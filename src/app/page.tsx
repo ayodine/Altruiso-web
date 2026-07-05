@@ -25,6 +25,8 @@ export default function Home() {
       <main>
         {/* Hook */}
         <Hero />
+        {/* Manifesto — bold ethos statement, sets the tone up front */}
+        <ClosingManifesto />
         {/* Why — the purpose behind the work */}
         <MissionStatement />
         {/* Who — the people and identity */}
@@ -44,9 +46,8 @@ export default function Home() {
         {/* Beliefs & the long-term aspiration */}
         <Philosophy />
         <Vision />
-        {/* Invitation → emotional close → conversion */}
+        {/* Invitation → conversion */}
         <BuildersWelcome />
-        <ClosingManifesto />
         <FinalCTA />
       </main>
       <Footer />

@@ -13,7 +13,7 @@ export function ClosingManifesto() {
   return (
     <section
       id="manifesto"
-      className="section-pad min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
+      className="section-pad flex flex-col items-center text-center overflow-hidden"
       style={{ background: "#000" }}
     >
       <div className="container-site flex flex-col items-center">
@@ -47,7 +47,7 @@ export function ClosingManifesto() {
         >
           <RotatingText
             texts={lines}
-            mainClassName="px-4 sm:px-5 md:px-6 bg-[#0276E8] text-white overflow-hidden py-1 sm:py-1.5 md:py-2 justify-center"
+            mainClassName="px-6 sm:px-8 md:px-10 bg-[#0276E8] text-white overflow-hidden py-1 sm:py-1.5 md:py-2 justify-center rounded-full"
             staggerFrom={"last"}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}

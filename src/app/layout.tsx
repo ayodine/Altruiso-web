@@ -108,7 +108,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="grain-overlay antialiased">{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

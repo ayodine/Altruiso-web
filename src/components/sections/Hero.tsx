@@ -158,18 +158,6 @@ export function Hero() {
           />
         </div>
 
-        {/* Animated grid background */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(2,118,232,1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(2,118,232,1) 1px, transparent 1px)
-            `,
-            backgroundSize: "80px 80px",
-          }}
-        />
-
         {/* 3D Converging Logo Container in the background */}
         <div
           ref={svgContainerRef}

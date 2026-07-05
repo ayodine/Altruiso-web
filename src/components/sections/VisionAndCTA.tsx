@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import SplitText from "@/components/ui/SplitText";
 
 export function Vision() {
   return (
@@ -16,24 +17,20 @@ export function Vision() {
             <span className="text-overline text-white/40">Our Vision</span>
           </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-white mb-10"
-            style={{
-              fontSize: "clamp(28px, 4vw, 64px)",
-              lineHeight: 1.1,
-              letterSpacing: "-0.025em",
-              fontWeight: 400,
-            }}
-          >
-            To become a globally respected venture-building and investment
-            company known for creating businesses, supporting builders, and
-            developing institutions that generate enduring value across
-            generations.
-          </motion.h2>
+          <SplitText
+            tag="h2"
+            text="To become a globally respected venture-building and investment company known for creating businesses, supporting builders, and developing institutions that generate enduring value across generations."
+            className="font-display text-white mb-10 text-[clamp(28px,4vw,64px)] leading-[1.1] tracking-[-0.025em] font-normal"
+            splitType="words"
+            delay={28}
+            duration={0.7}
+            ease="power3.out"
+            from={{ opacity: 0, y: 30 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.2}
+            rootMargin="-80px"
+            textAlign="left"
+          />
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -62,15 +59,6 @@ export function FinalCTA() {
       className="section-pad mesh-gradient-light"
       style={{ position: "relative", overflow: "hidden" }}
     >
-      {/* Grid overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(rgba(2,118,232,1) 1px, transparent 1px), linear-gradient(90deg, rgba(2,118,232,1) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
-
       <div className="container-site relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-10">
