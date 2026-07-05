@@ -169,7 +169,7 @@ export function Hero() {
             viewBox="0 0 184 199"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-[280px] h-[300px] md:w-[380px] md:h-[400px]"
+            className="w-[280px] h-[300px] md:w-[380px] md:h-[400px] overflow-visible"
           >
             <path
               ref={path1Ref}
