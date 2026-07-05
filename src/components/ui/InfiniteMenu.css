@@ -1,0 +1,155 @@
+#infinite-grid-menu-canvas {
+  cursor: grab;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  outline: none;
+  background: transparent;
+}
+
+#infinite-grid-menu-canvas:active {
+  cursor: grabbing;
+}
+
+/* ── Active Item Overlay ──────────────────────────────── */
+.face-title {
+  user-select: none;
+  position: absolute;
+  font-family: 'PP Neue Montreal', 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #ffffff;
+  top: 50%;
+  left: 50%;
+  max-width: 10ch;
+  text-align: right;
+  pointer-events: none;
+}
+
+.face-title.active {
+  opacity: 1;
+  transform: translate(calc(-100% - 240px), -50%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.face-title.inactive {
+  opacity: 0;
+  transform: translate(calc(-100% - 280px), -50%);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.face-description {
+  user-select: none;
+  position: absolute;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: clamp(0.9rem, 1.3vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  max-width: 18ch;
+  top: 50%;
+  left: 50%;
+  text-align: left;
+  pointer-events: none;
+}
+
+.face-description.active {
+  opacity: 1;
+  transform: translate(240px, -50%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.face-description.inactive {
+  opacity: 0;
+  transform: translate(280px, -50%);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* ── CTA button ────────────────────────────────────────── */
+.action-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  background: #0276E8;
+  border: 5px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.action-button:hover {
+  background: #005CB7;
+  transform: translate(-50%, 190px) scale(1.1) !important;
+}
+
+.action-button-icon {
+  user-select: none;
+  position: relative;
+  color: #fff;
+  top: 1px;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.action-button.active {
+  transform: translate(-50%, 190px) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+}
+
+.action-button.inactive {
+  transform: translate(-50%, 250px) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* ── Tag pill ──────────────────────────────────────────── */
+.face-tag {
+  user-select: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #0276E8;
+  background: rgba(2, 118, 232, 0.1);
+  border: 1px solid rgba(2, 118, 232, 0.25);
+  padding: 4px 10px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.face-tag.active {
+  opacity: 1;
+  transform: translate(calc(-100% - 240px), -104px);
+  transition: opacity 0.5s ease 0.05s, transform 0.5s ease 0.05s;
+}
+
+.face-tag.inactive {
+  opacity: 0;
+  transform: translate(calc(-100% - 280px), -104px);
+  transition: opacity 0.1s ease, transform 0.1s ease;
+}
+
+/* ── Hide text labels on small viewports ─────────────── */
+@media (max-width: 900px) {
+  .face-title,
+  .face-description,
+  .face-tag {
+    display: none;
+  }
+}

@@ -1,0 +1,19 @@
+.scroll-float {
+  overflow: hidden;
+  margin: 0;
+}
+
+.scroll-float-text {
+  display: inline-block;
+  /* Typography is controlled by the consumer via containerClassName so this
+     component can be reused at any scale. */
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+}
+
+.char {
+  display: inline-block;
+}
