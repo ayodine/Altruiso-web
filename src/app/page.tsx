@@ -14,7 +14,7 @@ import { Portfolio } from "@/components/sections/Portfolio";
 import { FocusAreas } from "@/components/sections/FocusAreas";
 import { Philosophy } from "@/components/sections/Philosophy";
 import { BuildersWelcome } from "@/components/sections/BuildersWelcome";
-import { Vision, FinalCTA } from "@/components/sections/VisionAndCTA";
+import { Vision } from "@/components/sections/VisionAndCTA";
 import { ClosingManifesto } from "@/components/sections/ClosingManifesto";
 
 export default function Home() {
@@ -46,9 +46,8 @@ export default function Home() {
         {/* Beliefs & the long-term aspiration */}
         <Philosophy />
         <Vision />
-        {/* Invitation → conversion */}
+        {/* Invitation + contact — the conversion close */}
         <BuildersWelcome />
-        <FinalCTA />
       </main>
       <Footer />
     </SmoothScroll>

@@ -6,9 +6,7 @@ import { ArrowRight } from "lucide-react";
 export function BuildersWelcome() {
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
@@ -37,11 +35,11 @@ export function BuildersWelcome() {
       <div className="container-site">
         <div className="flex items-center gap-3 mb-14 md:mb-20">
           <span className="blue-line" />
-          <span className="text-overline text-white/40">Builders Welcome</span>
+          <span className="text-overline text-white/40">Get in Touch</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
-          {/* Left — big statement */}
+          {/* Left — big statement + secondary CTA */}
           <div className="lg:col-span-7">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -55,8 +53,7 @@ export function BuildersWelcome() {
                 letterSpacing: "-0.03em",
               }}
             >
-              Extraordinary things begin with a single idea — and the courage to
-              pursue it.
+              Let&rsquo;s build something that lasts.
             </motion.h2>
 
             <motion.p
@@ -64,13 +61,37 @@ export function BuildersWelcome() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="text-body-xl text-white/50"
-              style={{ lineHeight: 1.8, maxWidth: "520px" }}
+              className="text-body-xl text-white/50 mb-10"
+              style={{ lineHeight: 1.8, maxWidth: "540px" }}
             >
-              We want to hear from ambitious people building meaningful things.
-              Share your idea with us — we&rsquo;re always looking for the next
-              great institution to help build.
+              Extraordinary things begin with a single idea — and the courage to
+              pursue it. Whether you&rsquo;re building a company, investing in
+              the future, or exploring meaningful opportunities, share your idea
+              and we&rsquo;ll start the conversation.
             </motion.p>
+
+            <motion.a
+              href="#ecosystem"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="group inline-flex items-center gap-3 text-white/70 hover:text-white transition-colors font-heading font-medium"
+              style={{ fontSize: "15px" }}
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .querySelector("#ecosystem")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              data-cursor-hover
+            >
+              Explore our ecosystem
+              <ArrowRight
+                size={16}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </motion.a>
           </div>
 
           {/* Right — contact form */}
@@ -132,8 +153,7 @@ export function BuildersWelcome() {
                 htmlFor="bw-phone"
                 className="text-caption text-white/50 font-heading"
               >
-                Phone{" "}
-                <span className="text-white/25">(optional)</span>
+                Phone <span className="text-white/25">(optional)</span>
               </label>
               <input
                 id="bw-phone"
