@@ -27,8 +27,8 @@ export function ClosingManifesto() {
         <h2
           className="font-heading font-medium text-white mx-auto"
           style={{
-            fontSize: "75.6px",
-            lineHeight: 1.0,
+            fontSize: "clamp(26px, 8vw, 75.6px)",
+            lineHeight: 1.05,
             letterSpacing: "-0.04em",
             maxWidth: "16ch",
           }}
@@ -38,10 +38,10 @@ export function ClosingManifesto() {
 
         {/* Rotating sentence inside a brand-blue container */}
         <div
-          className="mt-6 md:mt-8 font-heading font-medium"
+          className="mt-6 md:mt-8 font-heading font-medium max-w-full text-center"
           style={{
-            fontSize: "75.6px",
-            lineHeight: 1.0,
+            fontSize: "clamp(26px, 8vw, 75.6px)",
+            lineHeight: 1.05,
             letterSpacing: "-0.02em",
           }}
         >

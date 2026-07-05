@@ -12,6 +12,7 @@ export const StaggeredMenu = ({
   displayItemNumbering = true,
   className,
   logoUrl = '/brand/logo-white.svg',
+  openLogoUrl,
   menuButtonColor = '#fff',
   openMenuButtonColor = '#fff',
   accentColor = '#0276E8',
@@ -335,7 +336,7 @@ export const StaggeredMenu = ({
       <header className="staggered-menu-header" aria-label="Main navigation header">
         <div className="sm-logo" aria-label="Logo">
           <img
-            src={logoUrl || '/brand/logo-white.svg'}
+            src={open ? openLogoUrl || logoUrl : logoUrl || '/brand/logo-white.svg'}
             alt="Logo"
             className="sm-logo-img"
             draggable={false}

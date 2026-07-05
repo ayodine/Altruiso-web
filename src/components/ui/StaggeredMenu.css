@@ -349,8 +349,8 @@
   content: counter(smItem, decimal-leading-zero);
   flex: 0 0 auto;
   align-self: flex-start;
-  margin-top: 0.3em;
-  font-size: 0.3em;
+  margin-top: 0.35em;
+  font-size: max(15px, 0.3em);
   font-weight: 400;
   color: var(--sm-accent, #0276E8);
   letter-spacing: 0;
@@ -365,10 +365,6 @@
     left: 0;
     right: 0;
   }
-
-  .staggered-menu-wrapper[data-open] .sm-logo-img {
-    filter: invert(100%);
-  }
 }
 
 @media (max-width: 640px) {
@@ -376,9 +372,5 @@
     width: 100%;
     left: 0;
     right: 0;
-  }
-
-  .staggered-menu-wrapper[data-open] .sm-logo-img {
-    filter: invert(100%);
   }
 }

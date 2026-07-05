@@ -7,9 +7,11 @@ import GradualBlur from "@/components/ui/GradualBlur";
 
 const menuItems: StaggeredMenuItem[] = [
   { label: "About", ariaLabel: "Learn who we are", link: "#who-we-are" },
+  { label: "What We Do", ariaLabel: "See what we do", link: "#what-we-do" },
   { label: "Ecosystem", ariaLabel: "Explore our ecosystem", link: "#ecosystem" },
   { label: "Portfolio", ariaLabel: "See our portfolio", link: "#portfolio" },
   { label: "Investments", ariaLabel: "View our investment focus", link: "#investment-focus" },
+  { label: "Focus Areas", ariaLabel: "Explore our focus areas", link: "#focus-areas" },
   { label: "Vision", ariaLabel: "Read our vision", link: "#vision" },
   { label: "Get in Touch", ariaLabel: "Share your idea", link: "#builders-welcome" },
 ];
@@ -54,6 +56,7 @@ export function Navbar() {
         displaySocials
         displayItemNumbering
         logoUrl="/brand/logo-white.svg"
+        openLogoUrl="/brand/logo-black.svg"
         accentColor="#0276E8"
         colors={["#001931", "#0276E8"]}
         menuButtonColor="#ffffff"

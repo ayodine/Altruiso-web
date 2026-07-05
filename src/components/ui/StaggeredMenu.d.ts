@@ -19,6 +19,7 @@ declare module "@/components/ui/StaggeredMenu" {
     displayItemNumbering?: boolean;
     className?: string;
     logoUrl?: string;
+    openLogoUrl?: string;
     menuButtonColor?: string;
     openMenuButtonColor?: string;
     accentColor?: string;

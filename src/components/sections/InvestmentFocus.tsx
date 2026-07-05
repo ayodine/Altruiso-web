@@ -73,7 +73,7 @@ export function InvestmentFocus() {
         </div>
 
         {/* Expand / collapse cards */}
-        <div className="flex flex-col md:flex-row md:h-[460px] rounded-2xl overflow-hidden border border-white/10">
+        <div className="flex flex-col lg:flex-row lg:h-[460px] rounded-2xl overflow-hidden border border-white/10">
           {pillars.map((pillar, i) => {
             const Icon = pillar.icon;
             const isActive = i === active;
@@ -84,7 +84,7 @@ export function InvestmentFocus() {
                 onClick={() => openCard(i)}
                 animate={{ flexGrow: isActive ? 6 : 1 }}
                 transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="relative overflow-hidden cursor-pointer min-h-[120px] md:min-h-0 border-t border-white/10 first:border-t-0 md:border-t-0 md:border-l md:first:border-l-0"
+                className="relative overflow-hidden cursor-pointer min-h-[96px] lg:min-h-0 border-t border-white/10 first:border-t-0 lg:border-t-0 lg:border-l lg:first:border-l-0"
                 style={{
                   flexBasis: 0,
                   minWidth: 0,
@@ -95,7 +95,7 @@ export function InvestmentFocus() {
                 }}
                 data-cursor-hover
               >
-                <div className="relative h-full w-full p-6 md:p-7 flex flex-col">
+                <div className="relative h-full w-full p-5 sm:p-6 md:p-7 flex flex-col">
                   {/* Top row — number + icon */}
                   <div className="flex items-center justify-between">
                     <span
@@ -135,7 +135,6 @@ export function InvestmentFocus() {
                             style={{
                               fontSize: "clamp(20px, 2vw, 28px)",
                               lineHeight: 1.15,
-                              whiteSpace: "nowrap",
                             }}
                           >
                             {pillar.title}
@@ -168,7 +167,7 @@ export function InvestmentFocus() {
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="font-heading font-medium text-white/70 md:[writing-mode:vertical-rl] md:rotate-180"
+                          className="font-heading font-medium text-white/70 lg:[writing-mode:vertical-rl] lg:rotate-180"
                           style={{
                             fontSize: "16px",
                             letterSpacing: "0.01em",

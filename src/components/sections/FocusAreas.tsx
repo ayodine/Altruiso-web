@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 // WebGL component — client only, no SSR
@@ -60,6 +61,18 @@ const focusAreaItems = [
 ];
 
 export function FocusAreas() {
+  // The WebGL sphere hides its text labels below 900px and is awkward on
+  // touch, so only mount it on large screens; smaller screens get a grid.
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
   return (
     <section
       id="focus-areas"
@@ -67,7 +80,7 @@ export function FocusAreas() {
       style={{ background: "#0A0A0A" }}
     >
       <div className="container-site">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="blue-line" />
             <span className="text-overline text-white/40">Focus Areas</span>
@@ -82,10 +95,59 @@ export function FocusAreas() {
         </div>
       </div>
 
-      {/* Infinite menu sphere */}
-      <div style={{ height: "600px", position: "relative" }}>
-        <InfiniteMenu items={focusAreaItems} scale={1.0} />
-      </div>
+      {isDesktop ? (
+        /* Infinite menu sphere — desktop only */
+        <div style={{ height: "600px", position: "relative" }}>
+          <InfiniteMenu items={focusAreaItems} scale={1.0} />
+        </div>
+      ) : (
+        /* Readable grid — mobile & tablet */
+        <div className="container-site">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {focusAreaItems.map((item) => (
+              <div
+                key={item.title}
+                className="flex items-start gap-4 rounded-2xl p-5"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                }}
+              >
+                <div
+                  className="w-11 h-11 shrink-0 rounded-xl flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5"
+                  style={{
+                    background: "rgba(2,118,232,0.12)",
+                    border: "1px solid rgba(2,118,232,0.25)",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: item.iconSvg.replace(
+                      'stroke-width="0.4"',
+                      'stroke-width="1.75"'
+                    ),
+                  }}
+                />
+                <div>
+                  <div
+                    className="text-overline text-[#0276E8] mb-1"
+                    style={{ fontSize: "10px" }}
+                  >
+                    {item.tag}
+                  </div>
+                  <h3 className="font-heading font-medium text-white text-body-md mb-1">
+                    {item.title}
+                  </h3>
+                  <p
+                    className="text-body-sm text-white/45"
+                    style={{ lineHeight: 1.6 }}
+                  >
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
