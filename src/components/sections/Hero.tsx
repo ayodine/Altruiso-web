@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function Hero() {
   const triggerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -22,43 +23,39 @@ export function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Initial Entrance Animation (Text elements fly up, scroll indicator pulses)
+      // Narrative: the page loads on the fully assembled monogram, front and
+      // center. Scrolling shatters it — the shards fly apart and dim — and
+      // the copy (pill → headline → sub → CTAs) reveals in its place.
+
+      // Assembled starting state. transformOrigin "50% 50%" rotates each
+      // shard about its own bbox centre when it scatters.
+      gsap.set([path1Ref.current, path2Ref.current, path3Ref.current], {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        opacity: 1,
+        transformOrigin: "50% 50%",
+      });
+      gsap.set(svgContainerRef.current, { scale: 0.85, transformOrigin: "50% 50%" });
+
+      // Copy hidden until the reveal phase (headline words carry their own
+      // inline hidden state in the JSX).
+      gsap.set([pillRef.current, subRef.current], { opacity: 0, y: 36 });
+      gsap.set(ctaRef.current?.children ?? [], { opacity: 0, y: 24 });
+
+      // 1. Load entrance — the assembled logo settles in, scroll cue invites
+      // the story.
       const tlEntrance = gsap.timeline({ delay: 0.2 });
-
-      if (headlineRef.current) {
-        const words = headlineRef.current.querySelectorAll(".word-wrap");
-        tlEntrance.fromTo(
-          words,
-          { y: "110%", opacity: 0 },
-          {
-            y: "0%",
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.08,
-            ease: "power4.out",
-          }
-        );
-      }
-
       tlEntrance.fromTo(
-        subRef.current,
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" },
-        "-=0.6"
+        svgContainerRef.current,
+        { opacity: 0, scale: 0.72 },
+        { opacity: 1, scale: 0.85, duration: 1.4, ease: "power3.out" }
       );
-
-      tlEntrance.fromTo(
-        ctaRef.current?.children ?? [],
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: "power3.out" },
-        "-=0.5"
-      );
-
       tlEntrance.fromTo(
         scrollIndicatorRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.6 },
-        "-=0.2"
+        "-=0.6"
       );
 
       // Scroll indicator line pulse
@@ -74,17 +71,9 @@ export function Hero() {
         });
       }
 
-      // 2. Scroll-driven convergence (emcap.com style): the monogram starts as
-      //    three scattered shards bleeding off the edges and assembles into the
-      //    logo as the hero scrolls away, while the copy clears out.
+      // 2. Scrubbed story across the sticky track.
       if (triggerRef.current) {
-        // Establish the scattered starting state up front so there's no
-        // "assembled" flash before the first scroll frame. transformOrigin
-        // "50% 50%" lets GSAP rotate each shard about its own bbox centre.
-        gsap.set(path1Ref.current, { x: -300, y: -240, rotation: -55, opacity: 0.12, transformOrigin: "50% 50%" });
-        gsap.set(path2Ref.current, { x: 320, y: -170, rotation: 50, opacity: 0.12, transformOrigin: "50% 50%" });
-        gsap.set(path3Ref.current, { x: -240, y: 260, rotation: -35, opacity: 0.12, transformOrigin: "50% 50%" });
-        gsap.set(svgContainerRef.current, { scale: 1.5, transformOrigin: "50% 50%" });
+        const words = headlineRef.current?.querySelectorAll(".word-wrap") ?? [];
 
         const tlScroll = gsap.timeline({
           scrollTrigger: {
@@ -93,33 +82,45 @@ export function Hero() {
             end: "bottom bottom",
             scrub: 1,
             invalidateOnRefresh: true,
+            // The scroll cue is driven directly off progress (overwrite kills
+            // the entrance tween) so a scroll during page load can't leave it
+            // stuck visible.
+            onUpdate: (self) => {
+              gsap.to(scrollIndicatorRef.current, {
+                opacity: self.progress > 0.04 ? 0 : 1,
+                duration: 0.3,
+                overwrite: true,
+              });
+            },
           },
         });
 
-        // Copy clears out over the first ~half of the track.
-        tlScroll.to(
-          [headlineRef.current, subRef.current, ctaRef.current],
-          { opacity: 0, y: -80, stagger: 0.04, ease: "power2.in", duration: 0.5 },
-          0
-        );
-        tlScroll.to(
-          scrollIndicatorRef.current,
-          { opacity: 0, ease: "none", duration: 0.25 },
-          0
-        );
-
-        // Shards slide, rotate and fade into their assembled positions. A small
-        // stagger keeps them from snapping into place all at once.
-        const assemble = { x: 0, y: 0, rotation: 0, opacity: 1, ease: "power2.out", duration: 1 };
-        tlScroll.to(path1Ref.current, { ...assemble }, 0);
-        tlScroll.to(path2Ref.current, { ...assemble }, 0.05);
-        tlScroll.to(path3Ref.current, { ...assemble }, 0.1);
-
-        // Assembled monogram settles to a clean resting size.
+        // Phase 1 (0 → ~0.45): the monogram shatters — shards fly outward,
+        // rotate, and dim to a faint residue. A small stagger keeps them from
+        // breaking apart all at once.
+        const shatter = { ease: "power2.in", duration: 0.42 };
+        tlScroll.to(path1Ref.current, { x: -300, y: -240, rotation: -55, opacity: 0.1, ...shatter }, 0);
+        tlScroll.to(path2Ref.current, { x: 320, y: -170, rotation: 50, opacity: 0.1, ...shatter }, 0.03);
+        tlScroll.to(path3Ref.current, { x: -240, y: 260, rotation: -35, opacity: 0.1, ...shatter }, 0.06);
         tlScroll.to(
           svgContainerRef.current,
-          { scale: 0.85, ease: "power2.out", duration: 1 },
+          { scale: 1.4, ease: "power2.inOut", duration: 0.5 },
           0
+        );
+
+        // Phase 2 (~0.36 → 0.8): copy reveals in editorial order, starting
+        // when the shatter is ~75% through so the two moments overlap.
+        tlScroll.to(pillRef.current, { opacity: 1, y: 0, ease: "power2.out", duration: 0.1 }, 0.36);
+        tlScroll.to(
+          words,
+          { y: "0%", opacity: 1, stagger: 0.045, ease: "power3.out", duration: 0.22 },
+          0.42
+        );
+        tlScroll.to(subRef.current, { opacity: 1, y: 0, ease: "power2.out", duration: 0.14 }, 0.56);
+        tlScroll.to(
+          ctaRef.current?.children ?? [],
+          { opacity: 1, y: 0, stagger: 0.04, ease: "power2.out", duration: 0.12 },
+          0.66
         );
       }
     }, triggerRef);
@@ -130,7 +131,7 @@ export function Hero() {
   const headline = ["Building Institutions", "That Create Opportunity."];
 
   return (
-    <div ref={triggerRef} className="relative w-full h-[200vh]">
+    <div ref={triggerRef} className="relative w-full h-[280vh]">
       {/* Sticky Hero section */}
       <section
         ref={stickyRef}
@@ -193,7 +194,8 @@ export function Hero() {
         <div className="container-site relative z-10 flex flex-col items-center text-center">
           {/* Overline */}
           <div
-            className="mb-10 px-5 py-2 rounded-full bg-[rgba(2,118,232,0.06)] border-[#0276E8]"
+            ref={pillRef}
+            className="mb-8 px-5 py-2 rounded-full bg-[rgba(2,118,232,0.06)] border-[#0276E8] opacity-0"
             style={{ borderWidth: "0.5px" }}
           >
             <span
@@ -207,8 +209,14 @@ export function Hero() {
           {/* Headline */}
           <h1
             ref={headlineRef}
-            className="text-display-xl font-display mb-8 mx-auto"
-            style={{ maxWidth: "900px" }}
+            className="font-display text-white mb-8 mx-auto"
+            style={{
+              maxWidth: "1080px",
+              fontSize: "clamp(46px, 6.6vw, 104px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.035em",
+              fontWeight: 500,
+            }}
           >
             {headline.map((word, i) => (
               <span key={i} className="block overflow-hidden">
@@ -222,19 +230,21 @@ export function Hero() {
           {/* Subheading */}
           <p
             ref={subRef}
-            className="text-body-lg text-white/60 mb-12 opacity-0 mx-auto"
-            style={{ maxWidth: "560px", lineHeight: "1.7" }}
+            className="text-body-lg text-white/55 mb-10 opacity-0 mx-auto"
+            style={{ maxWidth: "620px", lineHeight: 1.7 }}
           >
-            Altruiso creates, invests in, and supports businesses that generate
-            enduring value through ownership, strategic partnerships, and venture
-            creation.
+            Altruiso is a long-term holding company that builds, acquires,
+            invests in, and holds businesses and opportunities with enduring
+            potential. We partner with exceptional founders and businesses to
+            create lasting economic value and build institutions that outlive
+            generations.
           </p>
 
           {/* CTAs */}
           <div ref={ctaRef} className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="#ecosystem"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-sm text-black transition-all duration-300 hover:scale-105"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-sm text-black transition-all duration-300 hover:scale-105 opacity-0"
               style={{ background: "#0276E8", color: "white", fontSize: "14px", letterSpacing: "0.01em" }}
               onClick={(e) => {
                 e.preventDefault();
@@ -247,14 +257,14 @@ export function Hero() {
 
             <a
               href="#builders-welcome"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-sm text-white border border-white/20 hover:border-white/50 transition-all duration-300"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-sm text-white border border-white/20 hover:border-white/50 transition-all duration-300 opacity-0"
               style={{ fontSize: "14px" }}
               onClick={(e) => {
                 e.preventDefault();
                 document.querySelector("#builders-welcome")?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Share Your Idea
+              Partner With Us
             </a>
           </div>
         </div>

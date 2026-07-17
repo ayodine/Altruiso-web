@@ -21,10 +21,11 @@ export function BuildersWelcome() {
     window.location.href = `mailto:ideas@altruiso.com?subject=${subject}&body=${body}`;
   };
 
-  const fieldStyle: React.CSSProperties = {
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.12)",
-  };
+  const fields = [
+    { id: "bw-name", name: "name", type: "text", label: "Full name", placeholder: "Jane Doe", required: true },
+    { id: "bw-email", name: "email", type: "email", label: "Email", placeholder: "you@company.com", required: true },
+    { id: "bw-phone", name: "phone", type: "tel", label: "Phone — optional", placeholder: "+1 (555) 000-0000", required: false },
+  ] as const;
 
   return (
     <section
@@ -35,7 +36,7 @@ export function BuildersWelcome() {
       <div className="container-site">
         <div className="flex items-center gap-3 mb-14 md:mb-20">
           <span className="blue-line" />
-          <span className="text-overline text-white/40">Get in Touch</span>
+          <span className="text-overline text-white/40">Partner With Us</span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
@@ -46,11 +47,12 @@ export function BuildersWelcome() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="font-heading font-medium text-white mb-8"
+              className="font-display text-white mb-8"
               style={{
-                fontSize: "clamp(34px, 5vw, 76px)",
-                lineHeight: 1.05,
+                fontSize: "clamp(36px, 5vw, 78px)",
+                lineHeight: 1.02,
                 letterSpacing: "-0.03em",
+                maxWidth: "14ch",
               }}
             >
               Let&rsquo;s build something that lasts.
@@ -101,79 +103,65 @@ export function BuildersWelcome() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="lg:col-span-5 rounded-[24px] border border-white/10 p-8 md:p-10 flex flex-col gap-5"
+            className="lg:col-span-5 relative rounded-[24px] border border-white/10 p-8 md:p-10 overflow-hidden"
             style={{
               background:
-                "linear-gradient(160deg, rgba(2,118,232,0.10) 0%, rgba(10,10,10,0.6) 60%)",
-              backdropFilter: "blur(12px)",
+                "radial-gradient(120% 90% at 100% 0%, rgba(2,118,232,0.14) 0%, transparent 55%), #0B0D10",
             }}
           >
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="bw-name"
-                className="text-caption text-white/50 font-heading"
-              >
-                Full name
-              </label>
-              <input
-                id="bw-name"
-                name="name"
-                type="text"
-                required
-                value={form.name}
-                onChange={handleChange}
-                placeholder="Jane Doe"
-                className="w-full rounded-xl px-4 py-3.5 text-white text-body-md placeholder:text-white/25 outline-none focus:border-[#0276E8] transition-colors"
-                style={fieldStyle}
-              />
+            {/* top accent hairline */}
+            <span
+              className="absolute top-0 left-0 w-full h-[2px]"
+              style={{
+                background:
+                  "linear-gradient(90deg, #0276E8 0%, rgba(2,118,232,0.15) 70%, transparent 100%)",
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Card header */}
+            <div className="mb-9">
+              <span className="text-overline text-[#0276E8] block mb-3">
+                Share your idea
+              </span>
+              <p className="text-body-md text-white/45" style={{ lineHeight: 1.65 }}>
+                A few details and we&rsquo;ll take it from there.
+              </p>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="bw-email"
-                className="text-caption text-white/50 font-heading"
-              >
-                Email
-              </label>
-              <input
-                id="bw-email"
-                name="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={handleChange}
-                placeholder="you@company.com"
-                className="w-full rounded-xl px-4 py-3.5 text-white text-body-md placeholder:text-white/25 outline-none focus:border-[#0276E8] transition-colors"
-                style={fieldStyle}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="bw-phone"
-                className="text-caption text-white/50 font-heading"
-              >
-                Phone <span className="text-white/25">(optional)</span>
-              </label>
-              <input
-                id="bw-phone"
-                name="phone"
-                type="tel"
-                value={form.phone}
-                onChange={handleChange}
-                placeholder="+1 (555) 000-0000"
-                className="w-full rounded-xl px-4 py-3.5 text-white text-body-md placeholder:text-white/25 outline-none focus:border-[#0276E8] transition-colors"
-                style={fieldStyle}
-              />
+            {/* Editorial underline fields */}
+            <div className="flex flex-col gap-7 mb-10">
+              {fields.map((f) => (
+                <div key={f.id} className="group/field flex flex-col gap-1">
+                  <label
+                    htmlFor={f.id}
+                    className="text-overline text-white/35 transition-colors group-focus-within/field:text-[#0276E8]"
+                    style={{ fontSize: "10px" }}
+                  >
+                    {f.label}
+                  </label>
+                  <input
+                    id={f.id}
+                    name={f.name}
+                    type={f.type}
+                    required={f.required}
+                    value={form[f.name]}
+                    onChange={handleChange}
+                    placeholder={f.placeholder}
+                    className="w-full bg-transparent border-0 border-b border-white/15 rounded-none px-0 py-3 text-white placeholder:text-white/20 outline-none focus:border-[#0276E8] transition-colors duration-300"
+                    style={{ fontSize: "17px" }}
+                  />
+                </div>
+              ))}
             </div>
 
             <button
               type="submit"
-              className="group mt-3 inline-flex w-full items-center justify-center gap-4 px-8 py-5 rounded-full font-heading font-medium text-white"
+              className="group inline-flex w-full items-center justify-center gap-4 px-8 py-5 rounded-full font-heading font-medium text-white transition-shadow duration-300"
               style={{
                 fontSize: "16px",
                 background: "linear-gradient(135deg, #0276E8 0%, #005CB7 100%)",
-                boxShadow: "0 0 40px rgba(2,118,232,0.3)",
+                boxShadow: "0 0 40px rgba(2,118,232,0.25)",
                 letterSpacing: "-0.005em",
               }}
               data-cursor-hover
@@ -184,6 +172,17 @@ export function BuildersWelcome() {
                 className="transition-transform duration-300 group-hover:translate-x-1"
               />
             </button>
+
+            <p className="text-caption text-white/30 text-center mt-5">
+              Prefer email?{" "}
+              <a
+                href="mailto:ideas@altruiso.com"
+                className="text-white/50 hover:text-white transition-colors link-underline"
+                data-cursor-hover
+              >
+                ideas@altruiso.com
+              </a>
+            </p>
           </motion.form>
         </div>
       </div>

@@ -1,41 +1,26 @@
 "use client";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-const companies = [
-  {
-    name: "Altruiso Strategies",
-    mark: "AS",
-    tag: "Education & Finance",
-    description:
-      "A financial education and wealth-building platform helping individuals develop the mindset and skills to achieve financial independence.",
-  },
-  {
-    name: "Mindset to Wealth Collective",
-    mark: "MW",
-    tag: "Community",
-    description:
-      "A community-driven platform focused on shifting financial mindsets and building generational wealth through education, accountability, and access.",
-  },
-  {
-    name: "Swing Trade FX",
-    mark: "SF",
-    tag: "Financial Markets",
-    description:
-      "A trading education and signal service empowering individuals to navigate financial markets with confidence and discipline.",
-  },
-  {
-    name: "Future Advisory & Consulting",
-    mark: "FA",
-    tag: "Advisory",
-    description:
-      "Strategic advisory services for entrepreneurs, businesses, and organizations seeking clarity, direction, and sustainable growth.",
-  },
+const platforms = [
   {
     name: "Altruiso Investments",
     mark: "AI",
-    tag: "Investments",
+    tagline: "Building long-term value through ownership.",
     description:
-      "The investment arm focused on deploying capital across public markets, private businesses, real estate, and strategic opportunities.",
+      "We invest in public markets, private businesses, equity partnerships, and strategic opportunities aligned with our long-term investment philosophy.",
+    cta: "Explore Investments",
+    href: "/investments",
+  },
+  {
+    name: "Altruiso Strategies",
+    mark: "AS",
+    tagline: "Helping organizations solve meaningful challenges.",
+    description:
+      "Our consulting and advisory company serving governments, organizations, educational institutions, nonprofits, and businesses through strategy, facilitation, education, and advisory services.",
+    cta: "Explore Strategies",
+    href: "/strategies",
   },
 ];
 
@@ -43,9 +28,8 @@ export function OurEcosystem() {
   return (
     <section id="ecosystem" className="section-pad" style={{ background: "#0A0A0A" }}>
       <div className="container-site">
-        {/* Intro header — label + headline / description */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 mb-16 md:mb-24">
-          {/* Label + headline */}
+        {/* Intro header — paragraph bottom-aligns with the heading's baseline */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 mb-16 md:mb-24 items-end">
           <div className="lg:col-span-8">
             <div className="flex items-center gap-3 mb-6">
               <span className="blue-line" />
@@ -55,84 +39,103 @@ export function OurEcosystem() {
               className="font-display text-white"
               style={{ fontSize: "clamp(36px, 4.5vw, 68px)", letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
-              A family of purposeful companies.
+              Two platforms, one philosophy.
             </h2>
           </div>
 
-          {/* Description */}
-          <div className="lg:col-span-4 lg:pt-2">
-            <p className="text-body-md text-white/70" style={{ lineHeight: 1.7 }}>
-              Each company in our ecosystem is built with intention, designed to
-              solve real problems and create enduring value.
-            </p>
-            <p className="text-body-sm text-white/45 mt-4" style={{ lineHeight: 1.7 }}>
-              From financial education to capital deployment, our companies share
-              one mission: turning mindset into lasting wealth.
+          <div className="lg:col-span-4 lg:pb-2">
+            <p className="text-body-md text-white/50" style={{ lineHeight: 1.7, maxWidth: "380px" }}>
+              Altruiso branches into two platforms — one for building and
+              investing in businesses, one for helping organizations solve
+              meaningful challenges.
             </p>
           </div>
         </div>
 
-        {/* Company cards — two-up grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 md:gap-y-20">
-          {companies.map((company, i) => (
+        {/* Platform cards — two-up, each links to its own page */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {platforms.map((platform, i) => (
             <motion.div
-              key={company.name}
+              key={platform.name}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.7, delay: (i % 2) * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="group"
-              data-cursor-hover
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              {/* Logo tile */}
-              <div
-                className="relative overflow-hidden rounded-xl flex items-center justify-center transition-all duration-500"
+              <Link
+                href={platform.href}
+                className="group relative flex h-full flex-col overflow-hidden rounded-[24px] p-8 md:p-10 transition-all duration-500"
                 style={{
-                  aspectRatio: "16 / 10",
                   background:
-                    "radial-gradient(ellipse 100% 90% at 50% 120%, rgba(2,118,232,0.14) 0%, transparent 60%), #101215",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                    "radial-gradient(ellipse 100% 90% at 50% 0%, rgba(2,118,232,0.10) 0%, transparent 55%), #101215",
+                  border: "1px solid rgba(255,255,255,0.08)",
                 }}
+                data-cursor-hover
               >
+                {/* hover stroke lighting — the card's edge glows blue */}
                 <span
-                  className="font-display text-white/90 leading-none transition-transform duration-500 group-hover:scale-105"
-                  style={{ fontSize: "clamp(56px, 8vw, 104px)", letterSpacing: "-0.03em" }}
-                >
-                  {company.mark}
-                </span>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/brand/logo-icon.svg"
-                  alt=""
+                  className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    border: "1px solid rgba(2,118,232,0.5)",
+                    boxShadow:
+                      "0 0 40px rgba(2,118,232,0.18), inset 0 0 32px rgba(2,118,232,0.07)",
+                  }}
                   aria-hidden="true"
-                  className="absolute right-5 bottom-5 w-8 opacity-20"
                 />
-              </div>
 
-              {/* Name */}
-              <h3
-                className="font-display text-white mt-7 mb-2"
-                style={{ fontSize: "clamp(24px, 2.4vw, 34px)", letterSpacing: "-0.01em", lineHeight: 1.15 }}
-              >
-                {company.name}
-              </h3>
+                {/* Index + ghost monogram */}
+                <div className="flex items-start justify-between mb-8">
+                  <span
+                    className="font-heading text-[#0276E8]/60 pt-2"
+                    style={{ fontSize: "13px", letterSpacing: "0.08em" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className="font-display leading-none text-white/[0.07] group-hover:text-white/[0.14] transition-colors duration-500 select-none"
+                    style={{ fontSize: "clamp(52px, 5.4vw, 84px)", letterSpacing: "-0.03em" }}
+                    aria-hidden="true"
+                  >
+                    {platform.mark}
+                  </span>
+                </div>
 
-              {/* Category (role line) */}
-              <div className="text-overline text-[#0276E8] mb-5">{company.tag}</div>
-
-              {/* Quote-styled description */}
-              <div className="flex gap-3 max-w-[440px]">
-                <span
-                  className="font-display text-[#0276E8]/50 select-none leading-none"
-                  style={{ fontSize: "34px" }}
-                  aria-hidden="true"
+                <h3
+                  className="font-display text-white group-hover:text-[#CDE6FF] transition-colors duration-300 mb-4"
+                  style={{ fontSize: "clamp(30px, 3.2vw, 46px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
                 >
-                  &ldquo;
-                </span>
-                <p className="text-body-sm text-white/55" style={{ lineHeight: 1.8 }}>
-                  {company.description}
+                  {platform.name}
+                </h3>
+                <p
+                  className="font-heading text-[#CDE6FF]/80 mb-5"
+                  style={{ fontSize: "clamp(17px, 1.7vw, 22px)", lineHeight: 1.35 }}
+                >
+                  {platform.tagline}
                 </p>
-              </div>
+                <p
+                  className="text-body-md text-white/50 mb-10"
+                  style={{ lineHeight: 1.7, maxWidth: "460px" }}
+                >
+                  {platform.description}
+                </p>
+
+                <span
+                  className="group/btn relative overflow-hidden mt-auto self-start inline-flex items-center gap-3 px-7 py-3.5 rounded-full font-heading font-medium text-white border border-white/20 hover:border-[#0276E8] transition-colors duration-300"
+                  style={{ fontSize: "15px" }}
+                >
+                  {/* water fill — curved surface sweeps in from the left */}
+                  <span
+                    className="absolute left-0 top-[-25%] h-[150%] w-full -translate-x-full rounded-r-[100%] group-hover/btn:translate-x-0 group-hover/btn:rounded-r-none transition-all duration-500 ease-out"
+                    style={{ background: "#0276E8" }}
+                    aria-hidden="true"
+                  />
+                  <span className="relative z-10">{platform.cta}</span>
+                  <ArrowRight
+                    size={17}
+                    className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1"
+                  />
+                </span>
+              </Link>
             </motion.div>
           ))}
         </div>

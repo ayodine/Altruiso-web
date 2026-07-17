@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Mail, ArrowUpRight } from "lucide-react";
 
 function LinkedInIcon() {
@@ -20,16 +21,14 @@ function XIcon() {
 
 const footerLinks = {
   Company: [
-    { label: "About", href: "#who-we-are" },
-    { label: "Vision", href: "#vision" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Investments", href: "#investment-focus" },
+    { label: "Why Altruiso", href: "#why-altruiso" },
+    { label: "What We Do", href: "#what-we-do" },
+    { label: "Our Ecosystem", href: "#ecosystem" },
+    { label: "Partner With Us", href: "#builders-welcome" },
   ],
-  Ecosystem: [
-    { label: "Altruiso Strategies", href: "#ecosystem" },
-    { label: "Mindset to Wealth", href: "#ecosystem" },
-    { label: "Swing Trade FX", href: "#ecosystem" },
-    { label: "Future Advisory", href: "#ecosystem" },
+  Platforms: [
+    { label: "Altruiso Investments", href: "/investments" },
+    { label: "Altruiso Strategies", href: "/strategies" },
   ],
   Resources: [
     { label: "News", href: "#" },
@@ -44,37 +43,57 @@ export function Footer() {
     if (href.startsWith("#")) {
       document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
     } else {
-      window.location.href = href;
+      window.location.assign(href);
     }
   };
 
   return (
     <footer
-      className="pt-16 md:pt-20 pb-16 md:pb-20"
+      className="overflow-hidden"
       style={{
         background: "#000",
         borderTop: "1px solid rgba(255,255,255,0.06)",
+        paddingTop: "clamp(72px, 8vw, 128px)",
+        paddingBottom: "clamp(32px, 3vw, 48px)",
       }}
     >
       <div className="container-site">
-        {/* Top row */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16">
+        {/* Top row — brand statement + link columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-10 mb-16 md:mb-24">
           {/* Brand */}
-          <div className="lg:col-span-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/brand/logo-white.svg"
-              alt="Altruiso"
-              width={112}
-              height={26}
-              className="h-[26px] w-auto mb-6"
-            />
-            <p
-              className="text-body-sm text-white/40 mb-8"
-              style={{ lineHeight: 1.8, maxWidth: "280px" }}
+          <div className="lg:col-span-6">
+            <Link
+              href="/"
+              aria-label="Altruiso — back to homepage"
+              className="inline-block mb-8"
+              data-cursor-hover
             >
-              Building institutions that create opportunity through ownership,
-              investment, partnerships, and venture creation.
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/logo-white.svg"
+                alt="Altruiso"
+                width={138}
+                height={32}
+                className="h-[32px] w-auto"
+              />
+            </Link>
+            <p
+              className="font-display text-white/85 mb-10"
+              style={{
+                fontSize: "clamp(24px, 2.6vw, 40px)",
+                lineHeight: 1.2,
+                letterSpacing: "-0.02em",
+                maxWidth: "17ch",
+              }}
+            >
+              Building institutions that create opportunity.
+            </p>
+            <p
+              className="text-body-md text-white/40 mb-10"
+              style={{ lineHeight: 1.75, maxWidth: "340px" }}
+            >
+              Through ownership, investment, partnerships, and venture
+              creation.
             </p>
 
             {/* Social */}
@@ -90,9 +109,9 @@ export function Footer() {
                   aria-label={label}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-white/40 hover:text-white transition-all duration-300 hover:scale-110"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white/45 hover:text-white transition-all duration-300 hover:scale-110"
                   style={{
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    border: "1px solid rgba(255,255,255,0.12)",
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
@@ -100,39 +119,39 @@ export function Footer() {
                     (e.currentTarget as HTMLElement).style.background = "rgba(2,118,232,0.08)";
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)";
                     (e.currentTarget as HTMLElement).style.background = "transparent";
                   }}
+                  data-cursor-hover
                 >
-                  <Icon size={15} />
+                  <Icon size={17} />
                 </a>
               ))}
             </div>
           </div>
 
           {/* Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h4
-                className="font-heading font-medium text-white mb-5"
-                style={{ fontSize: "13px", letterSpacing: "0.05em" }}
-              >
-                {category}
-              </h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <button
-                      onClick={() => scrollTo(link.href)}
-                      className="text-body-sm text-white/40 hover:text-white transition-colors duration-300 link-underline text-left"
-                    >
-                      {link.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-10">
+            {Object.entries(footerLinks).map(([category, links]) => (
+              <div key={category}>
+                <h4 className="text-overline text-white/30 mb-7">{category}</h4>
+                <ul className="space-y-4">
+                  {links.map((link) => (
+                    <li key={link.label}>
+                      <button
+                        onClick={() => scrollTo(link.href)}
+                        className="font-heading text-white/50 hover:text-white transition-colors duration-300 link-underline text-left"
+                        style={{ fontSize: "clamp(15px, 1.3vw, 17px)" }}
+                        data-cursor-hover
+                      >
+                        {link.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Bottom row */}
@@ -140,7 +159,7 @@ export function Footer() {
           className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-8"
           style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
         >
-          <p className="text-caption text-white/30">
+          <p className="text-body-sm text-white/30">
             © {new Date().getFullYear()} Altruiso. All rights reserved.
           </p>
 
@@ -150,14 +169,34 @@ export function Footer() {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="group flex items-center gap-2 text-caption text-white/30 hover:text-white transition-colors duration-300"
+            className="group flex items-center gap-2.5 text-body-sm text-white/30 hover:text-white transition-colors duration-300"
+            data-cursor-hover
           >
             Back to top
-            <div className="w-6 h-6 rounded-full border border-white/20 group-hover:border-white/50 flex items-center justify-center transition-all duration-300">
-              <ArrowUpRight size={11} className="rotate-[-45deg]" />
-            </div>
+            <span className="w-8 h-8 rounded-full border border-white/20 group-hover:border-white/50 flex items-center justify-center transition-all duration-300">
+              <ArrowUpRight size={13} className="rotate-[-45deg]" />
+            </span>
           </a>
         </div>
+      </div>
+
+      {/* Ghost wordmark — spans the full viewport width, cropped at the
+          page's bottom edge */}
+      <div
+        className="relative mt-10 md:mt-14"
+        style={{ height: "13vw" }}
+        aria-hidden="true"
+      >
+        <span
+          className="font-display absolute left-1/2 -translate-x-1/2 top-0 leading-none whitespace-nowrap select-none"
+          style={{
+            fontSize: "22.3vw",
+            letterSpacing: "-0.02em",
+            color: "rgba(255,255,255,0.05)",
+          }}
+        >
+          ALTRUISO
+        </span>
       </div>
     </footer>
   );

@@ -1,36 +1,29 @@
 "use client";
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { TrendingUp, Users, Handshake, Building2 } from "lucide-react";
+import { TrendingUp, Landmark, Building2 } from "lucide-react";
 
 const pillars = [
   {
     icon: Building2,
-    title: "We Build",
+    title: "Build",
     description:
-      "We create businesses designed to solve meaningful problems and generate lasting value across markets and communities.",
+      "We create businesses designed to solve meaningful problems.",
     number: "01",
   },
   {
-    icon: TrendingUp,
-    title: "We Invest",
+    icon: Landmark,
+    title: "Acquire",
     description:
-      "We invest capital, expertise, and strategic relationships into opportunities aligned with our long-term vision.",
+      "We acquire exceptional businesses with long-term potential.",
     number: "02",
   },
   {
-    icon: Handshake,
-    title: "We Partner",
+    icon: TrendingUp,
+    title: "Invest",
     description:
-      "We collaborate with founders, operators, organizations, and communities to unlock potential at every stage.",
+      "We invest in businesses and opportunities we believe will create lasting value and opportunity.",
     number: "03",
-  },
-  {
-    icon: Users,
-    title: "We Hold",
-    description:
-      "We focus on sustainable ownership rather than short-term outcomes, building wealth that compounds over generations.",
-    number: "04",
   },
 ];
 
@@ -62,14 +55,14 @@ export function WhatWeDo() {
                   maxWidth: "420px",
                 }}
               >
-                Four ways we create enduring value.
+                Three ways we create enduring value.
               </h2>
               <p
                 className="text-body-lg text-white/55"
                 style={{ maxWidth: "440px", lineHeight: 1.5 }}
               >
-                From building to investing, partnering to holding, every action
-                compounds toward wealth that lasts generations.
+                We don&rsquo;t simply invest in businesses. We invest in
+                businesses we believe will create opportunity.
               </p>
             </div>
           </div>

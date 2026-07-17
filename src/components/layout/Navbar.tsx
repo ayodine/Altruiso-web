@@ -6,14 +6,12 @@ import StaggeredMenu, {
 import GradualBlur from "@/components/ui/GradualBlur";
 
 const menuItems: StaggeredMenuItem[] = [
-  { label: "About", ariaLabel: "Learn who we are", link: "#who-we-are" },
+  { label: "Why Altruiso", ariaLabel: "Why Altruiso", link: "#why-altruiso" },
   { label: "What We Do", ariaLabel: "See what we do", link: "#what-we-do" },
   { label: "Ecosystem", ariaLabel: "Explore our ecosystem", link: "#ecosystem" },
-  { label: "Portfolio", ariaLabel: "See our portfolio", link: "#portfolio" },
-  { label: "Investments", ariaLabel: "View our investment focus", link: "#investment-focus" },
-  { label: "Focus Areas", ariaLabel: "Explore our focus areas", link: "#focus-areas" },
-  { label: "Vision", ariaLabel: "Read our vision", link: "#vision" },
-  { label: "Get in Touch", ariaLabel: "Share your idea", link: "#builders-welcome" },
+  { label: "Investments", ariaLabel: "Altruiso Investments", link: "/investments" },
+  { label: "Strategies", ariaLabel: "Altruiso Strategies", link: "/strategies" },
+  { label: "Partner With Us", ariaLabel: "Partner with us", link: "#builders-welcome" },
 ];
 
 const socialItems = [
@@ -27,9 +25,13 @@ export function Navbar() {
     (event: React.MouseEvent<HTMLAnchorElement>, item: StaggeredMenuItem) => {
       if (item.link.startsWith("#")) {
         event.preventDefault();
-        document
-          .querySelector(item.link)
-          ?.scrollIntoView({ behavior: "smooth" });
+        const target = document.querySelector(item.link);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        } else {
+          // Anchor lives on the homepage — navigate there with the hash.
+          window.location.href = `/${item.link}`;
+        }
       }
     },
     []

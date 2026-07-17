@@ -3,19 +3,10 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { StatsList } from "@/components/sections/StatsList";
-import { MissionStatement } from "@/components/sections/MissionStatement";
-import { WhoWeAre } from "@/components/sections/WhoWeAre";
+import { WhyAltruiso } from "@/components/sections/WhyAltruiso";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
-import { HowWeCreateValue } from "@/components/sections/HowWeCreateValue";
 import { OurEcosystem } from "@/components/sections/OurEcosystem";
-import { InvestmentFocus } from "@/components/sections/InvestmentFocus";
-import { Portfolio } from "@/components/sections/Portfolio";
-import { FocusAreas } from "@/components/sections/FocusAreas";
-import { Philosophy } from "@/components/sections/Philosophy";
 import { BuildersWelcome } from "@/components/sections/BuildersWelcome";
-import { Vision } from "@/components/sections/VisionAndCTA";
-import { ClosingManifesto } from "@/components/sections/ClosingManifesto";
 
 export default function Home() {
   return (
@@ -23,30 +14,15 @@ export default function Home() {
       <CustomCursor />
       <Navbar />
       <main>
-        {/* Hook */}
+        {/* Hook — who we are in one line */}
         <Hero />
-        {/* Manifesto — bold ethos statement, sets the tone up front */}
-        <ClosingManifesto />
-        {/* Why — the purpose behind the work */}
-        <MissionStatement />
-        {/* Who — the people and identity */}
-        <WhoWeAre />
-        {/* What — the offerings / pillars */}
+        {/* Why — the philosophy behind Altruiso */}
+        <WhyAltruiso />
+        {/* What we do — three pillars: Build, Acquire, Invest */}
         <WhatWeDo />
-        {/* How — the method by which we create value */}
-        <HowWeCreateValue />
-        {/* Proof — the numbers that back it up */}
-        <StatsList />
-        {/* The companies — family, then detailed cards */}
+        {/* The branch — two platforms, each linking to its own page */}
         <OurEcosystem />
-        <Portfolio />
-        {/* The investment lens & the sectors we focus on */}
-        <InvestmentFocus />
-        <FocusAreas />
-        {/* Beliefs & the long-term aspiration */}
-        <Philosophy />
-        <Vision />
-        {/* Invitation + contact — the conversion close */}
+        {/* Invitation + contact */}
         <BuildersWelcome />
       </main>
       <Footer />

@@ -1,5 +1,6 @@
 "use client";
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { gsap } from 'gsap';
 import './StaggeredMenu.css';
 
@@ -84,7 +85,7 @@ export const StaggeredMenu = ({
     const panelStart = offscreen;
 
     if (itemEls.length) {
-      gsap.set(itemEls, { yPercent: 140, rotate: 10 });
+      gsap.set(itemEls, { yPercent: 45, opacity: 0 });
     }
     if (numberEls.length) {
       gsap.set(numberEls, { '--sm-num-opacity': 0 });
@@ -114,14 +115,16 @@ export const StaggeredMenu = ({
     if (itemEls.length) {
       const itemsStartRatio = 0.15;
       const itemsStart = panelInsertTime + panelDuration * itemsStartRatio;
+      // Short rise + fade per item, with a stagger that's long relative to
+      // the duration so items land one after another instead of in one swoosh.
       tl.to(
         itemEls,
         {
           yPercent: 0,
-          rotate: 0,
-          duration: 1,
-          ease: 'power4.out',
-          stagger: { each: 0.1, from: 'start' }
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power3.out',
+          stagger: { each: 0.09, from: 'start' }
         },
         itemsStart
       );
@@ -129,12 +132,12 @@ export const StaggeredMenu = ({
         tl.to(
           numberEls,
           {
-            duration: 0.6,
+            duration: 0.45,
             ease: 'power2.out',
             '--sm-num-opacity': 1,
-            stagger: { each: 0.08, from: 'start' }
+            stagger: { each: 0.09, from: 'start' }
           },
-          itemsStart + 0.1
+          itemsStart + 0.08
         );
       }
     }
@@ -204,7 +207,7 @@ export const StaggeredMenu = ({
       onComplete: () => {
         const itemEls = Array.from(panel.querySelectorAll('.sm-panel-itemLabel'));
         if (itemEls.length) {
-          gsap.set(itemEls, { yPercent: 140, rotate: 10 });
+          gsap.set(itemEls, { yPercent: 45, opacity: 0 });
         }
         const numberEls = Array.from(panel.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item'));
         if (numberEls.length) {
@@ -334,15 +337,17 @@ export const StaggeredMenu = ({
         })()}
       </div>
       <header className="staggered-menu-header" aria-label="Main navigation header">
-        <div className="sm-logo" aria-label="Logo">
-          <img
-            src={open ? openLogoUrl || logoUrl : logoUrl || '/brand/logo-white.svg'}
-            alt="Logo"
-            className="sm-logo-img"
-            draggable={false}
-            width={110}
-            height={24}
-          />
+        <div className="sm-logo">
+          <Link href="/" aria-label="Altruiso — back to homepage" data-cursor-hover>
+            <img
+              src={open ? openLogoUrl || logoUrl : logoUrl || '/brand/logo-white.svg'}
+              alt="Altruiso"
+              className="sm-logo-img"
+              draggable={false}
+              width={110}
+              height={24}
+            />
+          </Link>
         </div>
         <button
           ref={toggleBtnRef}
