@@ -31,9 +31,7 @@ const footerLinks = {
     { label: "Altruiso Strategies", href: "/strategies" },
   ],
   Resources: [
-    { label: "News", href: "#" },
-    { label: "Insights", href: "#" },
-    { label: "Privacy Policy", href: "#" },
+    { label: "Privacy Policy", href: "/privacy" },
     { label: "Contact", href: "mailto:hello@altruiso.com" },
   ],
 };

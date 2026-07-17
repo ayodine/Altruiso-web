@@ -3,6 +3,7 @@ import { Inter, Geist } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { CookieConsent } from "@/components/ui/CookieConsent";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -108,7 +109,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }
