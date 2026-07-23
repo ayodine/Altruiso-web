@@ -32,6 +32,7 @@ function InstagramIcon() {
 const footerLinks = {
   Company: [
     { label: "Who We Are", href: "#who-we-are" },
+    { label: "What We Do", href: "#what-we-do" },
     { label: "Our Ecosystem", href: "#ecosystem" },
     { label: "Partner With Us", href: "#builders-welcome" },
   ],

@@ -7,6 +7,7 @@ import GradualBlur from "@/components/ui/GradualBlur";
 
 const menuItems: StaggeredMenuItem[] = [
   { label: "Who We Are", ariaLabel: "Who we are", link: "#who-we-are" },
+  { label: "What We Do", ariaLabel: "See what we do", link: "#what-we-do" },
   { label: "Ecosystem", ariaLabel: "Explore our ecosystem", link: "#ecosystem" },
   { label: "Investments", ariaLabel: "Altruiso Investments", link: "/investments" },
   { label: "Strategies", ariaLabel: "Altruiso Strategies", link: "/strategies" },
