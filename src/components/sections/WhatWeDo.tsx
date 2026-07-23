@@ -1,25 +1,21 @@
 "use client";
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { TrendingUp, Landmark, Building2 } from "lucide-react";
 
 const pillars = [
   {
-    icon: Building2,
     title: "Build",
     description:
       "We create businesses designed to solve meaningful problems.",
     number: "01",
   },
   {
-    icon: Landmark,
     title: "Acquire",
     description:
       "We acquire exceptional businesses with long-term potential.",
     number: "02",
   },
   {
-    icon: TrendingUp,
     title: "Invest",
     description:
       "We invest in businesses and opportunities we believe will create lasting value and opportunity.",
@@ -67,70 +63,60 @@ export function WhatWeDo() {
             </div>
           </div>
 
-          {/* Stacked cards column */}
+          {/* Stacked cards — oversized ghost index left, copy right */}
           <div className="lg:flex-1 flex flex-col gap-5">
-            {pillars.map((pillar, i) => {
-              const Icon = pillar.icon;
-              return (
-                <motion.div
-                  key={pillar.title}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.7, delay: (i % 2) * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="group relative flex flex-col justify-between overflow-hidden p-8 min-h-[280px]"
+            {pillars.map((pillar, i) => (
+              <motion.div
+                key={pillar.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.7, delay: (i % 2) * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="group relative flex items-center overflow-hidden p-8 md:p-10 min-h-[220px]"
+                style={{
+                  background: "rgba(255,255,255,0.035)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  backdropFilter: "blur(15px)",
+                  WebkitBackdropFilter: "blur(15px)",
+                }}
+                data-cursor-hover
+              >
+                {/* Hover blue glow */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
-                    background: "rgba(255,255,255,0.035)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    backdropFilter: "blur(15px)",
-                    WebkitBackdropFilter: "blur(15px)",
+                    background:
+                      "radial-gradient(ellipse 70% 80% at 100% 0%, rgba(2,118,232,0.10) 0%, transparent 60%)",
+                    border: "1px solid rgba(2,118,232,0.22)",
                   }}
-                  data-cursor-hover
+                />
+
+                {/* Oversized ghost index */}
+                <span
+                  aria-hidden="true"
+                  className="absolute left-2 md:left-5 top-1/2 -translate-y-1/2 font-display leading-none select-none text-white/[0.05] group-hover:text-white/[0.10] transition-colors duration-500"
+                  style={{ fontSize: "clamp(110px, 15vw, 200px)", letterSpacing: "-0.04em" }}
                 >
-                  {/* Hover blue glow */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse 70% 80% at 100% 0%, rgba(2,118,232,0.10) 0%, transparent 60%)",
-                      border: "1px solid rgba(2,118,232,0.22)",
-                    }}
-                  />
+                  {pillar.number}
+                </span>
 
-                  {/* Top row: icon chip + faint number */}
-                  <div className="relative z-10 flex items-start justify-between">
-                    <div
-                      className="w-12 h-12 flex items-center justify-center transition-colors duration-500"
-                      style={{ background: "rgba(2,118,232,0.1)", border: "1px solid rgba(2,118,232,0.2)" }}
-                    >
-                      <Icon size={20} color="#0276E8" />
-                    </div>
-                    <span
-                      className="font-display text-white/[0.08] group-hover:text-white/[0.16] transition-colors duration-500 leading-none"
-                      style={{ fontSize: "clamp(48px, 6vw, 72px)" }}
-                    >
-                      {pillar.number}
-                    </span>
-                  </div>
-
-                  {/* Bottom: title + description */}
-                  <div className="relative z-10 mt-10">
-                    <h3
-                      className="font-heading font-medium text-white mb-3 group-hover:text-[#CDE6FF] transition-colors duration-300"
-                      style={{ fontSize: "clamp(24px, 2.4vw, 34px)", letterSpacing: "-0.02em", lineHeight: 1.15 }}
-                    >
-                      {pillar.title}
-                    </h3>
-                    <p
-                      className="text-body-lg text-white/55 group-hover:text-white/70 transition-colors duration-300"
-                      style={{ lineHeight: 1.5, maxWidth: "500px" }}
-                    >
-                      {pillar.description}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
+                {/* Copy — offset clear of the ghost index */}
+                <div className="relative z-10 ml-[30%] sm:ml-[24%] lg:ml-[26%]">
+                  <h3
+                    className="font-heading font-medium text-white mb-3 group-hover:text-[#CDE6FF] transition-colors duration-300"
+                    style={{ fontSize: "clamp(24px, 2.4vw, 34px)", letterSpacing: "-0.02em", lineHeight: 1.15 }}
+                  >
+                    {pillar.title}
+                  </h3>
+                  <p
+                    className="text-body-lg text-white/55 group-hover:text-white/70 transition-colors duration-300"
+                    style={{ lineHeight: 1.5, maxWidth: "460px" }}
+                  >
+                    {pillar.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

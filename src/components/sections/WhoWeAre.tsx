@@ -5,12 +5,12 @@ import { GlassIcon } from "@/components/ui/GlassIcon";
 const platforms = [
   {
     key: "Altruiso Investments",
-    icon: "sphere" as const,
+    icon: "bars" as const,
     body: "Acquires equity and invests in businesses with enduring potential.",
   },
   {
     key: "Altruiso Strategies",
-    icon: "cube" as const,
+    icon: "pinwheel" as const,
     body: "Helps organizations, professionals, and communities grow through strategic advisory, financial education, and operational transformation.",
   },
 ];
@@ -103,7 +103,7 @@ export function WhoWeAre() {
               style={{ background: "#0A0A0A" }}
             >
               <div className="flex items-start justify-between mb-8">
-                <GlassIcon variant={p.icon} size={52} />
+                <GlassIcon variant={p.icon} size={68} />
                 <span
                   className="font-heading text-[#0276E8]/60"
                   style={{ fontSize: "13px", letterSpacing: "0.08em" }}

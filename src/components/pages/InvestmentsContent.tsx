@@ -37,7 +37,7 @@ const steps: { icon: GlassIconVariant; title: string; body: string }[] = [
     body: "If there's alignment, we invest through equity ownership or strategic partnerships depending on deal structure. We don't believe in unnecessary bureaucracy. We believe in building trusted, long-term relationships.",
   },
   {
-    icon: "stack",
+    icon: "bars",
     title: "Grow",
     body: "We don't actively operate the businesses we invest in. Instead, we partner through strategic guidance and operational expertise, helping businesses create enduring value over time.",
   },
@@ -298,7 +298,7 @@ export function InvestmentsContent() {
                 style={{ background: "#0B0D10" }}
               >
                 <div className="flex items-start justify-between mb-7">
-                  <GlassIcon variant={step.icon} size={52} />
+                  <GlassIcon variant={step.icon} size={64} />
                   <span
                     className="font-heading text-white/20"
                     style={{ fontSize: "14px", letterSpacing: "0.05em" }}

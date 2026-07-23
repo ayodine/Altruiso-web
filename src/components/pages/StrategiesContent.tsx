@@ -30,18 +30,15 @@ const capabilities: { title: string; icon: GlassIconVariant; items: string[] }[]
   },
   {
     title: "Learning & Capability",
-    icon: "sphere",
+    icon: "book",
     items: ["Financial Wellness", "Corporate Training", "Professional Development", "Workshops"],
   },
   {
     title: "Community & Stakeholders",
-    icon: "ring",
+    icon: "pinwheel",
     items: ["Community Engagement", "Stakeholder Consultation", "Facilitation", "Public Speaking"],
   },
 ];
-
-// Placeholder wordmarks — swap for real logo SVGs when provided.
-const partners = ["Royal Roads University", "YMCA", "British Council", "Wealthsimple"];
 
 const approach = [
   {
@@ -296,7 +293,7 @@ export function StrategiesContent() {
                 style={{ background: "#0B0D10" }}
               >
                 <div className="flex items-start justify-between mb-8">
-                  <GlassIcon variant={c.icon} size={56} />
+                  <GlassIcon variant={c.icon} size={72} />
                   <span className="font-heading text-[#0276E8]/50" style={{ fontSize: "14px" }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -322,35 +319,6 @@ export function StrategiesContent() {
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Trusted By — partner wordmark carousel (placeholders until logos land) */}
-      <section
-        className="py-16 md:py-24 border-b border-white/[0.06]"
-        style={{ background: "#000" }}
-      >
-        <div className="container-site mb-10 md:mb-12">
-          <Label>Trusted By</Label>
-          <p className="text-body-md text-white/45" style={{ lineHeight: 1.7, maxWidth: "420px" }}>
-            Organizations we&rsquo;ve had the privilege of working with.
-          </p>
-        </div>
-        <MarqueeBand duration={30} trackClassName="gap-x-6 pr-6 md:gap-x-8 md:pr-8">
-          {partners.map((name) => (
-            <span
-              key={name}
-              className="inline-flex items-center justify-center px-10 py-5 whitespace-nowrap"
-              style={{ border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.02)" }}
-            >
-              <span
-                className="font-display text-white/45"
-                style={{ fontSize: "clamp(18px, 1.8vw, 26px)", letterSpacing: "-0.01em" }}
-              >
-                {name}
-              </span>
-            </span>
-          ))}
-        </MarqueeBand>
       </section>
 
       {/* Why Altruiso Strategies — statement, approach, procurement */}
@@ -381,7 +349,7 @@ export function StrategiesContent() {
                   style={{ background: "rgba(5,7,10,0.85)" }}
                 >
                   <div className="flex items-start justify-between mb-6">
-                    <GlassIcon variant={(["sphere", "cube", "prism"] as GlassIconVariant[])[i]} size={44} />
+                    <GlassIcon variant={(["sphere", "ring", "bars"] as GlassIconVariant[])[i]} size={56} />
                     <span className="font-heading text-[#0276E8]/60" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>

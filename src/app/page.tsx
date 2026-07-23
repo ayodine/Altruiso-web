@@ -6,6 +6,7 @@ import { Hero } from "@/components/sections/Hero";
 import { WhoWeAre } from "@/components/sections/WhoWeAre";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
 import { OurEcosystem } from "@/components/sections/OurEcosystem";
+import { TrustedBy } from "@/components/sections/TrustedBy";
 import { BuildersWelcome } from "@/components/sections/BuildersWelcome";
 
 export default function Home() {
@@ -22,6 +23,8 @@ export default function Home() {
         <WhatWeDo />
         {/* The branch — two platforms, each linking to its own page */}
         <OurEcosystem />
+        {/* Social proof — organizations we've worked with */}
+        <TrustedBy />
         {/* Invitation + contact */}
         <BuildersWelcome />
       </main>

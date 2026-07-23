@@ -71,52 +71,6 @@ export function BuildersWelcome() {
               the future, or exploring meaningful opportunities, pitch your
               idea and we&rsquo;ll start the conversation.
             </motion.p>
-
-            <motion.a
-              href="#ecosystem"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="group inline-flex items-center gap-3 text-white/70 hover:text-white transition-colors font-heading font-medium"
-              style={{ fontSize: "15px" }}
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .querySelector("#ecosystem")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              data-cursor-hover
-            >
-              Explore our ecosystem
-              <ArrowRight
-                size={16}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </motion.a>
-
-            {/* Trust row — why founders pitch us */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.35 }}
-              className="grid sm:grid-cols-3 gap-px border border-white/10 mt-14"
-              style={{ background: "rgba(255,255,255,0.10)" }}
-            >
-              {[
-                { title: "Direct", body: "Your pitch goes to the partners, not a pipeline." },
-                { title: "48 hours", body: "Every serious pitch gets a reply within two days." },
-                { title: "Confidential", body: "Ideas stay yours. We don't shop them around." },
-              ].map((t) => (
-                <div key={t.title} className="p-5 md:p-6" style={{ background: "#0A0A0A" }}>
-                  <span className="text-overline text-[#0276E8] block mb-3">{t.title}</span>
-                  <p className="text-body-sm text-white/45" style={{ lineHeight: 1.6 }}>
-                    {t.body}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
           </div>
 
           {/* Right — contact form */}
@@ -142,27 +96,7 @@ export function BuildersWelcome() {
               aria-hidden="true"
             />
 
-            {/* Image strip — lit office windows, blended into the card */}
-            <div className="relative overflow-hidden" style={{ aspectRatio: "16 / 5" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/partner-card.jpg"
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ filter: "saturate(0.8) contrast(1.05)" }}
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to top, #0B0D10 4%, rgba(11,13,16,0.3) 50%, transparent 80%), linear-gradient(120deg, rgba(2,118,232,0.12), transparent 55%)",
-                }}
-              />
-            </div>
-
-            <div className="p-8 md:p-10 pt-7 md:pt-7">
+            <div className="p-8 md:p-10">
             {/* Card header */}
             <div className="mb-9">
               <span className="text-overline text-[#0276E8] block mb-3">
