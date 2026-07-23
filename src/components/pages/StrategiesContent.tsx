@@ -155,7 +155,7 @@ export function StrategiesContent() {
             </div>
           </motion.div>
 
-          {/* Our Focus — four disciplines, staggered hairline row */}
+          {/* Our Focus — four disciplines, top-aligned hairline row */}
           <div className="mt-20 md:mt-28">
             <motion.span
               initial={{ opacity: 0 }}
@@ -174,18 +174,16 @@ export function StrategiesContent() {
                   transition={{ duration: 0.8, delay: 0.5 + i * 0.1, ease: easeSmooth }}
                   className="border-t border-white/15 pt-5"
                 >
-                  <div className={["", "lg:mt-8", "lg:mt-16", "lg:mt-24"][i]}>
-                    <span className="font-heading text-[#0276E8]/50 block mb-3" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className="font-display text-white block leading-none"
-                      style={{ fontSize: "clamp(26px, 2.8vw, 44px)", letterSpacing: "-0.02em" }}
-                    >
-                      {word}
-                      <span className="text-[#0276E8]">.</span>
-                    </span>
-                  </div>
+                  <span className="font-heading text-[#0276E8]/50 block mb-3" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className="font-display text-white block leading-none"
+                    style={{ fontSize: "clamp(26px, 2.8vw, 44px)", letterSpacing: "-0.02em" }}
+                  >
+                    {word}
+                    <span className="text-[#0276E8]">.</span>
+                  </span>
                 </motion.div>
               ))}
             </div>
