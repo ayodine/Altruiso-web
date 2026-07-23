@@ -63,8 +63,10 @@ export function WhatWeDo() {
             </div>
           </div>
 
-          {/* Stacked cards — oversized ghost index left, copy right */}
-          <div className="lg:flex-1 flex flex-col gap-5">
+          {/* Stacked cards — Optimus "Simple process" StepCard pattern:
+              a masked, monospaced ghost numeral bleeding in from the edge,
+              paired with a plain title + description. */}
+          <div className="lg:flex-1 flex flex-col gap-4">
             {pillars.map((pillar, i) => (
               <motion.div
                 key={pillar.title}
@@ -72,45 +74,50 @@ export function WhatWeDo() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.7, delay: (i % 2) * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="group relative flex items-center overflow-hidden p-8 md:p-10 min-h-[220px]"
-                style={{
-                  background: "rgba(255,255,255,0.035)",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                  backdropFilter: "blur(15px)",
-                  WebkitBackdropFilter: "blur(15px)",
-                }}
+                className="group relative flex flex-col sm:flex-row sm:items-stretch overflow-hidden"
+                style={{ background: "#121212", border: "1px solid rgba(255,255,255,0.06)" }}
                 data-cursor-hover
               >
                 {/* Hover blue glow */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
                   style={{
                     background:
                       "radial-gradient(ellipse 70% 80% at 100% 0%, rgba(2,118,232,0.10) 0%, transparent 60%)",
-                    border: "1px solid rgba(2,118,232,0.22)",
+                    border: "1px solid rgba(2,118,232,0.18)",
                   }}
                 />
 
-                {/* Oversized ghost index */}
-                <span
-                  aria-hidden="true"
-                  className="absolute left-2 md:left-5 top-1/2 -translate-y-1/2 font-display leading-none select-none text-white/[0.05] group-hover:text-white/[0.10] transition-colors duration-500"
-                  style={{ fontSize: "clamp(110px, 15vw, 200px)", letterSpacing: "-0.04em" }}
+                {/* Ghost numeral — masked so it fades in from the edge */}
+                <div
+                  className="stepcard-mask relative shrink-0 flex items-center justify-center sm:justify-end overflow-hidden h-[110px] sm:h-auto sm:w-[clamp(96px,16vw,158px)]"
                 >
-                  {pillar.number}
-                </span>
+                  <span
+                    aria-hidden="true"
+                    className="font-mono leading-none select-none"
+                    style={{
+                      fontSize: "clamp(84px, 10vw, 150px)",
+                      letterSpacing: "-0.04em",
+                      lineHeight: 1.1,
+                      color: "#EDEDED",
+                      opacity: 0.1,
+                    }}
+                  >
+                    {pillar.number}
+                  </span>
+                </div>
 
-                {/* Copy — offset clear of the ghost index */}
-                <div className="relative z-10 ml-[30%] sm:ml-[24%] lg:ml-[26%]">
+                {/* Texts */}
+                <div className="relative z-10 flex flex-col justify-center gap-3 p-6 md:p-8">
                   <h3
-                    className="font-heading font-medium text-white mb-3 group-hover:text-[#CDE6FF] transition-colors duration-300"
-                    style={{ fontSize: "clamp(24px, 2.4vw, 34px)", letterSpacing: "-0.02em", lineHeight: 1.15 }}
+                    className="font-body"
+                    style={{ fontSize: "20px", fontWeight: 400, letterSpacing: "-0.02em", lineHeight: 1.3, color: "#fff" }}
                   >
                     {pillar.title}
                   </h3>
                   <p
-                    className="text-body-lg text-white/55 group-hover:text-white/70 transition-colors duration-300"
-                    style={{ lineHeight: 1.5, maxWidth: "460px" }}
+                    className="font-body"
+                    style={{ fontSize: "16px", fontWeight: 400, letterSpacing: "-0.02em", lineHeight: 1.4, color: "rgba(255,255,255,0.6)", maxWidth: "440px" }}
                   >
                     {pillar.description}
                   </p>
