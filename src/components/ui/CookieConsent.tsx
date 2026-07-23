@@ -49,7 +49,7 @@ export function CookieConsent() {
         >
           <div className="container-site pb-5">
             <div
-              className="pointer-events-auto rounded-2xl border border-white/10 px-6 py-5 md:px-8 md:py-6 flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-10"
+              className="pointer-events-auto border border-white/10 px-6 py-5 md:px-8 md:py-6 flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-10"
               style={{
                 background: "rgba(10, 12, 16, 0.92)",
                 backdropFilter: "blur(16px)",
@@ -75,7 +75,7 @@ export function CookieConsent() {
                 <button
                   type="button"
                   onClick={() => choose("declined")}
-                  className="px-6 py-3 rounded-full font-heading font-medium text-white/60 hover:text-white border border-white/15 hover:border-white/40 transition-colors duration-300"
+                  className="px-6 py-3 font-heading font-medium text-white/60 hover:text-white border border-white/15 hover:border-white/40 transition-colors duration-300"
                   style={{ fontSize: "14px" }}
                   data-cursor-hover
                 >
@@ -84,7 +84,7 @@ export function CookieConsent() {
                 <button
                   type="button"
                   onClick={() => choose("accepted")}
-                  className="px-7 py-3 rounded-full font-heading font-medium text-white transition-shadow duration-300"
+                  className="px-7 py-3 font-heading font-medium text-white transition-shadow duration-300"
                   style={{
                     fontSize: "14px",
                     background: "#0276E8",

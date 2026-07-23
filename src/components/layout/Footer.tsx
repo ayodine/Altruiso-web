@@ -118,7 +118,7 @@ export function Footer() {
                   aria-label={label}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="w-11 h-11 rounded-full flex items-center justify-center text-white/45 hover:text-white transition-all duration-300 hover:scale-110"
+                  className="w-11 h-11 flex items-center justify-center text-white/45 hover:text-white transition-all duration-300 hover:scale-110"
                   style={{
                     border: "1px solid rgba(255,255,255,0.12)",
                     transition: "all 0.3s ease",
@@ -182,7 +182,7 @@ export function Footer() {
             data-cursor-hover
           >
             Back to top
-            <span className="w-8 h-8 rounded-full border border-white/20 group-hover:border-white/50 flex items-center justify-center transition-all duration-300">
+            <span className="w-8 h-8 border border-white/20 group-hover:border-white/50 flex items-center justify-center transition-all duration-300">
               <ArrowUpRight size={13} className="rotate-[-45deg]" />
             </span>
           </a>

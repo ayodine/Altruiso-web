@@ -78,7 +78,7 @@ export function WhatWeDo() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.7, delay: (i % 2) * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="group relative flex flex-col justify-between overflow-hidden rounded-lg p-8 min-h-[280px]"
+                  className="group relative flex flex-col justify-between overflow-hidden p-8 min-h-[280px]"
                   style={{
                     background: "rgba(255,255,255,0.035)",
                     border: "1px solid rgba(255,255,255,0.08)",
@@ -89,7 +89,7 @@ export function WhatWeDo() {
                 >
                   {/* Hover blue glow */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-lg"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
                       background:
                         "radial-gradient(ellipse 70% 80% at 100% 0%, rgba(2,118,232,0.10) 0%, transparent 60%)",
@@ -100,7 +100,7 @@ export function WhatWeDo() {
                   {/* Top row: icon chip + faint number */}
                   <div className="relative z-10 flex items-start justify-between">
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-500"
+                      className="w-12 h-12 flex items-center justify-center transition-colors duration-500"
                       style={{ background: "rgba(2,118,232,0.1)", border: "1px solid rgba(2,118,232,0.2)" }}
                     >
                       <Icon size={20} color="#0276E8" />

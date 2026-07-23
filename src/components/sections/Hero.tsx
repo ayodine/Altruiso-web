@@ -195,7 +195,7 @@ export function Hero() {
           {/* Overline */}
           <div
             ref={pillRef}
-            className="mb-8 px-5 py-2 rounded-full bg-[rgba(2,118,232,0.06)] border-[#0276E8] opacity-0"
+            className="mb-8 px-5 py-2 bg-[rgba(2,118,232,0.06)] border-[#0276E8] opacity-0"
             style={{ borderWidth: "0.5px" }}
           >
             <span
@@ -241,7 +241,7 @@ export function Hero() {
           <div ref={ctaRef} className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="#ecosystem"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-sm text-black transition-all duration-300 hover:scale-105 opacity-0"
+              className="group inline-flex items-center gap-3 px-8 py-4 font-heading font-medium text-sm text-black transition-all duration-300 hover:scale-105 opacity-0"
               style={{ background: "#0276E8", color: "white", fontSize: "14px", letterSpacing: "0.01em" }}
               onClick={(e) => {
                 e.preventDefault();
@@ -254,7 +254,7 @@ export function Hero() {
 
             <a
               href="#builders-welcome"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-sm text-white border border-white/20 hover:border-white/50 transition-all duration-300 opacity-0"
+              className="inline-flex items-center gap-3 px-8 py-4 font-heading font-medium text-sm text-white border border-white/20 hover:border-white/50 transition-all duration-300 opacity-0"
               style={{ fontSize: "14px" }}
               onClick={(e) => {
                 e.preventDefault();

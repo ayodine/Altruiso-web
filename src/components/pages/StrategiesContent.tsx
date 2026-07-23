@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
+import { GlassIcon, type GlassIconVariant } from "@/components/ui/GlassIcon";
 
 const CALENDLY_URL = "https://calendly.com/thealtruiso/30min";
 
@@ -16,21 +17,25 @@ const audiences = [
   { label: "Businesses", desc: "Companies of every size and stage." },
 ];
 
-const capabilities = [
+const capabilities: { title: string; icon: GlassIconVariant; items: string[] }[] = [
   {
     title: "Strategy",
+    icon: "prism",
     items: ["Research & Strategic Planning", "Government Advisory", "Economic Development", "Tourism Strategy"],
   },
   {
     title: "Organizational Growth",
+    icon: "stack",
     items: ["Organizational Transformation", "Leadership Development", "Change Management", "Program Evaluation"],
   },
   {
     title: "Learning & Capability",
+    icon: "sphere",
     items: ["Financial Wellness", "Corporate Training", "Professional Development", "Workshops"],
   },
   {
     title: "Community & Stakeholders",
+    icon: "ring",
     items: ["Community Engagement", "Stakeholder Consultation", "Facilitation", "Public Speaking"],
   },
 ];
@@ -73,10 +78,32 @@ export function StrategiesContent() {
     <>
       {/* Hero — editorial: headline, offset paragraph, focus row */}
       <section
-        className="min-h-screen flex items-center"
+        className="relative min-h-screen flex items-center overflow-hidden"
         style={{ background: "#000", paddingTop: "clamp(120px, 14vw, 200px)", paddingBottom: "clamp(80px, 10vw, 160px)" }}
       >
-        <div className="container-site">
+        {/* Baked hero photo — silhouettes over the city, blended into black */}
+        <div className="absolute inset-0" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-strategies.jpg"
+            alt=""
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: 0.5,
+              objectPosition: "62% 45%",
+              filter: "saturate(0.7) contrast(1.08) brightness(0.9)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, #000 15%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0.4) 100%), linear-gradient(to top, #000 8%, transparent 50%), linear-gradient(to bottom, #000 2%, transparent 30%)",
+            }}
+          />
+        </div>
+        <div className="container-site relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -109,7 +136,7 @@ export function StrategiesContent() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-white"
+                className="group inline-flex items-center gap-3 px-8 py-4 font-heading font-medium text-white"
                 style={{ fontSize: "15px", background: "#0276E8", boxShadow: "0 0 40px rgba(2,118,232,0.25)" }}
                 data-cursor-hover
               >
@@ -255,38 +282,38 @@ export function StrategiesContent() {
             </h2>
           </div>
 
-          {/* Column headers */}
-          <div className="hidden md:grid grid-cols-12 gap-8 pb-4 border-b border-white/10">
-            <span className="col-span-5 text-overline text-white/30">Capability</span>
-            <span className="col-span-7 text-overline text-white/30">What it includes</span>
-          </div>
-
-          <div>
+          {/* Capability bento — 2×2 cells with glass icons */}
+          <div
+            className="grid md:grid-cols-2 gap-px border border-white/10"
+            style={{ background: "rgba(255,255,255,0.10)" }}
+          >
             {capabilities.map((c, i) => (
               <motion.div
                 key={c.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.6, delay: i * 0.05, ease: easeSmooth }}
-                className="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start py-8 md:py-10 border-b border-white/10 transition-colors hover:bg-white/[0.015]"
+                transition={{ duration: 0.6, delay: (i % 2) * 0.08, ease: easeSmooth }}
+                className="group p-8 md:p-10"
+                style={{ background: "#0B0D10" }}
               >
-                <div className="md:col-span-5 flex items-baseline gap-5">
-                  <span className="font-heading text-[#0276E8]/50 shrink-0" style={{ fontSize: "14px" }}>
+                <div className="flex items-start justify-between mb-8">
+                  <GlassIcon variant={c.icon} size={56} />
+                  <span className="font-heading text-[#0276E8]/50" style={{ fontSize: "14px" }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3
-                    className="font-display text-white group-hover:text-[#CDE6FF] transition-colors"
-                    style={{ fontSize: "clamp(26px, 2.8vw, 44px)", letterSpacing: "-0.02em", lineHeight: 1.08 }}
-                  >
-                    {c.title}
-                  </h3>
                 </div>
-                <div className="md:col-span-7 flex flex-wrap gap-2.5 md:pt-2">
+                <h3
+                  className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-6"
+                  style={{ fontSize: "clamp(26px, 2.8vw, 40px)", letterSpacing: "-0.02em", lineHeight: 1.08 }}
+                >
+                  {c.title}
+                </h3>
+                <div className="flex flex-wrap gap-2.5">
                   {c.items.map((item) => (
                     <span
                       key={item}
-                      className="font-heading text-white/55 px-4 py-2 rounded-full whitespace-nowrap"
+                      className="font-heading text-white/55 px-4 py-2 whitespace-nowrap"
                       style={{ fontSize: "13.5px", border: "1px solid rgba(255,255,255,0.12)" }}
                     >
                       {item}
@@ -314,7 +341,7 @@ export function StrategiesContent() {
           {partners.map((name) => (
             <span
               key={name}
-              className="inline-flex items-center justify-center rounded-full px-10 py-5 whitespace-nowrap"
+              className="inline-flex items-center justify-center px-10 py-5 whitespace-nowrap"
               style={{ border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.02)" }}
             >
               <span
@@ -338,10 +365,13 @@ export function StrategiesContent() {
             style={{ fontSize: "clamp(30px, 4.2vw, 64px)", lineHeight: 1.18, letterSpacing: "-0.025em" }}
           />
 
-          {/* Our Approach */}
+          {/* Our Approach — 3-cell bento with glass icons */}
           <div className="mt-16 md:mt-24">
             <span className="text-overline text-white/40 block mb-8">Our Approach</span>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
+            <div
+              className="grid md:grid-cols-3 gap-px border border-white/10"
+              style={{ background: "rgba(255,255,255,0.10)" }}
+            >
               {approach.map((a, i) => (
                 <motion.div
                   key={a.title}
@@ -349,11 +379,15 @@ export function StrategiesContent() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.6, delay: i * 0.08, ease: easeSmooth }}
-                  className="border-t border-white/15 pt-6"
+                  className="p-7 md:p-8"
+                  style={{ background: "rgba(5,7,10,0.85)" }}
                 >
-                  <span className="font-heading text-[#0276E8]/60 block mb-4" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <div className="flex items-start justify-between mb-6">
+                    <GlassIcon variant={(["sphere", "cube", "prism"] as GlassIconVariant[])[i]} size={44} />
+                    <span className="font-heading text-[#0276E8]/60" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
                   <h3
                     className="font-heading font-medium text-white mb-3"
                     style={{ fontSize: "clamp(20px, 2vw, 26px)", letterSpacing: "-0.01em" }}
@@ -404,7 +438,7 @@ export function StrategiesContent() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-9 py-5 rounded-full font-heading font-medium text-white"
+                className="group inline-flex items-center gap-3 px-9 py-5 font-heading font-medium text-white"
                 style={{
                   fontSize: "16px",
                   background: "linear-gradient(135deg, #0276E8 0%, #005CB7 100%)",

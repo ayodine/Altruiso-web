@@ -2,10 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Search, ClipboardCheck, Handshake, TrendingUp } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
+import { GlassIcon, type GlassIconVariant } from "@/components/ui/GlassIcon";
 
 // Illustrative allocation — sectors ordered so no two low-separation hues sit
 // adjacent; palette validated for the dark surface (dataviz six-checks).
@@ -19,24 +20,24 @@ const portfolio: DonutDatum[] = [
   { label: "Health Care", value: 10, color: "#EAB308" },
 ];
 
-const steps = [
+const steps: { icon: GlassIconVariant; title: string; body: string }[] = [
   {
-    icon: Search,
+    icon: "sphere",
     title: "Discover",
     body: "We identify exceptional businesses, founders, and opportunities aligned with our long-term investment philosophy.",
   },
   {
-    icon: ClipboardCheck,
+    icon: "prism",
     title: "Evaluate",
     body: "We take the time to understand the business, the people, and the long-term opportunity. We audit the financials. We focus on quality rather than complexity.",
   },
   {
-    icon: Handshake,
+    icon: "cube",
     title: "Invest",
     body: "If there's alignment, we invest through equity ownership or strategic partnerships depending on deal structure. We don't believe in unnecessary bureaucracy. We believe in building trusted, long-term relationships.",
   },
   {
-    icon: TrendingUp,
+    icon: "stack",
     title: "Grow",
     body: "We don't actively operate the businesses we invest in. Instead, we partner through strategic guidance and operational expertise, helping businesses create enduring value over time.",
   },
@@ -76,10 +77,32 @@ export function InvestmentsContent() {
     <>
       {/* Hero — editorial: headline, offset paragraph, staggered stat trio */}
       <section
-        className="min-h-screen flex items-center"
+        className="relative min-h-screen flex items-center overflow-hidden"
         style={{ background: "#000", paddingTop: "clamp(120px, 14vw, 200px)", paddingBottom: "clamp(80px, 10vw, 160px)" }}
       >
-        <div className="container-site">
+        {/* Baked hero photo — dark tower blended into the black canvas */}
+        <div className="absolute inset-0" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-investments.jpg"
+            alt=""
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: 0.8,
+              objectPosition: "52% 62%",
+              filter: "saturate(0.85) contrast(1.1) brightness(1.15)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, #000 8%, rgba(0,0,0,0.72) 40%, rgba(0,0,0,0.15) 100%), linear-gradient(to top, #000 5%, transparent 40%), linear-gradient(to bottom, #000 1%, transparent 25%)",
+            }}
+          />
+        </div>
+        <div className="container-site relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,7 +131,7 @@ export function InvestmentsContent() {
             <div className="flex flex-wrap items-center gap-4 mt-9">
               <Link
                 href="/#builders-welcome"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-heading font-medium text-white"
+                className="group inline-flex items-center gap-3 px-8 py-4 font-heading font-medium text-white"
                 style={{ fontSize: "15px", background: "#0276E8", boxShadow: "0 0 40px rgba(2,118,232,0.25)" }}
                 data-cursor-hover
               >
@@ -260,44 +283,40 @@ export function InvestmentsContent() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-            {steps.map((step, i) => {
-              const Icon = step.icon;
-              return (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.6, delay: i * 0.08, ease: easeSmooth }}
-                  className="border-t border-white/10 pt-6"
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <div
-                      className="w-11 h-11 rounded-xl flex items-center justify-center"
-                      style={{ background: "rgba(2,118,232,0.12)", border: "1px solid rgba(2,118,232,0.25)" }}
-                    >
-                      <Icon size={20} color="#0276E8" />
-                    </div>
-                    <span
-                      className="font-heading text-white/20"
-                      style={{ fontSize: "14px", letterSpacing: "0.05em" }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3
-                    className="font-heading font-medium text-white mb-3"
-                    style={{ fontSize: "clamp(20px, 2vw, 26px)", letterSpacing: "-0.01em" }}
+          <div
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px border border-white/10"
+            style={{ background: "rgba(255,255,255,0.10)" }}
+          >
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease: easeSmooth }}
+                className="p-8"
+                style={{ background: "#0B0D10" }}
+              >
+                <div className="flex items-start justify-between mb-7">
+                  <GlassIcon variant={step.icon} size={52} />
+                  <span
+                    className="font-heading text-white/20"
+                    style={{ fontSize: "14px", letterSpacing: "0.05em" }}
                   >
-                    {step.title}
-                  </h3>
-                  <p className="text-body-sm text-white/50" style={{ lineHeight: 1.7 }}>
-                    {step.body}
-                  </p>
-                </motion.div>
-              );
-            })}
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3
+                  className="font-heading font-medium text-white mb-3"
+                  style={{ fontSize: "clamp(20px, 2vw, 26px)", letterSpacing: "-0.01em" }}
+                >
+                  {step.title}
+                </h3>
+                <p className="text-body-sm text-white/50" style={{ lineHeight: 1.7 }}>
+                  {step.body}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -428,7 +447,7 @@ export function InvestmentsContent() {
             </p>
             <Link
               href="/#builders-welcome"
-              className="group inline-flex items-center gap-3 px-9 py-5 rounded-full font-heading font-medium text-white"
+              className="group inline-flex items-center gap-3 px-9 py-5 font-heading font-medium text-white"
               style={{
                 fontSize: "16px",
                 background: "linear-gradient(135deg, #0276E8 0%, #005CB7 100%)",

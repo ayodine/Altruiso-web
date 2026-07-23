@@ -150,7 +150,7 @@ export function DonutChart({
             }}
           >
             <span
-              className="w-3 h-3 rounded-sm shrink-0"
+              className="w-3 h-3 shrink-0"
               style={{ background: s.color }}
               aria-hidden="true"
             />

@@ -7,6 +7,7 @@ const platforms = [
   {
     name: "Altruiso Investments",
     mark: "AI",
+    image: "/images/ecosystem-investments.jpg",
     tagline: "Building long-term value through ownership.",
     description:
       "We invest in public markets, private businesses, equity partnerships, and strategic opportunities aligned with our long-term investment philosophy.",
@@ -16,6 +17,7 @@ const platforms = [
   {
     name: "Altruiso Strategies",
     mark: "AS",
+    image: "/images/ecosystem-strategies.jpg",
     tagline: "Helping organizations solve meaningful challenges.",
     description:
       "We help organizations, governments, professionals, and portfolio companies grow through strategy, financial education, operational transformation, and advisory.",
@@ -64,7 +66,7 @@ export function OurEcosystem() {
             >
               <Link
                 href={platform.href}
-                className="group relative flex h-full flex-col overflow-hidden rounded-[24px] p-8 md:p-10 transition-all duration-500"
+                className="group relative flex h-full flex-col overflow-hidden transition-all duration-500"
                 style={{
                   background:
                     "radial-gradient(ellipse 100% 90% at 50% 0%, rgba(2,118,232,0.10) 0%, transparent 55%), #101215",
@@ -74,7 +76,7 @@ export function OurEcosystem() {
               >
                 {/* hover stroke lighting — the card's edge glows blue */}
                 <span
-                  className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  className="pointer-events-none absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
                     border: "1px solid rgba(2,118,232,0.5)",
                     boxShadow:
@@ -83,16 +85,33 @@ export function OurEcosystem() {
                   aria-hidden="true"
                 />
 
-                {/* Index + ghost monogram */}
-                <div className="flex items-start justify-between mb-8">
+                {/* Image top — abstract 3D render blended into the card */}
+                <div className="relative overflow-hidden" style={{ aspectRatio: "16 / 7" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={platform.image}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    style={{ filter: "saturate(0.85) contrast(1.05) brightness(0.85)" }}
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, #101215 2%, rgba(16,18,21,0.35) 45%, transparent 75%), linear-gradient(120deg, rgba(2,118,232,0.12), transparent 55%)",
+                    }}
+                  />
+                  {/* Index + ghost monogram over the image */}
                   <span
-                    className="font-heading text-[#0276E8]/60 pt-2"
+                    className="absolute top-5 left-6 font-heading text-white/70"
                     style={{ fontSize: "13px", letterSpacing: "0.08em" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span
-                    className="font-display leading-none text-white/[0.07] group-hover:text-white/[0.14] transition-colors duration-500 select-none"
+                    className="absolute bottom-2 right-6 font-display leading-none text-white/20 group-hover:text-white/35 transition-colors duration-500 select-none"
                     style={{ fontSize: "clamp(52px, 5.4vw, 84px)", letterSpacing: "-0.03em" }}
                     aria-hidden="true"
                   >
@@ -100,6 +119,7 @@ export function OurEcosystem() {
                   </span>
                 </div>
 
+                <div className="flex flex-1 flex-col p-8 md:p-10">
                 <h3
                   className="font-display text-white group-hover:text-[#CDE6FF] transition-colors duration-300 mb-4"
                   style={{ fontSize: "clamp(30px, 3.2vw, 46px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
@@ -120,12 +140,12 @@ export function OurEcosystem() {
                 </p>
 
                 <span
-                  className="group/btn relative overflow-hidden mt-auto self-start inline-flex items-center gap-3 px-7 py-3.5 rounded-full font-heading font-medium text-white border border-white/20 hover:border-[#0276E8] transition-colors duration-300"
+                  className="group/btn relative overflow-hidden mt-auto self-start inline-flex items-center gap-3 px-7 py-3.5 font-heading font-medium text-white border border-white/20 hover:border-[#0276E8] transition-colors duration-300"
                   style={{ fontSize: "15px" }}
                 >
                   {/* water fill — curved surface sweeps in from the left */}
                   <span
-                    className="absolute left-0 top-[-25%] h-[150%] w-full -translate-x-full rounded-r-[100%] group-hover/btn:translate-x-0 group-hover/btn:rounded-r-none transition-all duration-500 ease-out"
+                    className="absolute inset-0 w-full -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-out"
                     style={{ background: "#0276E8" }}
                     aria-hidden="true"
                   />
@@ -135,6 +155,7 @@ export function OurEcosystem() {
                     className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1"
                   />
                 </span>
+                </div>
               </Link>
             </motion.div>
           ))}
