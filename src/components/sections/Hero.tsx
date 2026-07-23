@@ -128,7 +128,7 @@ export function Hero() {
     return () => ctx.revert();
   }, []);
 
-  const headline = ["Building Institutions", "That Create Opportunity."];
+  const headline = ["Investing in Businesses", "Creating Opportunity."];
 
   return (
     <div ref={triggerRef} className="relative w-full h-[280vh]">
@@ -202,7 +202,7 @@ export function Hero() {
               className="text-overline text-[#0276E8] tracking-[0.2em] font-heading font-medium block"
               style={{ fontSize: "10px", lineHeight: "1" }}
             >
-              Venture Building & Investment
+              Investment • Strategy
             </span>
           </div>
 
@@ -233,11 +233,8 @@ export function Hero() {
             className="text-body-lg text-white/55 mb-10 opacity-0 mx-auto"
             style={{ maxWidth: "620px", lineHeight: 1.7 }}
           >
-            Altruiso is a long-term holding company that builds, acquires,
-            invests in, and holds businesses and opportunities with enduring
-            potential. We partner with exceptional founders and businesses to
-            create lasting economic value and build institutions that outlive
-            generations.
+            Through Altruiso Investments and Altruiso Strategies, we invest
+            in, acquire, and grow businesses designed for long-term value.
           </p>
 
           {/* CTAs */}

@@ -18,7 +18,7 @@ const platforms = [
     mark: "AS",
     tagline: "Helping organizations solve meaningful challenges.",
     description:
-      "Our consulting and advisory company serving governments, organizations, educational institutions, nonprofits, and businesses through strategy, facilitation, education, and advisory services.",
+      "We help organizations, governments, professionals, and portfolio companies grow through strategy, financial education, operational transformation, and advisory.",
     cta: "Explore Strategies",
     href: "/strategies",
   },
@@ -39,15 +39,15 @@ export function OurEcosystem() {
               className="font-display text-white"
               style={{ fontSize: "clamp(36px, 4.5vw, 68px)", letterSpacing: "-0.02em", lineHeight: 1.05 }}
             >
-              Two platforms, one philosophy.
+              Two Engines. One Mission.
             </h2>
           </div>
 
           <div className="lg:col-span-4 lg:pb-2">
             <p className="text-body-md text-white/50" style={{ lineHeight: 1.7, maxWidth: "380px" }}>
-              Altruiso branches into two platforms — one for building and
-              investing in businesses, one for helping organizations solve
-              meaningful challenges.
+              Every great business needs more than capital. It needs the right
+              strategy, execution, and long-term partnership. That&rsquo;s why
+              Altruiso operates through two complementary platforms.
             </p>
           </div>
         </div>

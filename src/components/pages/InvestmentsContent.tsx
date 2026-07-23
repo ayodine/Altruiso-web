@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Search, ClipboardCheck, Handshake, Infinity as InfinityIcon } from "lucide-react";
+import { ArrowRight, ArrowLeft, Search, ClipboardCheck, Handshake, TrendingUp } from "lucide-react";
 import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
@@ -10,18 +10,13 @@ import { MarqueeBand } from "@/components/ui/MarqueeBand";
 // Illustrative allocation — sectors ordered so no two low-separation hues sit
 // adjacent; palette validated for the dark surface (dataviz six-checks).
 const portfolio: DonutDatum[] = [
-  { label: "Energy", value: 24, color: "#0276E8" },
-  { label: "Tech", value: 20, color: "#0891B2" },
+  { label: "Technology", value: 25, color: "#0276E8" },
+  { label: "Real estate", value: 25, color: "#8B5CF6" },
+  { label: "Energy", value: 10, color: "#059669" },
+  { label: "Education", value: 10, color: "#0891B2" },
   { label: "Food", value: 10, color: "#EA580C" },
-  { label: "Hospitality", value: 12, color: "#EC4899" },
-  { label: "Real estate", value: 18, color: "#8B5CF6" },
-  { label: "Public equity", value: 16, color: "#059669" },
-];
-
-const heroStats = [
-  { value: "06", caption: "Sectors we hold and invest across" },
-  { value: "05", caption: "Ways we deploy capital" },
-  { value: "Forever", caption: "Our intended holding period" },
+  { label: "Travel & Hospitality", value: 10, color: "#EC4899" },
+  { label: "Health Care", value: 10, color: "#EAB308" },
 ];
 
 const steps = [
@@ -33,26 +28,33 @@ const steps = [
   {
     icon: ClipboardCheck,
     title: "Evaluate",
-    body: "We take the time to understand the business, the people, and the long-term opportunity. We audit the financials, and we focus on quality rather than complexity.",
+    body: "We take the time to understand the business, the people, and the long-term opportunity. We audit the financials. We focus on quality rather than complexity.",
   },
   {
     icon: Handshake,
-    title: "Partner",
-    body: "If there's alignment, we invest through equity ownership or strategic partnerships depending on deal structure. We don't believe in unnecessary bureaucracy — we believe in building trusted, long-term relationships.",
+    title: "Invest",
+    body: "If there's alignment, we invest through equity ownership or strategic partnerships depending on deal structure. We don't believe in unnecessary bureaucracy. We believe in building trusted, long-term relationships.",
   },
   {
-    icon: InfinityIcon,
-    title: "Hold",
-    body: "We don't actively operate the businesses we invest in. Instead, we partner through ownership, provide strategic support where appropriate, and allow exceptional management teams to keep building. Our approach is patient, disciplined, and designed for long-term value creation.",
+    icon: TrendingUp,
+    title: "Grow",
+    body: "We don't actively operate the businesses we invest in. Instead, we partner through strategic guidance and operational expertise, helping businesses create enduring value over time.",
   },
 ];
 
 const approach = [
-  { title: "Equity Investments", body: "Direct ownership stakes in businesses we believe in." },
-  { title: "Angel Investments", body: "Early backing for exceptional founders and ideas." },
-  { title: "Strategic Acquisitions", body: "Acquiring quality businesses with long-term potential." },
-  { title: "Public Market Investments", body: "Disciplined positions across public equities." },
-  { title: "Long-Term Ownership", body: "Patient capital, held for the long run." },
+  {
+    title: "Growth-Stage Businesses",
+    body: "Our primary focus — investing in established businesses ready for their next stage of growth.",
+  },
+  {
+    title: "Strategic Acquisitions",
+    body: "Acquiring quality businesses with enduring potential.",
+  },
+  {
+    title: "Exceptional Founders",
+    body: "Select early-stage investments in exceptional founders and ideas where we have high conviction.",
+  },
 ];
 
 const easeSmooth: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
@@ -101,9 +103,7 @@ export function InvestmentsContent() {
           >
             <p className="text-body-xl text-white/60" style={{ lineHeight: 1.7 }}>
               We invest patiently in businesses and opportunities we believe
-              will create enduring economic and social value. We don&rsquo;t
-              simply invest in businesses — we invest in businesses we believe
-              will create opportunity.
+              will create enduring economic and social value.
             </p>
             <div className="flex flex-wrap items-center gap-4 mt-9">
               <Link
@@ -112,7 +112,7 @@ export function InvestmentsContent() {
                 style={{ fontSize: "15px", background: "#0276E8", boxShadow: "0 0 40px rgba(2,118,232,0.25)" }}
                 data-cursor-hover
               >
-                Partner With Us
+                Pitch for Investment
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
@@ -127,35 +127,6 @@ export function InvestmentsContent() {
             </div>
           </motion.div>
 
-          {/* Staggered stat trio */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-10 mt-20 md:mt-28 max-w-4xl">
-            {heroStats.map((stat, i) => (
-              <motion.div
-                key={stat.caption}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 + i * 0.12, ease: easeSmooth }}
-                className="border-t border-white/15 pt-5"
-              >
-                <div className={i === 1 ? "sm:mt-10" : i === 2 ? "sm:mt-20" : ""}>
-                  <span
-                    className="font-display text-white block leading-none"
-                    style={{
-                      // The word stat runs long — size it to sit at the digits' cap height.
-                      fontSize: stat.value === "Forever" ? "clamp(38px, 4vw, 60px)" : "clamp(48px, 5vw, 76px)",
-                      letterSpacing: "-0.03em",
-                    }}
-                  >
-                    {stat.value}
-                    <span className="text-[#0276E8]">.</span>
-                  </span>
-                  <p className="text-body-sm text-white/40 mt-3 max-w-[22ch]" style={{ lineHeight: 1.5 }}>
-                    {stat.caption}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -204,7 +175,7 @@ export function InvestmentsContent() {
               </h2>
               <p className="text-body-lg text-white/55 mb-12" style={{ lineHeight: 1.7, maxWidth: "460px" }}>
                 A diversified base of businesses and opportunities across
-                sectors. As the portfolio grows, new companies join the mix.
+                sectors. As new companies join the mix, the portfolio grows.
               </p>
 
               {/* Sector ledger */}
@@ -348,18 +319,19 @@ export function InvestmentsContent() {
             </h2>
             <p
               className="text-body-lg text-white/55 mt-6"
-              style={{ lineHeight: 1.7, maxWidth: "520px" }}
+              style={{ lineHeight: 1.7, maxWidth: "560px" }}
             >
-              Diversified across opportunities, while remaining disciplined and
-              focused on long-term value.
+              We primarily invest in established businesses with strong
+              fundamentals and long-term growth potential. In exceptional
+              cases, we partner with outstanding founders at an earlier stage.
             </p>
           </div>
 
           {/* Column headers */}
           <div className="hidden md:grid grid-cols-12 gap-8 pb-4 border-b border-white/10">
-            <span className="col-span-5 text-overline text-white/30">Approach</span>
+            <span className="col-span-5 text-overline text-white/30">Focus</span>
             <span className="col-span-7 text-overline text-white/30">
-              How we deploy
+              Description
             </span>
           </div>
 
@@ -398,6 +370,15 @@ export function InvestmentsContent() {
               </motion.div>
             ))}
           </div>
+
+          <p
+            className="text-body-md text-white/40 mt-8"
+            style={{ lineHeight: 1.75, maxWidth: "640px" }}
+          >
+            While our primary focus is growth-stage businesses, we occasionally
+            invest earlier when we encounter exceptional founders and
+            opportunities aligned with our long-term philosophy.
+          </p>
         </div>
       </section>
 
@@ -455,7 +436,7 @@ export function InvestmentsContent() {
               }}
               data-cursor-hover
             >
-              Partner With Us
+              Pitch for Investment
               <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>

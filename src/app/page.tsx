@@ -3,8 +3,7 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { WhyAltruiso } from "@/components/sections/WhyAltruiso";
-import { WhatWeDo } from "@/components/sections/WhatWeDo";
+import { WhoWeAre } from "@/components/sections/WhoWeAre";
 import { OurEcosystem } from "@/components/sections/OurEcosystem";
 import { BuildersWelcome } from "@/components/sections/BuildersWelcome";
 
@@ -16,10 +15,8 @@ export default function Home() {
       <main>
         {/* Hook — who we are in one line */}
         <Hero />
-        {/* Why — the philosophy behind Altruiso */}
-        <WhyAltruiso />
-        {/* What we do — three pillars: Build, Acquire, Invest */}
-        <WhatWeDo />
+        {/* Who we are — the philosophy and the two platforms */}
+        <WhoWeAre />
         {/* The branch — two platforms, each linking to its own page */}
         <OurEcosystem />
         {/* Invitation + contact */}

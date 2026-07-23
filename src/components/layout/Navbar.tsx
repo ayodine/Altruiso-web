@@ -6,8 +6,7 @@ import StaggeredMenu, {
 import GradualBlur from "@/components/ui/GradualBlur";
 
 const menuItems: StaggeredMenuItem[] = [
-  { label: "Why Altruiso", ariaLabel: "Why Altruiso", link: "#why-altruiso" },
-  { label: "What We Do", ariaLabel: "See what we do", link: "#what-we-do" },
+  { label: "Who We Are", ariaLabel: "Who we are", link: "#who-we-are" },
   { label: "Ecosystem", ariaLabel: "Explore our ecosystem", link: "#ecosystem" },
   { label: "Investments", ariaLabel: "Altruiso Investments", link: "/investments" },
   { label: "Strategies", ariaLabel: "Altruiso Strategies", link: "/strategies" },
@@ -15,7 +14,8 @@ const menuItems: StaggeredMenuItem[] = [
 ];
 
 const socialItems = [
-  { label: "LinkedIn", link: "https://linkedin.com/company/altruiso" },
+  { label: "LinkedIn", link: "https://www.linkedin.com/company/altruiso-inc/" },
+  { label: "Instagram", link: "https://www.instagram.com/altruisoholdings/" },
   { label: "X", link: "https://x.com/altruiso" },
   { label: "Email", link: "mailto:hello@altruiso.com" },
 ];

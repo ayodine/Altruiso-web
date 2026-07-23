@@ -31,8 +31,7 @@ function InstagramIcon() {
 
 const footerLinks = {
   Company: [
-    { label: "Why Altruiso", href: "#why-altruiso" },
-    { label: "What We Do", href: "#what-we-do" },
+    { label: "Who We Are", href: "#who-we-are" },
     { label: "Our Ecosystem", href: "#ecosystem" },
     { label: "Partner With Us", href: "#builders-welcome" },
   ],

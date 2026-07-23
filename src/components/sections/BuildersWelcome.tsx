@@ -12,7 +12,7 @@ export function BuildersWelcome() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`New idea from ${form.name}`);
+    const subject = encodeURIComponent(`Investment pitch from ${form.name}`);
     const body = encodeURIComponent(
       `Full name: ${form.name}\nEmail: ${form.email}\nPhone: ${
         form.phone || "—"
@@ -68,8 +68,8 @@ export function BuildersWelcome() {
             >
               Extraordinary things begin with a single idea — and the courage to
               pursue it. Whether you&rsquo;re building a company, investing in
-              the future, or exploring meaningful opportunities, share your idea
-              and we&rsquo;ll start the conversation.
+              the future, or exploring meaningful opportunities, pitch your
+              idea and we&rsquo;ll start the conversation.
             </motion.p>
 
             <motion.a
@@ -122,7 +122,7 @@ export function BuildersWelcome() {
             {/* Card header */}
             <div className="mb-9">
               <span className="text-overline text-[#0276E8] block mb-3">
-                Share your idea
+                Pitch for Investment
               </span>
               <p className="text-body-md text-white/45" style={{ lineHeight: 1.65 }}>
                 A few details and we&rsquo;ll take it from there.
@@ -166,7 +166,7 @@ export function BuildersWelcome() {
               }}
               data-cursor-hover
             >
-              Share Your Idea
+              Pitch for Investment
               <ArrowRight
                 size={18}
                 className="transition-transform duration-300 group-hover:translate-x-1"
