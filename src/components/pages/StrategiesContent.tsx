@@ -30,12 +30,12 @@ const capabilities: { title: string; icon: GlassIconVariant; items: string[] }[]
   },
   {
     title: "Learning & Capability",
-    icon: "book",
+    icon: "sphere",
     items: ["Financial Wellness", "Corporate Training", "Professional Development", "Workshops"],
   },
   {
     title: "Community & Stakeholders",
-    icon: "pinwheel",
+    icon: "ring",
     items: ["Community Engagement", "Stakeholder Consultation", "Facilitation", "Public Speaking"],
   },
 ];
@@ -293,7 +293,7 @@ export function StrategiesContent() {
                 style={{ background: "#0B0D10" }}
               >
                 <div className="flex items-start justify-between mb-8">
-                  <GlassIcon variant={c.icon} size={72} />
+                  <GlassIcon variant={c.icon} size={56} />
                   <span className="font-heading text-[#0276E8]/50" style={{ fontSize: "14px" }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -349,7 +349,7 @@ export function StrategiesContent() {
                   style={{ background: "rgba(5,7,10,0.85)" }}
                 >
                   <div className="flex items-start justify-between mb-6">
-                    <GlassIcon variant={(["sphere", "ring", "bars"] as GlassIconVariant[])[i]} size={56} />
+                    <GlassIcon variant={(["sphere", "cube", "prism"] as GlassIconVariant[])[i]} size={44} />
                     <span className="font-heading text-[#0276E8]/60" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
