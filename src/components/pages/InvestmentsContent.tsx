@@ -2,11 +2,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowLeft, Telescope, ClipboardCheck, Landmark, TrendingUp, type LucideIcon } from "lucide-react";
 import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
-import { GlassIcon, type GlassIconVariant } from "@/components/ui/GlassIcon";
 import { PITCH_FORM_URL } from "@/lib/utils";
 
 // Illustrative allocation — sectors ordered so no two low-separation hues sit
@@ -21,24 +20,24 @@ const portfolio: DonutDatum[] = [
   { label: "Health Care", value: 10, color: "#EAB308" },
 ];
 
-const steps: { icon: GlassIconVariant; title: string; body: string }[] = [
+const steps: { icon: LucideIcon; title: string; body: string }[] = [
   {
-    icon: "sphere",
+    icon: Telescope,
     title: "Discover",
     body: "We identify exceptional businesses, founders, and opportunities aligned with our long-term investment philosophy.",
   },
   {
-    icon: "prism",
+    icon: ClipboardCheck,
     title: "Evaluate",
     body: "We take the time to understand the business, the people, and the long-term opportunity. We audit the financials. We focus on quality rather than complexity.",
   },
   {
-    icon: "cube",
+    icon: Landmark,
     title: "Invest",
     body: "If there's alignment, we invest through equity ownership or strategic partnerships depending on deal structure. We don't believe in unnecessary bureaucracy. We believe in building trusted, long-term relationships.",
   },
   {
-    icon: "stack",
+    icon: TrendingUp,
     title: "Grow",
     body: "We don't actively operate the businesses we invest in. Instead, we partner through strategic guidance and operational expertise, helping businesses create enduring value over time.",
   },
@@ -301,7 +300,7 @@ export function InvestmentsContent() {
                 style={{ background: "#0B0D10" }}
               >
                 <div className="flex items-start justify-between mb-7">
-                  <GlassIcon variant={step.icon} size={52} />
+                  <step.icon size={30} strokeWidth={1.5} className="text-[#0276E8]" />
                   <span
                     className="font-heading text-white/20"
                     style={{ fontSize: "14px", letterSpacing: "0.05em" }}
@@ -432,40 +431,6 @@ export function InvestmentsContent() {
         </MarqueeBand>
       </section>
 
-      {/* Partner With Us */}
-      <section className="section-pad" style={{ background: "#0A0A0A" }}>
-        <div className="container-site">
-          <div className="max-w-3xl">
-            <Label>Partner With Us</Label>
-            <h2
-              className="font-heading font-medium text-white mb-8"
-              style={{ fontSize: "clamp(32px, 5vw, 72px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}
-            >
-              Let&rsquo;s build something that lasts.
-            </h2>
-            <p className="text-body-xl text-white/55 mb-12" style={{ lineHeight: 1.8, maxWidth: "560px" }}>
-              If you&rsquo;re building an exceptional business or exploring
-              long-term investment opportunities, we&rsquo;d love to hear from
-              you.
-            </p>
-            <a
-              href={PITCH_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-9 py-5 font-heading font-medium text-white"
-              style={{
-                fontSize: "16px",
-                background: "linear-gradient(135deg, #0276E8 0%, #005CB7 100%)",
-                boxShadow: "0 0 40px rgba(2,118,232,0.3)",
-              }}
-              data-cursor-hover
-            >
-              Pitch for Investment
-              <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

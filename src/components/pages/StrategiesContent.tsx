@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowLeft, Target, TrendingUp, GraduationCap, Users, Compass, Handshake, BarChart3, type LucideIcon } from "lucide-react";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
-import { GlassIcon, type GlassIconVariant } from "@/components/ui/GlassIcon";
 
 const CALENDLY_URL = "https://calendly.com/thealtruiso/30min";
 
@@ -17,40 +16,43 @@ const audiences = [
   { label: "Businesses", desc: "Companies of every size and stage." },
 ];
 
-const capabilities: { title: string; icon: GlassIconVariant; items: string[] }[] = [
+const capabilities: { title: string; icon: LucideIcon; items: string[] }[] = [
   {
     title: "Strategy",
-    icon: "prism",
+    icon: Target,
     items: ["Research & Strategic Planning", "Government Advisory", "Economic Development", "Tourism Strategy"],
   },
   {
     title: "Organizational Growth",
-    icon: "stack",
+    icon: TrendingUp,
     items: ["Organizational Transformation", "Leadership Development", "Change Management", "Program Evaluation"],
   },
   {
     title: "Learning & Capability",
-    icon: "sphere",
+    icon: GraduationCap,
     items: ["Financial Wellness", "Corporate Training", "Professional Development", "Workshops"],
   },
   {
     title: "Community & Stakeholders",
-    icon: "ring",
+    icon: Users,
     items: ["Community Engagement", "Stakeholder Consultation", "Facilitation", "Public Speaking"],
   },
 ];
 
-const approach = [
+const approach: { title: string; icon: LucideIcon; body: string }[] = [
   {
     title: "Practical Strategy",
+    icon: Compass,
     body: "Solutions grounded in real-world execution, not theory.",
   },
   {
     title: "Collaborative Delivery",
+    icon: Handshake,
     body: "Working alongside your team to build alignment, capability, and momentum.",
   },
   {
     title: "Measurable Outcomes",
+    icon: BarChart3,
     body: "Focusing on results that create lasting value for organizations and the communities they serve.",
   },
 ];
@@ -293,7 +295,7 @@ export function StrategiesContent() {
                 style={{ background: "#0B0D10" }}
               >
                 <div className="flex items-start justify-between mb-8">
-                  <GlassIcon variant={c.icon} size={56} />
+                  <c.icon size={32} strokeWidth={1.5} className="text-[#0276E8]" />
                   <span className="font-heading text-[#0276E8]/50" style={{ fontSize: "14px" }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -349,7 +351,7 @@ export function StrategiesContent() {
                   style={{ background: "rgba(5,7,10,0.85)" }}
                 >
                   <div className="flex items-start justify-between mb-6">
-                    <GlassIcon variant={(["sphere", "cube", "prism"] as GlassIconVariant[])[i]} size={44} />
+                    <a.icon size={26} strokeWidth={1.5} className="text-[#0276E8]" />
                     <span className="font-heading text-[#0276E8]/60" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -383,53 +385,6 @@ export function StrategiesContent() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-pad" style={{ background: "#000" }}>
-        <div className="container-site">
-          <div className="max-w-3xl">
-            <Label>Partner With Us</Label>
-            <h2
-              className="font-heading font-medium text-white mb-8"
-              style={{ fontSize: "clamp(32px, 5vw, 72px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}
-            >
-              Let&rsquo;s build something that lasts.
-            </h2>
-            <p className="text-body-xl text-white/55 mb-12" style={{ lineHeight: 1.8, maxWidth: "560px" }}>
-              Whether you&rsquo;re designing a new strategy, leading
-              organizational change, or delivering a community initiative,
-              we&rsquo;d love to explore how we can help.
-            </p>
-            <div className="flex flex-wrap items-center gap-6">
-              <a
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-9 py-5 font-heading font-medium text-white"
-                style={{
-                  fontSize: "16px",
-                  background: "linear-gradient(135deg, #0276E8 0%, #005CB7 100%)",
-                  boxShadow: "0 0 40px rgba(2,118,232,0.3)",
-                }}
-                data-cursor-hover
-              >
-                Partner With Us
-                <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-              <a
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 font-heading font-medium text-white/60 hover:text-white transition-colors"
-                style={{ fontSize: "15px" }}
-                data-cursor-hover
-              >
-                Start a conversation
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 }
