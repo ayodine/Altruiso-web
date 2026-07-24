@@ -130,7 +130,9 @@ export function Footer() {
 
             {/* Secondary — start a conversation (water-fill sweep) */}
             <a
-              href="mailto:hello@altruiso.com"
+              href="https://calendly.com/thealtruiso/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative overflow-hidden inline-flex items-center justify-center gap-3 px-8 py-5 font-heading font-medium text-white border border-white/25 hover:border-[#0276E8] transition-colors duration-300"
               style={{ fontSize: "16px", background: "rgba(0,0,0,0.25)" }}
               data-cursor-hover
