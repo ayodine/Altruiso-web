@@ -11,6 +11,8 @@ interface MarqueeBandProps {
   /** Seconds for one full loop of the sequence. */
   duration?: number;
   className?: string;
+  /** Inline style on the overflow-clipping wrapper (e.g. an edge-fade mask). */
+  style?: React.CSSProperties;
   /**
    * Class applied to EACH copy of the sequence. For a seamless wrap, pair
    * every `gap-x-*` with a matching `pr-*` (the seam inherits the padding).
@@ -28,6 +30,7 @@ export function MarqueeBand({
   children,
   duration = 28,
   className = "",
+  style,
   trackClassName = "",
   ariaLabel,
 }: MarqueeBandProps) {
@@ -71,6 +74,7 @@ export function MarqueeBand({
     <div
       ref={wrapRef}
       className={`overflow-hidden ${className}`}
+      style={style}
       aria-label={ariaLabel}
     >
       <div ref={trackRef} className="flex w-max">

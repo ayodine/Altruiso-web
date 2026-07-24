@@ -1,0 +1,481 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.questions-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.question-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateY(100vh);
+}
+
+.question-section.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.question-section.prev {
+  opacity: 0;
+  transform: translateY(-100vh);
+}
+
+.question-content {
+  width: 100%;
+  max-width: 720px;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 32px;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.question-number {
+  font-size: 14px;
+  color: var(--theme-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.question-asterisk {
+  color: var(--theme-accent);
+}
+
+.ok-button-container {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.ok-button {
+  background-color: var(--theme-accent);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 0;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ok-button:hover {
+  background-color: var(--theme-accent-hover);
+}
+
+.press-enter {
+  font-size: 12px;
+  color: var(--theme-text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Base input styling for reused components */
+.text-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.base-text-input {
+  width: 100%;
+  font-size: 24px;
+  color: var(--theme-text-primary);
+  border-bottom: 1px solid var(--theme-text-tertiary);
+  padding: 8px 0;
+  padding-bottom: 12px;
+  transition: border-color 0.2s;
+}
+
+.base-text-input:focus {
+  border-bottom-color: var(--theme-accent);
+}
+
+.base-text-input::placeholder {
+  color: var(--theme-text-tertiary);
+}
+
+/* Hide the native number spinner (looks out of place on the dark theme) */
+.base-text-input[type="number"]::-webkit-inner-spin-button,
+.base-text-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.base-text-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Navigation Fixed Bottom Right */
+.navigation-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 100;
+}
+
+.nav-buttons {
+  display: flex;
+  background-color: var(--theme-input-bg);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.nav-button {
+  padding: 8px 12px;
+  color: var(--theme-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.nav-button:hover:not(:disabled) {
+  background-color: var(--theme-input-hover);
+}
+
+.nav-button:disabled {
+  color: var(--theme-text-tertiary);
+  cursor: not-allowed;
+}
+
+.nav-separator {
+  width: 1px;
+  background-color: var(--theme-text-tertiary);
+  height: 24px;
+  margin: auto 0;
+}
+
+/* Progress bar fixed bottom */
+.progress-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--theme-accent);
+  transition: width 0.3s ease;
+  z-index: 100;
+}
+
+/* Multiple choice styling */
+.multiple-choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+}
+
+.choice-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--theme-input-bg);
+  border: 1px solid transparent;
+  padding: 12px 16px;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  animation: slideUpIn 0.4s ease forwards;
+  animation-delay: calc(var(--index) * 0.05s);
+  opacity: 0;
+}
+
+.choice-item:hover {
+  background-color: var(--theme-input-hover);
+}
+
+.choice-item.selected {
+  background-color: rgba(2, 118, 232, 0.12);
+  border-color: var(--theme-accent);
+}
+
+.choice-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.choice-item.selected .choice-letter {
+  background-color: var(--theme-accent);
+  border-color: var(--theme-accent);
+  color: white;
+}
+
+.choice-text {
+  font-size: 18px;
+}
+
+.choice-check {
+  margin-left: auto;
+  color: var(--theme-accent);
+}
+
+/* Dropdown styling */
+.dropdown-container {
+  width: 100%;
+  position: relative;
+}
+
+.dropdown-input-wrapper {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--theme-text-secondary);
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-input-wrapper:focus-within {
+  border-bottom-color: var(--theme-accent);
+}
+
+.dropdown-input {
+  width: 100%;
+  font-size: 24px;
+  color: var(--theme-text-primary);
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.dropdown-input::placeholder {
+  color: var(--theme-text-tertiary);
+}
+
+.dropdown-icon {
+  color: var(--theme-text-tertiary);
+  margin-left: 8px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  background-color: var(--theme-bg-secondary);
+  border-radius: 0;
+  margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover, .dropdown-item.highlighted {
+  background-color: var(--theme-accent);
+}
+
+/* Contact Details group */
+.contact-group {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-label {
+  font-size: 16px;
+  color: var(--theme-text-secondary);
+}
+
+.submit-button {
+  background-color: var(--theme-accent);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 0;
+  align-self: flex-start;
+  margin-top: 16px;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: var(--theme-accent-hover);
+}
+
+.long-text-hint {
+  font-size: 12px;
+  color: var(--theme-text-tertiary);
+  margin-top: 8px;
+}
+
+/* Submit states */
+.submit-error {
+  color: var(--theme-error);
+  font-size: 14px;
+  padding: 8px 12px;
+  background-color: rgba(255, 77, 79, 0.1);
+  border-radius: 0;
+  border: 1px solid rgba(255, 77, 79, 0.3);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-button:disabled:hover {
+  background-color: var(--theme-accent);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Branding Header */
+.branding-header {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 100;
+}
+
+.branding-logo {
+  width: 30px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.branding-text {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--theme-text-secondary);
+}
+
+@media (max-width: 600px) {
+  .branding-header {
+    top: 20px;
+    left: 20px;
+  }
+}
+
+/* ── Short text: prefix/suffix affixes (money, percent) ── */
+.short-input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  border-bottom: 1px solid var(--theme-text-tertiary);
+  transition: border-color 0.2s;
+}
+.short-input-row:focus-within {
+  border-bottom-color: var(--theme-accent);
+}
+.short-input-row .base-text-input {
+  border-bottom: none;
+}
+.input-affix {
+  font-size: 24px;
+  color: var(--theme-text-secondary);
+  flex-shrink: 0;
+}
+
+/* ── Question hint ── */
+.question-hint {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--theme-text-tertiary);
+}
+
+/* ── File upload ── */
+.file-drop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border: 1px dashed var(--theme-border);
+  background-color: var(--theme-input-bg);
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 16px;
+}
+.file-drop:hover {
+  border-color: var(--theme-accent);
+  background-color: var(--theme-input-hover);
+}
+.file-native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.file-label {
+  color: var(--theme-text-primary);
+  word-break: break-all;
+}

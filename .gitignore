@@ -44,3 +44,13 @@ next-env.d.ts
 # local design references
 Crawled reference/
 .tmp-assets/
+
+# Pitch form (Typeform/) — deps, build output, local env & caches
+/Typeform/node_modules
+/Typeform/dist
+/Typeform/.env
+/Typeform/.firebase
+/Typeform/.netlify
+
+# Stray asset source drops (used copies live in public/images/)
+/Trusted by

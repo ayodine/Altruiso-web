@@ -1,37 +1,51 @@
 "use client";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
 
-// Placeholder wordmarks — swap for real logo SVGs when provided.
-const partners = ["Royal Roads University", "YMCA", "British Council", "Wealthsimple"];
+// Per-logo heights tuned so the marks read at an even visual weight
+// (compact marks like Royal Roads / YMCA render taller than wide wordmarks).
+const partners = [
+  { name: "Royal Roads University", src: "/images/logos/royal-roads.svg", height: 100 },
+  { name: "YMCA", src: "/images/logos/ymca.svg", height: 64 },
+  { name: "British Council", src: "/images/logos/british-council.svg", height: 56 },
+  { name: "Wealthsimple", src: "/images/logos/wealthsimple.svg", height: 34 },
+];
+
+// Repeated so the marquee has enough width to loop smoothly with only 4 logos.
+const track = [...partners, ...partners, ...partners];
+
+const edgeFade =
+  "linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%)";
 
 export function TrustedBy() {
   return (
     <section
-      className="py-16 md:py-24 border-y border-white/[0.06]"
+      className="py-5 md:py-7 border-y border-white/[0.06]"
       style={{ background: "#000" }}
     >
-      <div className="container-site mb-10 md:mb-12">
-        <div className="flex items-center gap-3 mb-6">
-          <span className="blue-line" />
-          <span className="text-overline text-white/40">Trusted By</span>
-        </div>
-        <p className="text-body-md text-white/45" style={{ lineHeight: 1.7, maxWidth: "420px" }}>
-          Organizations we&rsquo;ve had the privilege of working with.
-        </p>
+      <div className="mb-8 text-center">
+        <span className="text-overline text-white/50" style={{ fontWeight: 700 }}>
+          Trusted By
+        </span>
       </div>
-      <MarqueeBand duration={30} trackClassName="gap-x-6 pr-6 md:gap-x-8 md:pr-8">
-        {partners.map((name) => (
+      <MarqueeBand
+        duration={34}
+        style={{ WebkitMaskImage: edgeFade, maskImage: edgeFade }}
+        trackClassName="gap-x-2 pr-2 md:gap-x-4 md:pr-4"
+      >
+        {track.map((p, i) => (
           <span
-            key={name}
-            className="inline-flex items-center justify-center px-10 py-5 whitespace-nowrap"
-            style={{ border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.02)" }}
+            key={`${p.name}-${i}`}
+            className="group flex items-center justify-center shrink-0 w-[300px] h-[112px] px-10 md:w-[360px] md:h-[120px] md:px-14"
+            style={{ background: "rgba(255,255,255,0.045)" }}
           >
-            <span
-              className="font-display text-white/45"
-              style={{ fontSize: "clamp(18px, 1.8vw, 26px)", letterSpacing: "-0.01em" }}
-            >
-              {name}
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={p.src}
+              alt={p.name}
+              loading="lazy"
+              className="w-auto object-contain opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+              style={{ height: p.height, maxWidth: "100%", filter: "invert(1) brightness(1.8)" }}
+            />
           </span>
         ))}
       </MarqueeBand>

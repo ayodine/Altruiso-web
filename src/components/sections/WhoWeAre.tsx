@@ -1,16 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
-import { GlassIcon } from "@/components/ui/GlassIcon";
 
 const platforms = [
   {
     key: "Altruiso Investments",
-    icon: "sphere" as const,
+    image: "/images/whoweare-investments.jpg",
     body: "Acquires equity and invests in businesses with enduring potential.",
   },
   {
     key: "Altruiso Strategies",
-    icon: "cube" as const,
+    image: "/images/whoweare-strategies.jpg",
     body: "Helps organizations, professionals, and communities grow through strategic advisory, financial education, and operational transformation.",
   },
 ];
@@ -99,31 +98,45 @@ export function WhoWeAre() {
               key={p.key}
               {...fadeUp}
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="p-8 md:p-10"
+              className="flex flex-col overflow-hidden"
               style={{ background: "#0A0A0A" }}
             >
-              <div className="flex items-start justify-between mb-8">
-                <GlassIcon variant={p.icon} size={52} />
-                <span
-                  className="font-heading text-[#0276E8]/60"
-                  style={{ fontSize: "13px", letterSpacing: "0.08em" }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+              {/* Abstract 3D render — blended into the card's top edge */}
+              <div className="relative overflow-hidden" style={{ aspectRatio: "16 / 7" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={p.image}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ filter: "saturate(0.85) contrast(1.05) brightness(0.85)" }}
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, #0A0A0A 3%, rgba(10,10,10,0.35) 45%, transparent 78%), linear-gradient(120deg, rgba(2,118,232,0.12), transparent 55%)",
+                  }}
+                />
               </div>
-              <h3
-                className="font-display text-white mb-4"
-                style={{
-                  fontSize: "clamp(28px, 3.2vw, 44px)",
-                  lineHeight: 1.02,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {p.key}
-              </h3>
-              <p className="text-body-md text-white/50" style={{ lineHeight: 1.7, maxWidth: "460px" }}>
-                {p.body}
-              </p>
+
+              <div className="p-8 md:p-10">
+                <h3
+                  className="font-display text-white mb-4"
+                  style={{
+                    fontSize: "clamp(28px, 3.2vw, 44px)",
+                    lineHeight: 1.02,
+                    letterSpacing: "-0.02em",
+                    fontWeight: 600,
+                  }}
+                >
+                  {p.key}
+                </h3>
+                <p className="text-body-md text-white/50" style={{ lineHeight: 1.7, maxWidth: "460px" }}>
+                  {p.body}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

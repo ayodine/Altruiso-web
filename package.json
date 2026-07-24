@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:pitch": "cd Typeform && npm run build",
+    "build:all": "next build && npm run build:pitch",
     "start": "next start",
     "lint": "eslint"
   },

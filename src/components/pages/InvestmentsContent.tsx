@@ -7,6 +7,7 @@ import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
 import { GlassIcon, type GlassIconVariant } from "@/components/ui/GlassIcon";
+import { PITCH_FORM_URL } from "@/lib/utils";
 
 // Illustrative allocation — sectors ordered so no two low-separation hues sit
 // adjacent; palette validated for the dark surface (dataviz six-checks).
@@ -129,15 +130,17 @@ export function InvestmentsContent() {
               will create enduring economic and social value.
             </p>
             <div className="flex flex-wrap items-center gap-4 mt-9">
-              <Link
-                href="/#builders-welcome"
+              <a
+                href={PITCH_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 font-heading font-medium text-white"
                 style={{ fontSize: "15px", background: "#0276E8", boxShadow: "0 0 40px rgba(2,118,232,0.25)" }}
                 data-cursor-hover
               >
                 Pitch for Investment
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+              </a>
               <Link
                 href="/"
                 className="group inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors font-heading font-medium"
@@ -445,8 +448,10 @@ export function InvestmentsContent() {
               long-term investment opportunities, we&rsquo;d love to hear from
               you.
             </p>
-            <Link
-              href="/#builders-welcome"
+            <a
+              href={PITCH_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 px-9 py-5 font-heading font-medium text-white"
               style={{
                 fontSize: "16px",
@@ -457,7 +462,7 @@ export function InvestmentsContent() {
             >
               Pitch for Investment
               <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>

@@ -6,7 +6,6 @@ import { ArrowRight } from "lucide-react";
 const platforms = [
   {
     name: "Altruiso Investments",
-    mark: "AI",
     image: "/images/ecosystem-investments.jpg",
     tagline: "Building long-term value through ownership.",
     description:
@@ -16,7 +15,6 @@ const platforms = [
   },
   {
     name: "Altruiso Strategies",
-    mark: "AS",
     image: "/images/ecosystem-strategies.jpg",
     tagline: "Helping organizations solve meaningful challenges.",
     description:
@@ -103,26 +101,12 @@ export function OurEcosystem() {
                         "linear-gradient(to top, #101215 2%, rgba(16,18,21,0.35) 45%, transparent 75%), linear-gradient(120deg, rgba(2,118,232,0.12), transparent 55%)",
                     }}
                   />
-                  {/* Index + ghost monogram over the image */}
-                  <span
-                    className="absolute top-5 left-6 font-heading text-white/70"
-                    style={{ fontSize: "13px", letterSpacing: "0.08em" }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span
-                    className="absolute bottom-2 right-6 font-display leading-none text-white/20 group-hover:text-white/35 transition-colors duration-500 select-none"
-                    style={{ fontSize: "clamp(52px, 5.4vw, 84px)", letterSpacing: "-0.03em" }}
-                    aria-hidden="true"
-                  >
-                    {platform.mark}
-                  </span>
                 </div>
 
-                <div className="flex flex-1 flex-col p-8 md:p-10">
+                <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
                 <h3
                   className="font-display text-white group-hover:text-[#CDE6FF] transition-colors duration-300 mb-4"
-                  style={{ fontSize: "clamp(30px, 3.2vw, 46px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
+                  style={{ fontSize: "clamp(30px, 3.2vw, 46px)", letterSpacing: "-0.025em", lineHeight: 1.05, fontWeight: 600 }}
                 >
                   {platform.name}
                 </h3>
