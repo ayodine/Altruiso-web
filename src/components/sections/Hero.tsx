@@ -7,6 +7,23 @@ import MagicRings from "@/components/ui/MagicRings";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// The Altruiso monogram is three shards. We split it into two "diamonds":
+// shard A = the large body, shard B = the two smaller wedges. Both are rendered
+// in overlapping, identically-sized SVGs so that at their resting (identity)
+// transform they recompose the exact monogram.
+const PATH_A =
+  "M114.44 34.3202L100.953 4.60528C98.1686 -1.53509 89.448 -1.53509 86.6633 4.60528L35.7779 116.732C34.0507 120.532 35.6087 125.016 39.3098 126.94L172.417 195.986C179.03 199.419 186.256 192.56 183.175 185.778L166.037 148.019C165.311 146.419 164.063 145.108 162.505 144.297L93.8894 108.71C89.2295 106.292 87.2767 100.652 89.448 95.872L114.432 40.813C115.37 38.7545 115.37 36.3858 114.432 34.3272L114.44 34.3202Z";
+const PATH_B1 =
+  "M153.608 130.62L100.573 103.112C98.2391 101.907 97.2662 99.0795 98.3519 96.6897L118.627 52.0151C120.383 48.1518 125.86 48.1518 127.616 52.0151L160.376 124.191C162.315 128.456 157.768 132.771 153.608 130.613V130.62Z";
+const PATH_B2 =
+  "M0.465461 192.003L26.303 135.055C27.4732 132.482 30.561 131.41 33.0708 132.714L75.0453 154.491C78.5984 156.331 78.5984 161.414 75.0453 163.254L7.22622 198.425C3.06684 200.583 -1.47323 196.275 0.458411 192.003H0.465461Z";
+
+// Muted, dark-enough giant states so the white headline reads over them;
+// both converge to the true brand blue as they resolve into the mark.
+const A_START = "#17406F";
+const B_START = "#1E5568";
+const BRAND = "#0276E8";
+
 export function Hero() {
   const triggerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
@@ -15,50 +32,80 @@ export function Hero() {
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
-  
-  const svgContainerRef = useRef<HTMLDivElement>(null);
-  const path1Ref = useRef<SVGPathElement>(null);
-  const path2Ref = useRef<SVGPathElement>(null);
-  const path3Ref = useRef<SVGPathElement>(null);
+
+  const shapeLayerRef = useRef<HTMLDivElement>(null);
+  const shardARef = useRef<SVGSVGElement>(null);
+  const shardBRef = useRef<SVGSVGElement>(null);
+  const pathARef = useRef<SVGPathElement>(null);
+  const pathB1Ref = useRef<SVGPathElement>(null);
+  const pathB2Ref = useRef<SVGPathElement>(null);
 
   useEffect(() => {
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const ctx = gsap.context(() => {
-      // Narrative: the page loads on the fully assembled monogram, front and
-      // center. Scrolling shatters it — the shards fly apart and dim — and
-      // the copy (pill → headline → sub → CTAs) reveals in its place.
+      const words = headlineRef.current?.querySelectorAll(".word-wrap") ?? [];
+      const pathsB = [pathB1Ref.current, pathB2Ref.current];
 
-      // Assembled starting state. transformOrigin "50% 50%" rotates each
-      // shard about its own bbox centre when it scatters.
-      gsap.set([path1Ref.current, path2Ref.current, path3Ref.current], {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        opacity: 1,
-        transformOrigin: "50% 50%",
-      });
-      gsap.set(svgContainerRef.current, { scale: 0.85, transformOrigin: "50% 50%" });
+      // ---- Reduced motion: show everything already resolved, no scrub. ----
+      if (reduced) {
+        gsap.set([shardARef.current, shardBRef.current], {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+        });
+        gsap.set(pathARef.current, { fill: BRAND });
+        gsap.set(pathsB, { fill: BRAND });
+        gsap.set(shapeLayerRef.current, { opacity: 1 });
+        gsap.set([pillRef.current, subRef.current], { opacity: 1, y: 0 });
+        gsap.set(words, { y: "0%", opacity: 1 });
+        gsap.set(ctaRef.current?.children ?? [], { opacity: 1, y: 0 });
+        gsap.set(scrollIndicatorRef.current, { opacity: 1 });
+        return;
+      }
 
-      // Copy hidden until the reveal phase (headline words carry their own
-      // inline hidden state in the JSX).
-      gsap.set([pillRef.current, subRef.current], { opacity: 0, y: 36 });
-      gsap.set(ctaRef.current?.children ?? [], { opacity: 0, y: 24 });
+      // ---- Copy hidden until the load entrance. ----
+      gsap.set(shapeLayerRef.current, { opacity: 0 });
+      gsap.set([pillRef.current, subRef.current], { opacity: 0, y: 34 });
+      gsap.set(ctaRef.current?.children ?? [], { opacity: 0, y: 22 });
 
-      // 1. Load entrance — the assembled logo settles in, scroll cue invites
-      // the story.
-      const tlEntrance = gsap.timeline({ delay: 0.2 });
-      tlEntrance.fromTo(
-        svgContainerRef.current,
-        { opacity: 0, scale: 0.72 },
-        { opacity: 1, scale: 0.85, duration: 1.4, ease: "power3.out" }
-      );
-      tlEntrance.fromTo(
-        scrollIndicatorRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.6 },
-        "-=0.6"
-      );
+      // 1. Load entrance — the giant diamonds fade in as the headline rises.
+      //    The copy is present from the start (emcap keeps it static); only
+      //    the shapes are driven by scroll.
+      const tlEntrance = gsap.timeline({ delay: 0.15 });
+      tlEntrance
+        .to(shapeLayerRef.current, { opacity: 1, duration: 1.3, ease: "power2.out" })
+        .to(
+          pillRef.current,
+          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+          0.15
+        )
+        .to(
+          words,
+          { y: "0%", opacity: 1, stagger: 0.09, duration: 0.9, ease: "power4.out" },
+          0.28
+        )
+        .to(
+          subRef.current,
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+          0.62
+        )
+        .to(
+          ctaRef.current?.children ?? [],
+          { opacity: 1, y: 0, stagger: 0.08, duration: 0.7, ease: "power3.out" },
+          0.74
+        )
+        .fromTo(
+          scrollIndicatorRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6 },
+          0.9
+        );
 
-      // Scroll indicator line pulse
+      // Scroll cue line pulse.
       const scrollLine = scrollIndicatorRef.current?.querySelector(".scroll-line");
       if (scrollLine) {
         gsap.to(scrollLine, {
@@ -71,10 +118,12 @@ export function Hero() {
         });
       }
 
-      // 2. Scrubbed story across the sticky track.
+      // 2. The resolve — scrubbed across the sticky wall. Two oversized,
+      //    rotated shards flank the headline (A top-left, B bottom-right) and
+      //    de-rotate, shrink, and converge into the assembled monogram while
+      //    shifting from muted to brand blue. power-out front-loads the motion
+      //    so it settles early and holds — the emcap cadence.
       if (triggerRef.current) {
-        const words = headlineRef.current?.querySelectorAll(".word-wrap") ?? [];
-
         const tlScroll = gsap.timeline({
           scrollTrigger: {
             trigger: triggerRef.current,
@@ -82,9 +131,6 @@ export function Hero() {
             end: "bottom bottom",
             scrub: 1,
             invalidateOnRefresh: true,
-            // The scroll cue is driven directly off progress (overwrite kills
-            // the entrance tween) so a scroll during page load can't leave it
-            // stuck visible.
             onUpdate: (self) => {
               gsap.to(scrollIndicatorRef.current, {
                 opacity: self.progress > 0.04 ? 0 : 1,
@@ -95,33 +141,56 @@ export function Hero() {
           },
         });
 
-        // Phase 1 (0 → ~0.45): the monogram shatters — shards fly outward,
-        // rotate, and dim to a faint residue. A small stagger keeps them from
-        // breaking apart all at once.
-        const shatter = { ease: "power2.in", duration: 0.42 };
-        tlScroll.to(path1Ref.current, { x: -300, y: -240, rotation: -55, opacity: 0.1, ...shatter }, 0);
-        tlScroll.to(path2Ref.current, { x: 320, y: -170, rotation: 50, opacity: 0.1, ...shatter }, 0.03);
-        tlScroll.to(path3Ref.current, { x: -240, y: 260, rotation: -35, opacity: 0.1, ...shatter }, 0.06);
-        tlScroll.to(
-          svgContainerRef.current,
-          { scale: 1.4, ease: "power2.inOut", duration: 0.5 },
-          0
-        );
-
-        // Phase 2 (~0.36 → 0.8): copy reveals in editorial order, starting
-        // when the shatter is ~75% through so the two moments overlap.
-        tlScroll.to(pillRef.current, { opacity: 1, y: 0, ease: "power2.out", duration: 0.1 }, 0.36);
-        tlScroll.to(
-          words,
-          { y: "0%", opacity: 1, stagger: 0.045, ease: "power3.out", duration: 0.22 },
-          0.42
-        );
-        tlScroll.to(subRef.current, { opacity: 1, y: 0, ease: "power2.out", duration: 0.14 }, 0.56);
-        tlScroll.to(
-          ctaRef.current?.children ?? [],
-          { opacity: 1, y: 0, stagger: 0.04, ease: "power2.out", duration: 0.12 },
-          0.66
-        );
+        const resolve = { ease: "power2.out", duration: 1 } as const;
+        tlScroll
+          .fromTo(
+            shardARef.current,
+            {
+              x: () => -window.innerWidth * 0.26,
+              y: () => -window.innerHeight * 0.22,
+              rotation: 42,
+              scale: 3.6,
+              transformOrigin: "50% 50%",
+            },
+            { x: 0, y: 0, rotation: 0, scale: 1, ...resolve },
+            0
+          )
+          .fromTo(
+            shardBRef.current,
+            {
+              x: () => window.innerWidth * 0.26,
+              y: () => window.innerHeight * 0.22,
+              rotation: -78,
+              scale: 3.6,
+              transformOrigin: "50% 50%",
+            },
+            { x: 0, y: 0, rotation: 0, scale: 1, ...resolve },
+            0
+          )
+          .fromTo(
+            pathARef.current,
+            { fill: A_START },
+            { fill: BRAND, duration: 1, ease: "power1.out" },
+            0
+          )
+          .fromTo(
+            pathsB,
+            { fill: B_START },
+            { fill: BRAND, duration: 1, ease: "power1.out" },
+            0
+          )
+          // As the shards join into the finished mark, clear the copy so the
+          // completed logo stands alone (emcap). Reverses on scroll-up.
+          .to(
+            [
+              pillRef.current,
+              headlineRef.current,
+              subRef.current,
+              ctaRef.current,
+            ],
+            { opacity: 0, y: -22, ease: "power2.in", duration: 0.3 },
+            0.45
+          );
       }
     }, triggerRef);
 
@@ -131,14 +200,15 @@ export function Hero() {
   const headline = ["Investing in Businesses", "Creating Opportunity."];
 
   return (
-    <div ref={triggerRef} className="relative w-full h-[280vh]">
+    <div ref={triggerRef} className="relative w-full h-[240vh]">
       {/* Sticky Hero section */}
       <section
         ref={stickyRef}
         id="hero"
         className="sticky top-0 left-0 w-full h-screen flex flex-col justify-center overflow-hidden bg-black"
       >
-        {/* MagicRings WebGL background */}
+        {/* MagicRings WebGL atmosphere — dialed back so it reads as faint depth
+            behind the resolving shards. */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <MagicRings
             color="#0276E8"
@@ -150,7 +220,7 @@ export function Hero() {
             baseRadius={0.3}
             radiusStep={0.12}
             scaleRate={0.12}
-            opacity={0.55}
+            opacity={0.32}
             blur={0}
             noiseAmount={0.04}
             ringGap={1.5}
@@ -159,36 +229,47 @@ export function Hero() {
           />
         </div>
 
-        {/* 3D Converging Logo Container in the background */}
+        {/* Two monogram shards — giant, rotated, flanking on load; they resolve
+            into the assembled mark on scroll. Both SVGs share the same viewBox,
+            size, and centering so identity recomposes the exact logo. */}
         <div
-          ref={svgContainerRef}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+          ref={shapeLayerRef}
+          className="absolute inset-0 z-[1] pointer-events-none"
         >
-          <svg
-            width="380"
-            height="400"
-            viewBox="0 0 184 199"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-[280px] h-[300px] md:w-[380px] md:h-[400px] overflow-visible"
-          >
-            <path
-              ref={path1Ref}
-              d="M114.44 34.3202L100.953 4.60528C98.1686 -1.53509 89.448 -1.53509 86.6633 4.60528L35.7779 116.732C34.0507 120.532 35.6087 125.016 39.3098 126.94L172.417 195.986C179.03 199.419 186.256 192.56 183.175 185.778L166.037 148.019C165.311 146.419 164.063 145.108 162.505 144.297L93.8894 108.71C89.2295 106.292 87.2767 100.652 89.448 95.872L114.432 40.813C115.37 38.7545 115.37 36.3858 114.432 34.3272L114.44 34.3202Z"
-              fill="#0276E8"
-            />
-            <path
-              ref={path2Ref}
-              d="M153.608 130.62L100.573 103.112C98.2391 101.907 97.2662 99.0795 98.3519 96.6897L118.627 52.0151C120.383 48.1518 125.86 48.1518 127.616 52.0151L160.376 124.191C162.315 128.456 157.768 132.771 153.608 130.613V130.62Z"
-              fill="#0276E8"
-            />
-            <path
-              ref={path3Ref}
-              d="M0.465461 192.003L26.303 135.055C27.4732 132.482 30.561 131.41 33.0708 132.714L75.0453 154.491C78.5984 156.331 78.5984 161.414 75.0453 163.254L7.22622 198.425C3.06684 200.583 -1.47323 196.275 0.458411 192.003H0.465461Z"
-              fill="#0276E8"
-            />
-          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <svg
+              ref={shardARef}
+              viewBox="0 0 184 199"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-[280px] h-[300px] md:w-[380px] md:h-[400px] overflow-visible"
+            >
+              <path ref={pathARef} d={PATH_A} fill={A_START} />
+            </svg>
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <svg
+              ref={shardBRef}
+              viewBox="0 0 184 199"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-[280px] h-[300px] md:w-[380px] md:h-[400px] overflow-visible"
+            >
+              <path ref={pathB1Ref} d={PATH_B1} fill={B_START} />
+              <path ref={pathB2Ref} d={PATH_B2} fill={B_START} />
+            </svg>
+          </div>
         </div>
+
+        {/* Legibility overlay — darkens the headline zone and melts the shards
+            into black at the bottom edge (emcap's hero_overlay). */}
+        <div
+          className="absolute inset-0 z-[2] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(56% 46% at 50% 46%, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.30) 44%, transparent 72%), linear-gradient(to bottom, transparent 52%, rgba(0,0,0,0.92) 100%)",
+          }}
+        />
 
         {/* Content on top */}
         <div className="container-site relative z-10 flex flex-col items-center text-center">
@@ -269,7 +350,7 @@ export function Hero() {
         {/* Scroll indicator */}
         <div
           ref={scrollIndicatorRef}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 z-10"
         >
           <div className="text-overline text-white/30 mb-1">Scroll</div>
           <div className="w-px h-12 bg-white/10 overflow-hidden">
