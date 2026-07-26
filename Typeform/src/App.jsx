@@ -124,13 +124,13 @@ function DropdownInput({ options, value, onSelect }) {
   );
 }
 
-function LongTextInput({ value, onChangeValue, onDone }) {
+function LongTextInput({ value, submitMode, submitting, submitError, onChangeValue, onDone }) {
   const ref = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (ref.current) ref.current.focus({ preventScroll: true });
-    }, 700); // Wait for CSS transition to finish
+    }, 700);
     return () => clearTimeout(timer);
   }, []);
 
@@ -147,17 +147,32 @@ function LongTextInput({ value, onChangeValue, onDone }) {
           e.target.style.height = e.target.scrollHeight + 'px';
         }}
         onKeyDown={e => {
-          if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (value?.trim()) onDone(); }
+          if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (!submitting) onDone(); }
         }}
         rows={1}
+        disabled={submitting}
         style={{ resize: 'none', overflow: 'hidden', minHeight: 40 }}
       />
       <div className="long-text-hint"><strong>Shift ⇧</strong> + <strong>Enter ↵</strong> to make a line break</div>
-      {value?.trim() && (
-        <div className="ok-button-container">
-          <button className="ok-button" onClick={onDone}>OK <Check size={20} /></button>
-          <span className="press-enter">press <strong>Enter ↵</strong></span>
-        </div>
+
+      {submitMode ? (
+        <>
+          {submitError && <div className="submit-error">{submitError}</div>}
+          <button className="submit-button" onClick={onDone} disabled={submitting}>
+            {submitting ? (
+              <><Loader2 size={20} className="spinner" /> Submitting…</>
+            ) : (
+              'Submit application'
+            )}
+          </button>
+        </>
+      ) : (
+        value?.trim() && (
+          <div className="ok-button-container">
+            <button className="ok-button" onClick={onDone}>OK <Check size={20} /></button>
+            <span className="press-enter">press <strong>Enter ↵</strong></span>
+          </div>
+        )
       )}
     </div>
   );
@@ -483,8 +498,11 @@ function App() {
                   <LongTextInput
                     key={'lt-' + q.id}
                     value={answers[q.id]}
+                    submitMode={idx === totalQ - 1}
+                    submitting={submitting}
+                    submitError={submitError}
                     onChangeValue={(v) => setAnswer(q.id, v)}
-                    onDone={goNext}
+                    onDone={idx === totalQ - 1 ? handleSubmit : goNext}
                   />
                 )}
                 {isActive && q.type === 'contact_group' && (

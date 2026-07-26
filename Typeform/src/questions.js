@@ -171,4 +171,13 @@ export const questions = [
     hint: "(PDF preferred)",
     required: true,
   },
+  {
+    id: "q_additional_info",
+    name: "additional_info",
+    type: "long_text",
+    sectionHeader: "Supporting Information",
+    title: "Is there anything else you'd like us to know?",
+    hint: "Optional.",
+    required: false,
+  },
 ];
