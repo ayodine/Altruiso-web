@@ -48,7 +48,7 @@ const steps: { icon: LucideIcon; title: string; body: string }[] = [
 const approach = [
   {
     title: "Growth-Stage Businesses",
-    body: "Our primary focus — investing in established businesses ready for their next stage of growth.",
+    body: "Our primary focus: investing in established businesses ready for their next stage of growth.",
   },
   {
     title: "Strategic Acquisitions",
@@ -286,7 +286,7 @@ export function InvestmentsContent() {
               Simple. Clear. Fast.
             </h2>
             <p className="text-body-lg text-white/55" style={{ lineHeight: 1.7 }}>
-              A patient, disciplined approach — without the bureaucracy.
+              A patient, disciplined approach without the bureaucracy.
             </p>
           </div>
 
@@ -481,7 +481,7 @@ export function InvestmentsContent() {
                   className="font-display text-white"
                   style={{ fontSize: "clamp(30px, 3.8vw, 56px)", letterSpacing: "-0.025em", lineHeight: 1.05, fontWeight: 400 }}
                 >
-                  Flexible Capital — No two businesses are the same.
+                  Flexible Capital. No two businesses are the same.
                 </h3>
               </div>
               <div className="lg:col-span-5">

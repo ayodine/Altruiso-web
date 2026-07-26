@@ -89,7 +89,7 @@ export function WhoWeAre() {
           <span className="text-overline text-[#0276E8] block mb-8">Vision &amp; Philosophy</span>
 
           <ScrollRevealText
-            text="Our vision is inspired by **altruism** — the belief that lasting success is measured not only by what we build, but by the **value we create for others.**"
+            text="Our vision is inspired by **altruism**, the belief that lasting success is measured not only by what we build, but by the **value we create for others.**"
             className="font-display text-white max-w-5xl mb-12"
             style={{ fontSize: "clamp(28px, 3.8vw, 56px)", lineHeight: 1.18, letterSpacing: "-0.025em" }}
           />

@@ -231,7 +231,7 @@ export function StrategiesContent() {
               </h2>
             </div>
             <p className="lg:col-span-5 text-body-md text-white/45 lg:pb-2" style={{ lineHeight: 1.7, maxWidth: "380px" }}>
-              From national agencies to local businesses — six sectors, one
+              From national agencies to local businesses: six sectors, one
               standard of rigor.
             </p>
           </div>

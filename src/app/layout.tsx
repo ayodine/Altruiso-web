@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://altruiso.com"),
   title: {
     template: "%s | ALTRUISO",
-    default: "ALTRUISO — Building Institutions That Create Opportunity",
+    default: "ALTRUISO | Building Institutions That Create Opportunity",
   },
   description:
     "Altruiso creates, invests in, and supports businesses that generate enduring value through ownership, strategic partnerships, and venture creation.",
@@ -59,13 +59,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://altruiso.com",
     siteName: "ALTRUISO",
-    title: "ALTRUISO — Building Institutions That Create Opportunity",
+    title: "ALTRUISO | Building Institutions That Create Opportunity",
     description:
       "Altruiso creates, invests in, and supports businesses that generate enduring value through ownership, strategic partnerships, and venture creation.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ALTRUISO — Building Institutions That Create Opportunity",
+    title: "ALTRUISO | Building Institutions That Create Opportunity",
     description:
       "Altruiso creates, invests in, and supports businesses that generate enduring value.",
   },

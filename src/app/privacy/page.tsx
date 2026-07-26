@@ -20,8 +20,8 @@ const sections = [
   {
     title: "Information We Collect",
     body: [
-      "Information you provide directly — such as your name, email address, and phone number when you share an idea or contact us through the forms on this site.",
-      "Information collected automatically — such as pages visited, approximate location, device and browser type, and how you interact with the site. This is collected through cookies and similar technologies.",
+      "Information you provide directly, such as your name, email address, and phone number when you share an idea or contact us through the forms on this site.",
+      "Information collected automatically, such as pages visited, approximate location, device and browser type, and how you interact with the site. This is collected through cookies and similar technologies.",
     ],
   },
   {
@@ -92,7 +92,7 @@ export default function PrivacyPage() {
             <p className="text-body-lg text-white/55" style={{ lineHeight: 1.75, maxWidth: "640px" }}>
               This policy describes what information we collect when you use
               this website, how we use it, and the choices you have. It is
-              written to be read — if anything is unclear, ask us.
+              written to be read. If anything is unclear, ask us.
             </p>
           </div>
         </section>

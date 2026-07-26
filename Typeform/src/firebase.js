@@ -74,7 +74,7 @@ async function notifyByEmail(data) {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         access_key: key,
-        subject: `New investment pitch: ${data.company_name || ''} — ${data.first_name || ''} ${data.last_name || ''}`.trim(),
+        subject: `New investment pitch: ${data.company_name || ''} - ${data.first_name || ''} ${data.last_name || ''}`.trim(),
         from_name: 'Altruiso Pitch Form',
         replyto: data.email || undefined,
         ...data,

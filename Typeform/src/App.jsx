@@ -411,11 +411,11 @@ function App() {
           <div className="question-section active">
             <div className="question-content" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
               <div className="question-title" style={{ justifyContent: 'center', marginBottom: 0 }}>
-                <div>Thank you — your inquiry is in. 🎉</div>
+                <div>Thank you, your inquiry is in. 🎉</div>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: 18, margin: 0, maxWidth: 520 }}>
                 We review every submission carefully. If it aligns with our thesis, a
-                partner will be in touch directly — usually within a few days.
+                partner will be in touch directly, usually within a few days.
               </p>
 
               <button
