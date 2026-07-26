@@ -227,29 +227,51 @@ function ContactInput({ fields, value, onChangeValue, onDone }) {
     return () => clearTimeout(timer);
   }, []);
 
+  const allRequiredFilled = fields.every(field => {
+    if (!field.required) return true;
+    const v = value && value[field.id];
+    return v != null && String(v).trim() !== '';
+  });
+
   return (
     <div className="contact-group">
       {fields.map((field, i) => (
         <div key={field.id} className="contact-field">
           <label className="contact-label" htmlFor={`f-${field.id}`}>{field.label}</label>
-          <input
-            ref={i === 0 ? ref : null}
-            id={`f-${field.id}`}
-            name={field.id}
-            className="base-text-input"
-            type={field.type}
-            inputMode={field.type === 'number' ? 'decimal' : undefined}
-            placeholder={`Enter ${field.label.toLowerCase()}`}
-            value={(value && value[field.id]) || ''}
-            onChange={e => onChangeValue({ ...value, [field.id]: e.target.value })}
-            onKeyDown={e => { if (e.key === 'Enter') e.preventDefault(); }}
-          />
+          {field.type === 'textarea' ? (
+            <textarea
+              ref={i === 0 ? ref : null}
+              id={`f-${field.id}`}
+              name={field.id}
+              className="base-text-input"
+              rows={2}
+              placeholder={`Enter ${field.label.toLowerCase().replace(/\*/g, '')}`}
+              value={(value && value[field.id]) || ''}
+              onChange={e => onChangeValue({ ...value, [field.id]: e.target.value })}
+              style={{ resize: 'none', minHeight: 60 }}
+            />
+          ) : (
+            <input
+              ref={i === 0 ? ref : null}
+              id={`f-${field.id}`}
+              name={field.id}
+              className="base-text-input"
+              type={field.type}
+              inputMode={field.type === 'number' ? 'decimal' : undefined}
+              placeholder={`Enter ${field.label.toLowerCase().replace(/\*/g, '')}`}
+              value={(value && value[field.id]) || ''}
+              onChange={e => onChangeValue({ ...value, [field.id]: e.target.value })}
+              onKeyDown={e => { if (e.key === 'Enter') e.preventDefault(); }}
+            />
+          )}
         </div>
       ))}
-      <div className="ok-button-container">
-        <button className="ok-button" onClick={onDone}>OK <Check size={20} /></button>
-        <span className="press-enter">press <strong>Enter ↵</strong></span>
-      </div>
+      {allRequiredFilled && (
+        <div className="ok-button-container">
+          <button className="ok-button" onClick={onDone}>OK <Check size={20} /></button>
+          <span className="press-enter">press <strong>Enter ↵</strong></span>
+        </div>
+      )}
     </div>
   );
 }
@@ -263,6 +285,21 @@ const BrandingHeader = () => (
   </div>
 );
 
+const isQuestionValid = (q, answer) => {
+  if (!q || !q.required) return true;
+  if (q.type === 'contact_group') {
+    for (const f of q.fields) {
+      if (f.required) {
+        const v = answer && answer[f.id];
+        if (v == null || String(v).trim() === '') return false;
+      }
+    }
+    return true;
+  }
+  if (answer == null || String(answer).trim() === '') return false;
+  return true;
+};
+
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -272,7 +309,17 @@ function App() {
   const containerRef = useRef(null);
   const totalQ = questions.length;
 
-  const goNext = useCallback(() => setActiveIndex(i => Math.min(i + 1, totalQ - 1)), [totalQ]);
+  const currentQ = questions[activeIndex];
+  const isCurrentValid = isQuestionValid(currentQ, answers[currentQ?.id]);
+
+  const goNext = useCallback(() => {
+    setActiveIndex(i => {
+      const q = questions[i];
+      if (!isQuestionValid(q, answers[q?.id])) return i;
+      return Math.min(i + 1, totalQ - 1);
+    });
+  }, [answers, totalQ]);
+
   const goPrev = useCallback(() => setActiveIndex(i => Math.max(i - 1, 0)), []);
 
   // Keyboard nav (arrows only when not in input)
@@ -280,12 +327,16 @@ function App() {
     const handler = (e) => {
       const tag = document.activeElement?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      if (e.key === 'ArrowDown') { e.preventDefault(); goNext(); }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const q = questions[activeIndex];
+        if (isQuestionValid(q, answers[q?.id])) goNext();
+      }
       if (e.key === 'ArrowUp') { e.preventDefault(); goPrev(); }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [goNext, goPrev]);
+  }, [activeIndex, answers, goNext, goPrev]);
 
   // Wheel debounce
   useEffect(() => {
@@ -293,21 +344,26 @@ function App() {
     const handler = (e) => {
       if (t) return;
       if (Math.abs(e.deltaY) > 50) {
-        e.deltaY > 0 ? goNext() : goPrev();
+        if (e.deltaY > 0) {
+          const q = questions[activeIndex];
+          if (isQuestionValid(q, answers[q?.id])) goNext();
+        } else {
+          goPrev();
+        }
         t = setTimeout(() => { t = null; }, 1200);
       }
     };
     const el = containerRef.current;
     if (el) el.addEventListener('wheel', handler, { passive: true });
     return () => { if (el) el.removeEventListener('wheel', handler); };
-  }, [goNext, goPrev]);
+  }, [activeIndex, answers, goNext, goPrev]);
 
   const setAnswer = (id, val) => setAnswers(prev => ({ ...prev, [id]: val }));
 
   const handleSubmit = async () => {
     setSubmitting(true);
     setSubmitError(null);
-    // Map answers (keyed by question id) to named fields; pull out file uploads.
+    // Map answers (keyed by question id) to named fields
     const payload = {};
     for (const q of questions) {
       const val = answers[q.id];
@@ -317,7 +373,7 @@ function App() {
           payload[f.id] = v != null && v !== '' ? v : null;
         }
       } else {
-        payload[q.name] = val ?? null;
+        payload[q.name || q.id] = val ?? null;
       }
     }
     const result = await submitFormResponse(payload);
@@ -337,10 +393,10 @@ function App() {
           <div className="question-section active">
             <div className="question-content" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
               <div className="question-title" style={{ justifyContent: 'center', marginBottom: 0 }}>
-                <div>Thank you — your pitch is in. 🎉</div>
+                <div>Thank you — your inquiry is in. 🎉</div>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: 18, margin: 0, maxWidth: 520 }}>
-                We review every pitch carefully. If it aligns with our thesis, a
+                We review every submission carefully. If it aligns with our thesis, a
                 partner will be in touch directly — usually within a few days.
               </p>
 
@@ -383,6 +439,9 @@ function App() {
           return (
             <div key={q.id} className={cls}>
               <div className="question-content">
+                {q.sectionHeader && (
+                  <div className="question-section-header">{q.sectionHeader}</div>
+                )}
                 <div className="question-title">
                   <span className="question-number">{idx + 1} {q.required && <span className="question-asterisk">*</span>}</span>
                   <div>{q.title}</div>
@@ -450,7 +509,7 @@ function App() {
         <div className="nav-buttons">
           <button className="nav-button" onClick={goPrev} disabled={activeIndex === 0}><ChevronUp size={20} /></button>
           <div className="nav-separator" />
-          <button className="nav-button" onClick={goNext} disabled={activeIndex === totalQ - 1}><ChevronDown size={20} /></button>
+          <button className="nav-button" onClick={goNext} disabled={activeIndex === totalQ - 1 || !isCurrentValid}><ChevronDown size={20} /></button>
         </div>
       </div>
 

@@ -47,6 +47,15 @@
   flex-direction: column;
 }
 
+.question-section-header {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--theme-accent);
+  margin-bottom: 12px;
+}
+
 .question-title {
   font-size: 24px;
   font-weight: 500;
