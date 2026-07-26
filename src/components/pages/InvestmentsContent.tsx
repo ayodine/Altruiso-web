@@ -7,6 +7,7 @@ import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
 import { InvestmentsCTA } from "@/components/sections/InvestmentsCTA";
+import { TrustedBy } from "@/components/sections/TrustedBy";
 import { PITCH_FORM_URL } from "@/lib/utils";
 
 // Illustrative allocation — sectors ordered so no two low-separation hues sit
@@ -186,6 +187,9 @@ export function InvestmentsContent() {
           </div>
         </div>
       </section>
+
+      {/* Trusted By logo marquee */}
+      <TrustedBy />
 
       {/* Our Portfolio — sector ledger rows drive the donut */}
       <section className="section-pad" style={{ background: "#000" }}>

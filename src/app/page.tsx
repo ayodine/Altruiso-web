@@ -7,7 +7,6 @@ import { WhoWeAre } from "@/components/sections/WhoWeAre";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
 import { OurEcosystem } from "@/components/sections/OurEcosystem";
 import { WhoWePartnerWith } from "@/components/sections/WhoWePartnerWith";
-import { TrustedBy } from "@/components/sections/TrustedBy";
 
 export default function Home() {
   return (
@@ -17,8 +16,6 @@ export default function Home() {
       <main>
         {/* Hook — who we are in one line */}
         <Hero />
-        {/* Social proof — organizations we've worked with */}
-        <TrustedBy />
         {/* Who we are — the philosophy and the two platforms */}
         <WhoWeAre />
         {/* What we do — three pillars: Build, Acquire, Invest */}
