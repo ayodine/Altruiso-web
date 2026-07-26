@@ -79,9 +79,7 @@ export function WhoWePartnerWith() {
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
-                  <div className="p-3 bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors">
-                    <p.icon size={26} strokeWidth={1.5} className="text-[#0276E8]" />
-                  </div>
+                  <p.icon size={28} strokeWidth={1.5} className="text-[#0276E8]" />
                 </div>
                 <h3
                   className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4 font-normal"

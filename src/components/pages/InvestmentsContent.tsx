@@ -451,9 +451,7 @@ export function InvestmentsContent() {
                   />
 
                   <div className="relative z-10 flex items-center justify-between mb-6">
-                    <div className="p-3 bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors">
-                      <item.icon size={22} strokeWidth={1.5} className="text-[#0276E8]" />
-                    </div>
+                    <item.icon size={24} strokeWidth={1.5} className="text-[#0276E8]" />
                   </div>
 
                   <span
