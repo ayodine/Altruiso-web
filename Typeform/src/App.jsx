@@ -259,7 +259,7 @@ function ContactInput({ fields, value, onChangeValue, onDone }) {
 const BrandingHeader = () => (
   <div className="branding-header">
     <img src={`${import.meta.env.BASE_URL}altruiso-icon.svg`} alt="Altruiso" className="branding-logo" />
-    <span className="branding-text">Altruiso — Pitch for Investment</span>
+    <span className="branding-text">Altruiso Investment Inquiry</span>
   </div>
 );
 
