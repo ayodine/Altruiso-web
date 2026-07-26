@@ -394,7 +394,7 @@ export function StrategiesContent() {
                     maxWidth: "420px",
                   }}
                 >
-                  Think → Plan → Implement → Evaluate
+                  Think, Plan, Implement, Evaluate
                 </h2>
                 <p
                   className="text-body-lg text-white/55"
@@ -409,22 +409,22 @@ export function StrategiesContent() {
             <div className="lg:flex-1 flex flex-col gap-4">
               {[
                 {
-                  title: "01 Thinking",
+                  title: "Thinking",
                   description: "Clarifying opportunities, challenges, and priorities.",
                   number: "01",
                 },
                 {
-                  title: "02 Planning",
+                  title: "Planning",
                   description: "Developing strategies, roadmaps, policies, and programs.",
                   number: "02",
                 },
                 {
-                  title: "03 Implementation",
+                  title: "Implementation",
                   description: "Supporting execution, organizational change, and capability building.",
                   number: "03",
                 },
                 {
-                  title: "04 Evaluation",
+                  title: "Evaluation",
                   description: "Measuring outcomes, identifying lessons learned, and informing future decisions.",
                   number: "04",
                 },
