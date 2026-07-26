@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, ArrowUpRight, Telescope, ClipboardCheck, Landmark, TrendingUp, Check, type LucideIcon } from "lucide-react";
+import { ArrowRight, ArrowLeft, ArrowUpRight, Telescope, ClipboardCheck, Landmark, TrendingUp, Layers, UserCheck, Rocket, Scale, HeartHandshake, type LucideIcon } from "lucide-react";
 import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
@@ -417,15 +417,15 @@ export function InvestmentsContent() {
               style={{ background: "rgba(255,255,255,0.10)" }}
             >
               {[
-                "Proven business model",
-                "Positive unit economics",
-                "Strong leadership",
-                "Clear path for sustainable growth",
-                "Sound financial fundamentals",
-                "Alignment with our long-term philosophy",
-              ].map((criteria, i) => (
+                { title: "Proven business model", icon: Layers },
+                { title: "Positive unit economics", icon: TrendingUp },
+                { title: "Strong leadership", icon: UserCheck },
+                { title: "Clear path for sustainable growth", icon: Rocket },
+                { title: "Sound financial fundamentals", icon: Scale },
+                { title: "Alignment with our long-term philosophy", icon: HeartHandshake },
+              ].map((item, i) => (
                 <motion.div
-                  key={criteria}
+                  key={item.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-30px" }}
@@ -451,8 +451,8 @@ export function InvestmentsContent() {
                   />
 
                   <div className="relative z-10 flex items-center justify-between mb-6">
-                    <div className="p-2.5 bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors">
-                      <Check size={18} className="text-[#0276E8]" />
+                    <div className="p-3 bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors">
+                      <item.icon size={22} strokeWidth={1.5} className="text-[#0276E8]" />
                     </div>
                   </div>
 
@@ -460,7 +460,7 @@ export function InvestmentsContent() {
                     className="relative z-10 font-heading text-white text-lg leading-snug group-hover:text-[#CDE6FF] transition-colors"
                     style={{ fontWeight: 400 }}
                   >
-                    {criteria}
+                    {item.title}
                   </span>
                 </motion.div>
               ))}
