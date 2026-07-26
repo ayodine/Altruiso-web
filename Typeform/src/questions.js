@@ -88,23 +88,26 @@ export const questions = [
 
   // ── Form Page 4: Business Performance ──────────────────
   {
-    id: "q_employees",
-    name: "full_time_employees",
-    type: "short_text",
-    inputType: "number",
+    id: "q_business_performance_metrics",
+    type: "contact_group",
     sectionHeader: "Business Performance",
-    title: "How many full-time employees do you have?",
+    title: "Business Performance",
     required: true,
-  },
-  {
-    id: "q_revenue_ltm",
-    name: "revenue_ltm_usd",
-    type: "short_text",
-    inputType: "number",
-    prefix: "$",
-    sectionHeader: "Business Performance",
-    title: "What was your revenue over the last 12 months (USD)?",
-    required: true,
+    fields: [
+      {
+        id: "full_time_employees",
+        label: "How many full-time employees do you have?*",
+        type: "number",
+        required: true,
+      },
+      {
+        id: "revenue_ltm_usd",
+        label: "What was your revenue over the last 12 months (USD)?*",
+        type: "number",
+        prefix: "$",
+        required: true,
+      },
+    ],
   },
   {
     id: "q_profitable",

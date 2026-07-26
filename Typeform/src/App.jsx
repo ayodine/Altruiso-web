@@ -266,18 +266,21 @@ function ContactInput({ fields, value, onChangeValue, onDone }) {
               style={{ resize: 'none', minHeight: 60 }}
             />
           ) : (
-            <input
-              ref={i === 0 ? ref : null}
-              id={`f-${field.id}`}
-              name={field.id}
-              className="base-text-input"
-              type={field.type}
-              inputMode={field.type === 'number' ? 'decimal' : undefined}
-              placeholder={`Enter ${field.label.toLowerCase().replace(/\*/g, '')}`}
-              value={(value && value[field.id]) || ''}
-              onChange={e => onChangeValue({ ...value, [field.id]: e.target.value })}
-              onKeyDown={e => { if (e.key === 'Enter') e.preventDefault(); }}
-            />
+            <div className="input-prefix-container">
+              {field.prefix && <span className="input-prefix">{field.prefix}</span>}
+              <input
+                ref={i === 0 ? ref : null}
+                id={`f-${field.id}`}
+                name={field.id}
+                className="base-text-input"
+                type={field.type}
+                inputMode={field.type === 'number' ? 'decimal' : undefined}
+                placeholder={`Enter ${field.label.toLowerCase().replace(/\*/g, '')}`}
+                value={(value && value[field.id]) || ''}
+                onChange={e => onChangeValue({ ...value, [field.id]: e.target.value })}
+                onKeyDown={e => { if (e.key === 'Enter') e.preventDefault(); }}
+              />
+            </div>
           )}
         </div>
       ))}
