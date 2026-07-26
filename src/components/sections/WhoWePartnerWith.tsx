@@ -82,13 +82,10 @@ export function WhoWePartnerWith() {
                   <div className="p-3 bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors">
                     <p.icon size={26} strokeWidth={1.5} className="text-[#0276E8]" />
                   </div>
-                  <span className="font-mono text-[#0276E8]/70 tabular-nums text-sm font-medium tracking-wider">
-                    [{p.number}]
-                  </span>
                 </div>
                 <h3
-                  className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4 font-semibold"
-                  style={{ fontSize: "clamp(24px, 2.4vw, 32px)", lineHeight: 1.12, letterSpacing: "-0.015em" }}
+                  className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4 font-normal"
+                  style={{ fontSize: "clamp(24px, 2.4vw, 32px)", lineHeight: 1.12, letterSpacing: "-0.015em", fontWeight: 400 }}
                 >
                   {p.title}
                 </h3>

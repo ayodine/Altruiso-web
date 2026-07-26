@@ -393,7 +393,7 @@ export function InvestmentsContent() {
             ))}
           </div>
 
-          {/* Target Profile — Adopted from Investflow / Westbridge criteria bento cards */}
+          {/* Target Profile — Tightly packed bento grid with 1px hairline dividers */}
           <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/10">
             <div className="max-w-3xl mb-12">
               <div className="flex items-center gap-3 mb-4">
@@ -401,8 +401,8 @@ export function InvestmentsContent() {
                 <span className="text-overline text-[#0276E8]">Target Profile</span>
               </div>
               <h3
-                className="font-display text-white mb-4 font-semibold"
-                style={{ fontSize: "clamp(30px, 3.6vw, 54px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
+                className="font-display text-white mb-4"
+                style={{ fontSize: "clamp(30px, 3.6vw, 54px)", letterSpacing: "-0.025em", lineHeight: 1.05, fontWeight: 400 }}
               >
                 Investment Criteria
               </h3>
@@ -411,8 +411,11 @@ export function InvestmentsContent() {
               </p>
             </div>
 
-            {/* 6 Bento Grid Cards with Top Hover Accent Lines (Investflow pattern) */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {/* 6 Bento Grid Cards — Tightly packed hairline grid (no gap/space) */}
+            <div
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px border border-white/10"
+              style={{ background: "rgba(255,255,255,0.10)" }}
+            >
               {[
                 "Proven business model",
                 "Positive unit economics",
@@ -427,11 +430,11 @@ export function InvestmentsContent() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-30px" }}
                   transition={{ duration: 0.5, delay: i * 0.06 }}
-                  className="group relative p-7 border border-white/10 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
+                  className="group relative p-7 md:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
                   style={{ background: "#0A0A0A" }}
                   data-cursor-hover
                 >
-                  {/* Active top line indicator (Investflow pattern) */}
+                  {/* Active top line indicator */}
                   <span
                     className="absolute top-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out"
                     style={{ background: "#0276E8" }}
@@ -451,12 +454,12 @@ export function InvestmentsContent() {
                     <div className="p-2.5 bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors">
                       <Check size={18} className="text-[#0276E8]" />
                     </div>
-                    <span className="font-mono text-[#0276E8]/70 tabular-nums text-xs font-semibold tracking-wider">
-                      [{String(i + 1).padStart(2, "0")}]
-                    </span>
                   </div>
 
-                  <span className="relative z-10 font-heading text-white text-lg font-semibold leading-snug group-hover:text-[#CDE6FF] transition-colors">
+                  <span
+                    className="relative z-10 font-heading text-white text-lg leading-snug group-hover:text-[#CDE6FF] transition-colors"
+                    style={{ fontWeight: 400 }}
+                  >
                     {criteria}
                   </span>
                 </motion.div>
@@ -464,7 +467,7 @@ export function InvestmentsContent() {
             </div>
           </div>
 
-          {/* Structuring Strategy — Adopted from Consultiva / Clarity Ventures vehicle card design */}
+          {/* Structuring Strategy */}
           <div className="mt-20 md:mt-28">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-12 items-end">
               <div className="lg:col-span-7">
@@ -473,8 +476,8 @@ export function InvestmentsContent() {
                   <span className="text-overline text-[#0276E8]">Structuring Strategy</span>
                 </div>
                 <h3
-                  className="font-display text-white font-semibold"
-                  style={{ fontSize: "clamp(30px, 3.8vw, 56px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
+                  className="font-display text-white"
+                  style={{ fontSize: "clamp(30px, 3.8vw, 56px)", letterSpacing: "-0.025em", lineHeight: 1.05, fontWeight: 400 }}
                 >
                   Flexible Capital — No two businesses are the same.
                 </h3>
@@ -486,30 +489,27 @@ export function InvestmentsContent() {
               </div>
             </div>
 
-            {/* 3 Strategy Vehicle Cards (Consultiva 3-column layout) */}
+            {/* 3 Strategy Vehicle Cards */}
             <div
               className="grid md:grid-cols-3 gap-px border border-white/10"
               style={{ background: "rgba(255,255,255,0.10)" }}
             >
               {[
                 {
-                  number: "01",
                   title: "Minority Equity Investments",
                   description: "Providing growth capital while empowering existing leadership and management teams to execute their long-term vision.",
                 },
                 {
-                  number: "02",
                   title: "Majority Acquisitions",
                   description: "Long-term buyout partnerships focused on business continuity, operational excellence, and enduring succession planning.",
                 },
                 {
-                  number: "03",
                   title: "Strategic Partnerships",
                   description: "Tailored capital structures designed for joint ventures, growth initiatives, and strategic co-investments.",
                 },
               ].map((vehicle, idx) => (
                 <motion.div
-                  key={vehicle.number}
+                  key={vehicle.title}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
@@ -528,15 +528,12 @@ export function InvestmentsContent() {
                   />
 
                   <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-8">
-                      <span className="font-mono text-[#0276E8]/70 tabular-nums text-sm font-semibold tracking-wider">
-                        [{vehicle.number}]
-                      </span>
+                    <div className="flex items-center justify-end mb-8">
                       <ArrowUpRight size={18} className="text-white/30 group-hover:text-[#0276E8] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
                     <h4
-                      className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4 font-semibold"
-                      style={{ fontSize: "clamp(22px, 2.2vw, 28px)", lineHeight: 1.15, letterSpacing: "-0.015em" }}
+                      className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4"
+                      style={{ fontSize: "clamp(22px, 2.2vw, 28px)", lineHeight: 1.15, letterSpacing: "-0.015em", fontWeight: 400 }}
                     >
                       {vehicle.title}
                     </h4>
