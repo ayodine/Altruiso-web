@@ -470,7 +470,7 @@ export function StrategiesContent() {
                   <div className="relative z-10 flex flex-col justify-center gap-3 p-6 md:p-8">
                     <h3
                       className="font-body"
-                      style={{ fontSize: "20px", fontWeight: 400, letterSpacing: "-0.02em", lineHeight: 1.3, color: "#fff" }}
+                      style={{ fontSize: "20px", fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.3, color: "#fff" }}
                     >
                       {step.title}
                     </h3>
