@@ -63,30 +63,42 @@ export function WhoWePartnerWith() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: easeSmooth }}
-              className="group p-8 md:p-10 flex flex-col justify-between transition-colors duration-300"
+              className="group relative p-8 md:p-10 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
               style={{ background: "#0A0A0A" }}
               data-cursor-hover
             >
-              <div>
+              {/* Subtle hover radial glow from investflow/optimus */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 80% 70% at 100% 0%, rgba(2,118,232,0.12) 0%, transparent 65%)",
+                  border: "1px solid rgba(2,118,232,0.22)",
+                }}
+              />
+
+              <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
-                  <p.icon size={28} strokeWidth={1.5} className="text-[#0276E8]" />
-                  <span className="font-heading text-[#0276E8]/60 tabular-nums" style={{ fontSize: "14px", letterSpacing: "0.08em" }}>
-                    {p.number}
+                  <div className="p-3 bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors">
+                    <p.icon size={26} strokeWidth={1.5} className="text-[#0276E8]" />
+                  </div>
+                  <span className="font-mono text-[#0276E8]/70 tabular-nums text-sm font-medium tracking-wider">
+                    [{p.number}]
                   </span>
                 </div>
                 <h3
-                  className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4"
+                  className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4 font-semibold"
                   style={{ fontSize: "clamp(24px, 2.4vw, 32px)", lineHeight: 1.12, letterSpacing: "-0.015em" }}
                 >
                   {p.title}
                 </h3>
-                <p className="text-body-md text-white/50" style={{ lineHeight: 1.7 }}>
+                <p className="text-body-md text-white/55" style={{ lineHeight: 1.7 }}>
                   {p.description}
                 </p>
               </div>
 
-              <div className="pt-8 mt-8 border-t border-white/10 flex items-center justify-between">
-                <span className="text-overline text-white/30 group-hover:text-white/60 transition-colors">Explore Collaboration</span>
+              <div className="relative z-10 pt-8 mt-8 border-t border-white/10 flex items-center justify-between">
+                <span className="text-overline text-white/30 group-hover:text-white/70 transition-colors">Explore Collaboration</span>
                 <ArrowUpRight size={16} className="text-white/40 group-hover:text-[#0276E8] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </motion.div>
