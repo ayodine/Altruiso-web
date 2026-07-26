@@ -376,82 +376,111 @@ export function StrategiesContent() {
             </div>
           </div>
 
-          {/* Our Engagement Model */}
-          <div className="mt-16 md:mt-24">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
-              <div>
-                <span className="text-overline text-[#0276E8] block mb-3">Structured Methodology</span>
-                <h3
-                  className="font-display text-white"
-                  style={{ fontSize: "clamp(28px, 3.4vw, 52px)", letterSpacing: "-0.025em", lineHeight: 1.08 }}
-                >
-                  Our Engagement Model
-                </h3>
+          {/* Our Engagement Model — Reusing exact WhatWeDo split layout & 4 StepCards */}
+          <div className="mt-20 md:mt-28 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-12 lg:gap-16">
+            {/* Sticky heading column */}
+            <div className="lg:w-[38%] lg:sticky lg:top-28 lg:self-start flex flex-col gap-8">
+              <div className="flex items-center gap-3">
+                <span className="blue-line" />
+                <span className="text-overline text-white/40">Our Engagement Model</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-white/70 font-heading text-sm">
-                <span>Think</span>
-                <span className="text-[#0276E8]">→</span>
-                <span>Plan</span>
-                <span className="text-[#0276E8]">→</span>
-                <span>Implement</span>
-                <span className="text-[#0276E8]">→</span>
-                <span>Evaluate</span>
+              <div className="flex flex-col gap-4">
+                <h2
+                  className="font-display text-white"
+                  style={{
+                    fontSize: "clamp(34px, 4vw, 52px)",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.08,
+                    maxWidth: "420px",
+                  }}
+                >
+                  Think → Plan → Implement → Evaluate
+                </h2>
+                <p
+                  className="text-body-lg text-white/55"
+                  style={{ maxWidth: "440px", lineHeight: 1.5 }}
+                >
+                  Four stages designed to move your organization from initial clarity to long-term, measurable impact.
+                </p>
               </div>
             </div>
 
-            {/* Stacked Horizontal Cards */}
-            <div
-              className="grid grid-cols-1 gap-px border border-white/10"
-              style={{ background: "rgba(255,255,255,0.10)" }}
-            >
+            {/* Stacked cards — exact WhatWeDo StepCard design with 4 cards */}
+            <div className="lg:flex-1 flex flex-col gap-4">
               {[
                 {
-                  step: "01",
-                  stage: "Thinking",
-                  body: "Clarifying opportunities, challenges, and priorities.",
+                  title: "01 Thinking",
+                  description: "Clarifying opportunities, challenges, and priorities.",
+                  number: "01",
                 },
                 {
-                  step: "02",
-                  stage: "Planning",
-                  body: "Developing strategies, roadmaps, policies, and programs.",
+                  title: "02 Planning",
+                  description: "Developing strategies, roadmaps, policies, and programs.",
+                  number: "02",
                 },
                 {
-                  step: "03",
-                  stage: "Implementation",
-                  body: "Supporting execution, organizational change, and capability building.",
+                  title: "03 Implementation",
+                  description: "Supporting execution, organizational change, and capability building.",
+                  number: "03",
                 },
                 {
-                  step: "04",
-                  stage: "Evaluation",
-                  body: "Measuring outcomes, identifying lessons learned, and informing future decisions.",
+                  title: "04 Evaluation",
+                  description: "Measuring outcomes, identifying lessons learned, and informing future decisions.",
+                  number: "04",
                 },
-              ].map((item, idx) => (
+              ].map((step, i) => (
                 <motion.div
-                  key={item.step}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={step.number}
+                  initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.6, delay: idx * 0.08, ease: easeSmooth }}
-                  className="group p-7 md:p-9 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center transition-colors hover:bg-white/[0.02]"
-                  style={{ background: "rgba(5,7,10,0.92)" }}
+                  transition={{ duration: 0.7, delay: (i % 2) * 0.08, ease: easeSmooth }}
+                  className="group relative flex flex-col sm:flex-row sm:items-stretch overflow-hidden"
+                  style={{ background: "#121212", border: "1px solid rgba(255,255,255,0.06)" }}
+                  data-cursor-hover
                 >
-                  <div className="md:col-span-4 flex items-center gap-5">
+                  {/* Hover blue glow */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse 70% 80% at 100% 0%, rgba(2,118,232,0.10) 0%, transparent 60%)",
+                      border: "1px solid rgba(2,118,232,0.18)",
+                    }}
+                  />
+
+                  {/* Ghost numeral — masked so it fades in from the edge */}
+                  <div className="stepcard-mask relative shrink-0 flex items-center justify-center sm:justify-end overflow-hidden h-[110px] sm:h-auto sm:w-[clamp(96px,16vw,158px)]">
                     <span
-                      className="font-heading font-medium text-[#0276E8]/70 tabular-nums shrink-0"
-                      style={{ fontSize: "16px", letterSpacing: "0.08em" }}
+                      aria-hidden="true"
+                      className="font-mono leading-none select-none"
+                      style={{
+                        fontSize: "clamp(84px, 10vw, 150px)",
+                        letterSpacing: "-0.04em",
+                        lineHeight: 1.1,
+                        color: "#EDEDED",
+                        opacity: 0.1,
+                      }}
                     >
-                      {item.step}
+                      {step.number}
                     </span>
-                    <h4
-                      className="font-display text-white group-hover:text-[#CDE6FF] transition-colors"
-                      style={{ fontSize: "clamp(22px, 2.2vw, 32px)", letterSpacing: "-0.015em", lineHeight: 1.1 }}
-                    >
-                      {item.stage}
-                    </h4>
                   </div>
-                  <p className="md:col-span-8 text-body-md text-white/55" style={{ lineHeight: 1.7 }}>
-                    {item.body}
-                  </p>
+
+                  {/* Texts */}
+                  <div className="relative z-10 flex flex-col justify-center gap-3 p-6 md:p-8">
+                    <h3
+                      className="font-body"
+                      style={{ fontSize: "20px", fontWeight: 400, letterSpacing: "-0.02em", lineHeight: 1.3, color: "#fff" }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p
+                      className="font-body"
+                      style={{ fontSize: "16px", fontWeight: 400, letterSpacing: "-0.02em", lineHeight: 1.4, color: "rgba(255,255,255,0.6)", maxWidth: "440px" }}
+                    >
+                      {step.description}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </div>
