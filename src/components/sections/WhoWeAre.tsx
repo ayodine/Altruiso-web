@@ -44,7 +44,7 @@ export function WhoWeAre() {
                 maxWidth: "12ch",
               }}
             >
-              Investing in Better Businesses.
+              Where Businesses Grow Through Investment and Strategy
             </motion.h2>
 
             <motion.p

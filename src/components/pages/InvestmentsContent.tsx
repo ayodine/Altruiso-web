@@ -39,7 +39,7 @@ const steps: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: TrendingUp,
     title: "Grow",
-    body: "We don't actively operate the businesses we invest in. Instead, we partner through strategic guidance and operational expertise, helping businesses create enduring value over time.",
+    body: "We respect the independence of the businesses we invest in while providing strategic guidance, governance support, and access to our expertise when it creates long-term value.",
   },
 ];
 
@@ -113,7 +113,7 @@ export function InvestmentsContent() {
               className="font-display text-white"
               style={{ fontSize: "clamp(44px, 7vw, 110px)", lineHeight: 1.0, letterSpacing: "-0.035em", maxWidth: "13ch" }}
             >
-              Investing in Businesses That Create Opportunity.
+              Investing in Businesses That create enduring value for generations to come.
             </h1>
           </motion.div>
 
@@ -199,7 +199,7 @@ export function InvestmentsContent() {
                 What we own and invest in.
               </h2>
               <p className="text-body-lg text-white/55 mb-12" style={{ lineHeight: 1.7, maxWidth: "460px" }}>
-                A diversified base of businesses and opportunities across
+                We invest in a diversified base of businesses and opportunities across
                 sectors. As new companies join the mix, the portfolio grows.
               </p>
 

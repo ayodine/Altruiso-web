@@ -197,7 +197,7 @@ export function Hero() {
     return () => ctx.revert();
   }, []);
 
-  const headline = ["Investing in Businesses", "Creating Opportunity."];
+  const headline = ["Investing in Businesses.", "Creating Opportunity."];
 
   return (
     <div ref={triggerRef} className="relative w-full h-[240vh]">

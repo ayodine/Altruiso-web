@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, Target, TrendingUp, GraduationCap, Users, Compass, Handshake, BarChart3, type LucideIcon } from "lucide-react";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
+import { CTASection } from "@/components/sections/CTASection";
 
 const CALENDLY_URL = "https://calendly.com/thealtruiso/30min";
 
@@ -57,7 +58,12 @@ const approach: { title: string; icon: LucideIcon; body: string }[] = [
   },
 ];
 
-const focus = ["Strategy", "Transformation", "Education", "Advisory"];
+const focus = [
+  "Strategic Planning",
+  "Organizational Growth",
+  "Learning & Capability",
+  "Advisory & Partnerships",
+];
 
 const tickerItems = ["Strategy", "Transformation", "Education", "Advisory", "Facilitation", "Engagement"];
 
@@ -126,9 +132,10 @@ export function StrategiesContent() {
           >
             <p className="text-body-xl text-white/60" style={{ lineHeight: 1.7 }}>
               Altruiso Strategies partners with governments, public
-              institutions, nonprofits, businesses, and communities to design
-              practical strategies, strengthen organizations, and deliver
-              measurable outcomes.
+              institutions, nonprofits, businesses, and community organizations
+              to solve complex challenges through strategy, implementation,
+              leadership, and capability building. Together, we turn ideas into
+              practical action and measurable results.
             </p>
             <div className="flex flex-wrap items-center gap-4 mt-9">
               <a
@@ -181,7 +188,6 @@ export function StrategiesContent() {
                     style={{ fontSize: "clamp(26px, 2.8vw, 44px)", letterSpacing: "-0.02em" }}
                   >
                     {word}
-                    <span className="text-[#0276E8]">.</span>
                   </span>
                 </motion.div>
               ))}
@@ -266,11 +272,11 @@ export function StrategiesContent() {
         </div>
       </section>
 
-      {/* What We Do — four capabilities, editorial ledger */}
+      {/* How We Help — four capabilities, editorial ledger */}
       <section className="section-pad" style={{ background: "#000" }}>
         <div className="container-site">
           <div className="max-w-2xl mb-12 md:mb-16">
-            <Label>What We Do</Label>
+            <Label>How We Help</Label>
             <h2
               className="font-display text-white"
               style={{ fontSize: "clamp(32px, 4vw, 60px)", letterSpacing: "-0.02em", lineHeight: 1.05 }}
@@ -385,6 +391,8 @@ export function StrategiesContent() {
         </div>
       </section>
 
+      {/* Decoupled Call to Action — strategies page only */}
+      <CTASection />
     </>
   );
 }

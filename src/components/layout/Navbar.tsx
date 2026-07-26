@@ -17,7 +17,6 @@ const menuItems: StaggeredMenuItem[] = [
 const socialItems = [
   { label: "LinkedIn", link: "https://www.linkedin.com/company/altruiso-inc/" },
   { label: "Instagram", link: "https://www.instagram.com/altruisoholdings/" },
-  { label: "X", link: "https://x.com/altruiso" },
   { label: "Email", link: "mailto:hello@altruiso.com" },
 ];
 

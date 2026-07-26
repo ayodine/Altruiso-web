@@ -18,7 +18,7 @@ const pillars = [
   {
     title: "Invest",
     description:
-      "We invest in businesses and opportunities we believe will create lasting value and opportunity.",
+      "We invest in businesses and opportunities we believe will create lasting value and impact.",
     number: "03",
   },
 ];
@@ -57,8 +57,7 @@ export function WhatWeDo() {
                 className="text-body-lg text-white/55"
                 style={{ maxWidth: "440px", lineHeight: 1.5 }}
               >
-                We don&rsquo;t simply invest in businesses. We invest in
-                businesses we believe will create opportunity.
+                We don&rsquo;t simply invest in businesses. We create enduring value for generations to come.
               </p>
             </div>
           </div>

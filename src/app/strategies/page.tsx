@@ -8,7 +8,7 @@ import { StrategiesContent } from "@/components/pages/StrategiesContent";
 export const metadata: Metadata = {
   title: "Altruiso Strategies",
   description:
-    "Altruiso Strategies partners with governments, public institutions, nonprofits, businesses, and communities to design practical strategies, strengthen organizations, and deliver measurable outcomes.",
+    "Altruiso Strategies partners with governments, public institutions, nonprofits, businesses, and community organizations to solve complex challenges through strategy, implementation, leadership, and capability building. Together, we turn ideas into practical action and measurable results.",
 };
 
 export default function StrategiesPage() {

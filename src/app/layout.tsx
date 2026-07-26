@@ -102,8 +102,8 @@ export default function RootLayout({
               description:
                 "A venture-building and investment company creating businesses, supporting builders, and developing institutions that generate enduring value.",
               sameAs: [
-                "https://linkedin.com/company/altruiso",
-                "https://x.com/altruiso",
+                "https://www.linkedin.com/company/altruiso-inc/",
+                "https://www.instagram.com/altruisoholdings/",
               ],
             }),
           }}
