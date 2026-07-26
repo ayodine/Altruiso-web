@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Telescope, ClipboardCheck, Landmark, TrendingUp, Check, type LucideIcon } from "lucide-react";
+import { ArrowRight, ArrowLeft, ArrowUpRight, Telescope, ClipboardCheck, Landmark, TrendingUp, Check, type LucideIcon } from "lucide-react";
 import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
@@ -393,24 +393,26 @@ export function InvestmentsContent() {
             ))}
           </div>
 
-          {/* Investment Criteria */}
+          {/* Target Profile — Adopted from Investflow / Westbridge criteria bento cards */}
           <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/10">
-            <div className="max-w-3xl mb-10">
-              <span className="inline-flex items-center px-3.5 py-1 bg-white/5 border border-white/10 rounded-full text-overline text-[#0276E8] mb-4">
-                Target Profile
-              </span>
+            <div className="max-w-3xl mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="blue-line" />
+                <span className="text-overline text-[#0276E8]">Target Profile</span>
+              </div>
               <h3
                 className="font-display text-white mb-4 font-semibold"
-                style={{ fontSize: "clamp(28px, 3.2vw, 48px)", letterSpacing: "-0.025em", lineHeight: 1.08 }}
+                style={{ fontSize: "clamp(30px, 3.6vw, 54px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
               >
                 Investment Criteria
               </h3>
-              <p className="text-body-md text-white/60" style={{ lineHeight: 1.7 }}>
+              <p className="text-body-lg text-white/60" style={{ lineHeight: 1.7 }}>
                 While every opportunity is unique, we generally look for businesses that demonstrate:
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* 6 Bento Grid Cards with Top Hover Accent Lines (Investflow pattern) */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {[
                 "Proven business model",
                 "Positive unit economics",
@@ -419,79 +421,131 @@ export function InvestmentsContent() {
                 "Sound financial fundamentals",
                 "Alignment with our long-term philosophy",
               ].map((criteria, i) => (
-                <div
+                <motion.div
                   key={criteria}
-                  className="group relative p-6 border border-white/10 flex items-start justify-between gap-4 overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
-                  style={{ background: "rgba(10, 10, 10, 0.9)" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ duration: 0.5, delay: i * 0.06 }}
+                  className="group relative p-7 border border-white/10 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
+                  style={{ background: "#0A0A0A" }}
                   data-cursor-hover
                 >
-                  {/* Hover radial glow inspired by investflow/optimus */}
+                  {/* Active top line indicator (Investflow pattern) */}
+                  <span
+                    className="absolute top-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out"
+                    style={{ background: "#0276E8" }}
+                    aria-hidden="true"
+                  />
+
+                  {/* Hover radial ambient glow */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
                     style={{
                       background:
                         "radial-gradient(ellipse 80% 70% at 100% 0%, rgba(2,118,232,0.12) 0%, transparent 65%)",
-                      border: "1px solid rgba(2,118,232,0.22)",
                     }}
                   />
 
-                  <div className="relative z-10 flex items-start gap-4">
-                    <div className="p-2.5 rounded-lg bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors shrink-0">
-                      <Check size={16} className="text-[#0276E8]" />
+                  <div className="relative z-10 flex items-center justify-between mb-6">
+                    <div className="p-2.5 bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors">
+                      <Check size={18} className="text-[#0276E8]" />
                     </div>
-                    <span className="font-heading text-white/90 text-base font-semibold leading-snug pt-0.5 group-hover:text-[#CDE6FF] transition-colors">
-                      {criteria}
+                    <span className="font-mono text-[#0276E8]/70 tabular-nums text-xs font-semibold tracking-wider">
+                      [{String(i + 1).padStart(2, "0")}]
                     </span>
                   </div>
 
-                  <span className="relative z-10 font-mono text-[#0276E8]/60 tabular-nums text-xs font-medium tracking-wider shrink-0 pt-1">
-                    [{String(i + 1).padStart(2, "0")}]
+                  <span className="relative z-10 font-heading text-white text-lg font-semibold leading-snug group-hover:text-[#CDE6FF] transition-colors">
+                    {criteria}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Flexible Capital */}
-          <div
-            className="group relative mt-16 md:mt-20 p-8 md:p-12 lg:p-16 border border-white/10 overflow-hidden transition-all duration-500 hover:border-[#0276E8]/40"
-            style={{ background: "rgba(10,12,16,0.9)" }}
-          >
-            {/* Ambient hover radial glow */}
-            <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
-              style={{
-                background:
-                  "radial-gradient(ellipse 70% 80% at 100% 0%, rgba(2,118,232,0.14) 0%, transparent 60%)",
-                border: "1px solid rgba(2,118,232,0.22)",
-              }}
-            />
-
-            <div className="relative z-10">
-              <span className="inline-flex items-center px-3.5 py-1 bg-white/5 border border-white/10 rounded-full text-overline text-[#0276E8] mb-6">
-                Structuring Strategy
-              </span>
-              <h3
-                className="font-display text-white mb-6 font-semibold"
-                style={{ fontSize: "clamp(30px, 3.6vw, 54px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
-              >
-                Flexible Capital — No two businesses are the same.
-              </h3>
-              <p className="text-body-lg text-white/70 max-w-3xl mb-8" style={{ lineHeight: 1.75 }}>
-                We structure investments based on the needs of the opportunity, whether through minority equity investments, majority acquisitions, or strategic partnerships.
-              </p>
-
-              {/* 3 Pill Badges inspired by Framer reference templates */}
-              <div className="flex flex-wrap items-center gap-3 pt-6 border-t border-white/10">
-                {["Minority Equity Investments", "Majority Acquisitions", "Strategic Partnerships"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="font-heading text-xs font-medium tracking-wide uppercase px-4 py-2 bg-white/[0.04] border border-white/12 text-white/70 group-hover:border-[#0276E8]/30 transition-colors"
-                  >
-                    {tag}
-                  </span>
-                ))}
+          {/* Structuring Strategy — Adopted from Consultiva / Clarity Ventures vehicle card design */}
+          <div className="mt-20 md:mt-28">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-12 items-end">
+              <div className="lg:col-span-7">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="blue-line" />
+                  <span className="text-overline text-[#0276E8]">Structuring Strategy</span>
+                </div>
+                <h3
+                  className="font-display text-white font-semibold"
+                  style={{ fontSize: "clamp(30px, 3.8vw, 56px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
+                >
+                  Flexible Capital — No two businesses are the same.
+                </h3>
               </div>
+              <div className="lg:col-span-5">
+                <p className="text-body-lg text-white/60" style={{ lineHeight: 1.7 }}>
+                  We structure investments based on the needs of the opportunity, whether through minority equity investments, majority acquisitions, or strategic partnerships.
+                </p>
+              </div>
+            </div>
+
+            {/* 3 Strategy Vehicle Cards (Consultiva 3-column layout) */}
+            <div
+              className="grid md:grid-cols-3 gap-px border border-white/10"
+              style={{ background: "rgba(255,255,255,0.10)" }}
+            >
+              {[
+                {
+                  number: "01",
+                  title: "Minority Equity Investments",
+                  description: "Providing growth capital while empowering existing leadership and management teams to execute their long-term vision.",
+                },
+                {
+                  number: "02",
+                  title: "Majority Acquisitions",
+                  description: "Long-term buyout partnerships focused on business continuity, operational excellence, and enduring succession planning.",
+                },
+                {
+                  number: "03",
+                  title: "Strategic Partnerships",
+                  description: "Tailored capital structures designed for joint ventures, growth initiatives, and strategic co-investments.",
+                },
+              ].map((vehicle, idx) => (
+                <motion.div
+                  key={vehicle.number}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.6, delay: idx * 0.08 }}
+                  className="group relative p-8 md:p-10 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
+                  style={{ background: "#0A0A0A" }}
+                  data-cursor-hover
+                >
+                  {/* Subtle hover radial glow */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse 80% 70% at 100% 0%, rgba(2,118,232,0.12) 0%, transparent 65%)",
+                    }}
+                  />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-8">
+                      <span className="font-mono text-[#0276E8]/70 tabular-nums text-sm font-semibold tracking-wider">
+                        [{vehicle.number}]
+                      </span>
+                      <ArrowUpRight size={18} className="text-white/30 group-hover:text-[#0276E8] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
+                    <h4
+                      className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4 font-semibold"
+                      style={{ fontSize: "clamp(22px, 2.2vw, 28px)", lineHeight: 1.15, letterSpacing: "-0.015em" }}
+                    >
+                      {vehicle.title}
+                    </h4>
+                    <p className="text-body-md text-white/55" style={{ lineHeight: 1.7 }}>
+                      {vehicle.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
