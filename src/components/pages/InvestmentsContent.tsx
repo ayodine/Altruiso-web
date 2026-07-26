@@ -157,6 +157,9 @@ export function InvestmentsContent() {
         </div>
       </section>
 
+      {/* Trusted By logo marquee */}
+      <TrustedBy />
+
       {/* Our Philosophy — large statement, revealed word-by-word on scroll */}
       <section className="section-pad" style={{ background: "#0A0A0A" }}>
         <div className="container-site">
@@ -187,9 +190,6 @@ export function InvestmentsContent() {
           </div>
         </div>
       </section>
-
-      {/* Trusted By logo marquee */}
-      <TrustedBy />
 
       {/* Our Portfolio — sector ledger rows drive the donut */}
       <section className="section-pad" style={{ background: "#000" }}>
