@@ -111,7 +111,7 @@ export function InvestmentsContent() {
             <Label>Altruiso Investments</Label>
             <h1
               className="font-display text-white"
-              style={{ fontSize: "clamp(44px, 7vw, 110px)", lineHeight: 1.0, letterSpacing: "-0.035em", maxWidth: "13ch" }}
+              style={{ fontSize: "clamp(44px, 7vw, 110px)", lineHeight: 1.0, letterSpacing: "-0.035em", maxWidth: "22ch" }}
             >
               Investing in Businesses That create enduring value for generations to come.
             </h1>
