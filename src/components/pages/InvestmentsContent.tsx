@@ -396,9 +396,11 @@ export function InvestmentsContent() {
           {/* Investment Criteria */}
           <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/10">
             <div className="max-w-3xl mb-10">
-              <span className="text-overline text-[#0276E8] block mb-3">Target Profile</span>
+              <span className="inline-flex items-center px-3.5 py-1 bg-white/5 border border-white/10 rounded-full text-overline text-[#0276E8] mb-4">
+                Target Profile
+              </span>
               <h3
-                className="font-display text-white mb-4"
+                className="font-display text-white mb-4 font-semibold"
                 style={{ fontSize: "clamp(28px, 3.2vw, 48px)", letterSpacing: "-0.025em", lineHeight: 1.08 }}
               >
                 Investment Criteria
@@ -416,17 +418,34 @@ export function InvestmentsContent() {
                 "Clear path for sustainable growth",
                 "Sound financial fundamentals",
                 "Alignment with our long-term philosophy",
-              ].map((criteria) => (
+              ].map((criteria, i) => (
                 <div
                   key={criteria}
-                  className="p-6 border border-white/10 flex items-start gap-4 transition-colors hover:border-[#0276E8]/40"
+                  className="group relative p-6 border border-white/10 flex items-start justify-between gap-4 overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
                   style={{ background: "rgba(10, 10, 10, 0.9)" }}
+                  data-cursor-hover
                 >
-                  <div className="p-2 rounded-full shrink-0" style={{ background: "rgba(2, 118, 232, 0.12)" }}>
-                    <Check size={16} className="text-[#0276E8]" />
+                  {/* Hover radial glow inspired by investflow/optimus */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse 80% 70% at 100% 0%, rgba(2,118,232,0.12) 0%, transparent 65%)",
+                      border: "1px solid rgba(2,118,232,0.22)",
+                    }}
+                  />
+
+                  <div className="relative z-10 flex items-start gap-4">
+                    <div className="p-2.5 rounded-lg bg-white/[0.04] border border-white/10 group-hover:border-[#0276E8]/40 transition-colors shrink-0">
+                      <Check size={16} className="text-[#0276E8]" />
+                    </div>
+                    <span className="font-heading text-white/90 text-base font-semibold leading-snug pt-0.5 group-hover:text-[#CDE6FF] transition-colors">
+                      {criteria}
+                    </span>
                   </div>
-                  <span className="font-heading text-white/90 text-base font-medium leading-snug pt-0.5">
-                    {criteria}
+
+                  <span className="relative z-10 font-mono text-[#0276E8]/60 tabular-nums text-xs font-medium tracking-wider shrink-0 pt-1">
+                    [{String(i + 1).padStart(2, "0")}]
                   </span>
                 </div>
               ))}
@@ -434,21 +453,46 @@ export function InvestmentsContent() {
           </div>
 
           {/* Flexible Capital */}
-          <div className="mt-16 md:mt-20 p-8 md:p-12 lg:p-16 border border-white/10 relative overflow-hidden" style={{ background: "rgba(10,12,16,0.9)" }}>
+          <div
+            className="group relative mt-16 md:mt-20 p-8 md:p-12 lg:p-16 border border-white/10 overflow-hidden transition-all duration-500 hover:border-[#0276E8]/40"
+            style={{ background: "rgba(10,12,16,0.9)" }}
+          >
+            {/* Ambient hover radial glow */}
             <div
-              className="absolute -top-20 -left-20 w-80 h-80 rounded-full pointer-events-none opacity-15"
-              style={{ background: "radial-gradient(circle, #0276E8 0%, transparent 70%)" }}
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+              style={{
+                background:
+                  "radial-gradient(ellipse 70% 80% at 100% 0%, rgba(2,118,232,0.14) 0%, transparent 60%)",
+                border: "1px solid rgba(2,118,232,0.22)",
+              }}
             />
-            <span className="text-overline text-[#0276E8] block mb-4">Structuring Strategy</span>
-            <h3
-              className="font-display text-white mb-6"
-              style={{ fontSize: "clamp(30px, 3.6vw, 54px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
-            >
-              Flexible Capital — No two businesses are the same.
-            </h3>
-            <p className="text-body-lg text-white/70 max-w-3xl" style={{ lineHeight: 1.75 }}>
-              We structure investments based on the needs of the opportunity, whether through minority equity investments, majority acquisitions, or strategic partnerships.
-            </p>
+
+            <div className="relative z-10">
+              <span className="inline-flex items-center px-3.5 py-1 bg-white/5 border border-white/10 rounded-full text-overline text-[#0276E8] mb-6">
+                Structuring Strategy
+              </span>
+              <h3
+                className="font-display text-white mb-6 font-semibold"
+                style={{ fontSize: "clamp(30px, 3.6vw, 54px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
+              >
+                Flexible Capital — No two businesses are the same.
+              </h3>
+              <p className="text-body-lg text-white/70 max-w-3xl mb-8" style={{ lineHeight: 1.75 }}>
+                We structure investments based on the needs of the opportunity, whether through minority equity investments, majority acquisitions, or strategic partnerships.
+              </p>
+
+              {/* 3 Pill Badges inspired by Framer reference templates */}
+              <div className="flex flex-wrap items-center gap-3 pt-6 border-t border-white/10">
+                {["Minority Equity Investments", "Majority Acquisitions", "Strategic Partnerships"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-heading text-xs font-medium tracking-wide uppercase px-4 py-2 bg-white/[0.04] border border-white/12 text-white/70 group-hover:border-[#0276E8]/30 transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
