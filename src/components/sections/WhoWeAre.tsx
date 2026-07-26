@@ -1,18 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-
-const platforms = [
-  {
-    key: "Altruiso Investments",
-    image: "/images/whoweare-investments.jpg",
-    body: "Acquires equity and invests in businesses with enduring potential.",
-  },
-  {
-    key: "Altruiso Strategies",
-    image: "/images/whoweare-strategies.jpg",
-    body: "Helps organizations, professionals, and communities grow through strategic advisory, financial education, and operational transformation.",
-  },
-];
+import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 
 const fadeUp = {
   initial: { opacity: 0, y: 28 },
@@ -31,7 +19,7 @@ export function WhoWeAre() {
         </div>
 
         {/* Split: headline + lead copy left, image panel right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 mb-16 md:mb-24 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 mb-20 md:mb-28 items-stretch">
           <div className="lg:col-span-7 flex flex-col justify-between gap-12">
             <motion.h2
               {...fadeUp}
@@ -88,85 +76,42 @@ export function WhoWeAre() {
           </motion.div>
         </div>
 
-        {/* Platform bento — two cells, hairline dividers */}
+        {/* Vision & Philosophy Block — Editorial typographic presentation */}
         <div
-          className="grid md:grid-cols-2 gap-px border border-white/10 mb-20 md:mb-28"
-          style={{ background: "rgba(255,255,255,0.10)" }}
+          className="p-8 md:p-14 lg:p-20 relative overflow-hidden border border-white/10"
+          style={{ background: "rgba(10,10,10,0.85)" }}
         >
-          {platforms.map((p, i) => (
-            <motion.div
-              key={p.key}
-              {...fadeUp}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-col overflow-hidden"
-              style={{ background: "#0A0A0A" }}
+          <div
+            className="absolute -top-24 -right-24 w-96 h-96 rounded-full pointer-events-none opacity-20"
+            style={{ background: "radial-gradient(circle, #0276E8 0%, transparent 70%)" }}
+          />
+
+          <span className="text-overline text-[#0276E8] block mb-8">Vision &amp; Philosophy</span>
+
+          <ScrollRevealText
+            text="Our vision is inspired by **altruism** — the belief that lasting success is measured not only by what we build, but by the **value we create for others.**"
+            className="font-display text-white max-w-5xl mb-12"
+            style={{ fontSize: "clamp(28px, 3.8vw, 56px)", lineHeight: 1.18, letterSpacing: "-0.025em" }}
+          />
+
+          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <p
+              className="font-display text-white/80"
+              style={{
+                fontSize: "clamp(22px, 2.4vw, 36px)",
+                lineHeight: 1.25,
+                letterSpacing: "-0.02em",
+                maxWidth: "32ch",
+              }}
             >
-              {/* Abstract 3D render — blended into the card's top edge */}
-              <div className="relative overflow-hidden" style={{ aspectRatio: "16 / 7" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={p.image}
-                  alt=""
-                  aria-hidden="true"
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  style={{ filter: "saturate(0.85) contrast(1.05) brightness(0.85)" }}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(to top, #0A0A0A 3%, rgba(10,10,10,0.35) 45%, transparent 78%), linear-gradient(120deg, rgba(2,118,232,0.12), transparent 55%)",
-                  }}
-                />
-              </div>
-
-              <div className="p-8 md:p-10">
-                <h3
-                  className="font-display text-white mb-4"
-                  style={{
-                    fontSize: "clamp(28px, 3.2vw, 44px)",
-                    lineHeight: 1.02,
-                    letterSpacing: "-0.02em",
-                    fontWeight: 600,
-                  }}
-                >
-                  {p.key}
-                </h3>
-                <p className="text-body-md text-white/50" style={{ lineHeight: 1.7, maxWidth: "460px" }}>
-                  {p.body}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              This philosophy shapes every investment, partnership, and business within Altruiso.
+            </p>
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#0276E8" }} />
+              <span className="text-overline text-white/40">The Altruiso Standard</span>
+            </div>
+          </div>
         </div>
-
-        {/* Vision */}
-        <motion.p
-          {...fadeUp}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-white/70"
-          style={{ fontSize: "clamp(18px, 1.5vw, 22px)", lineHeight: 1.6, maxWidth: "56ch" }}
-        >
-          Our vision is inspired by altruism, the belief that lasting success
-          is measured not only by what we build, but by the value we create
-          for others.
-        </motion.p>
-
-        {/* Closing line */}
-        <motion.p
-          {...fadeUp}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="font-display text-white/80 mt-10 md:mt-14 max-w-3xl"
-          style={{
-            fontSize: "clamp(24px, 2.8vw, 44px)",
-            lineHeight: 1.25,
-            letterSpacing: "-0.02em",
-          }}
-        >
-          This philosophy shapes every investment, partnership, and business
-          within Altruiso.
-        </motion.p>
       </div>
     </section>
   );

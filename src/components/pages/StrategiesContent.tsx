@@ -376,6 +376,87 @@ export function StrategiesContent() {
             </div>
           </div>
 
+          {/* Our Engagement Model */}
+          <div className="mt-16 md:mt-24">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
+              <div>
+                <span className="text-overline text-[#0276E8] block mb-3">Structured Methodology</span>
+                <h3
+                  className="font-display text-white"
+                  style={{ fontSize: "clamp(28px, 3.4vw, 52px)", letterSpacing: "-0.025em", lineHeight: 1.08 }}
+                >
+                  Our Engagement Model
+                </h3>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 text-white/70 font-heading text-sm">
+                <span>Think</span>
+                <span className="text-[#0276E8]">→</span>
+                <span>Plan</span>
+                <span className="text-[#0276E8]">→</span>
+                <span>Implement</span>
+                <span className="text-[#0276E8]">→</span>
+                <span>Evaluate</span>
+              </div>
+            </div>
+
+            {/* Stacked Horizontal Cards */}
+            <div
+              className="grid grid-cols-1 gap-px border border-white/10"
+              style={{ background: "rgba(255,255,255,0.10)" }}
+            >
+              {[
+                {
+                  step: "01",
+                  stage: "Thinking",
+                  body: "Clarifying opportunities, challenges, and priorities.",
+                },
+                {
+                  step: "02",
+                  stage: "Planning",
+                  body: "Developing strategies, roadmaps, policies, and programs.",
+                },
+                {
+                  step: "03",
+                  stage: "Implementation",
+                  body: "Supporting execution, organizational change, and capability building.",
+                },
+                {
+                  step: "04",
+                  stage: "Evaluation",
+                  body: "Measuring outcomes, identifying lessons learned, and informing future decisions.",
+                },
+              ].map((item, idx) => (
+                <motion.div
+                  key={item.step}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.6, delay: idx * 0.08, ease: easeSmooth }}
+                  className="group p-7 md:p-9 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center transition-colors hover:bg-white/[0.02]"
+                  style={{ background: "rgba(5,7,10,0.92)" }}
+                >
+                  <div className="md:col-span-4 flex items-center gap-5">
+                    <span
+                      className="font-heading font-medium text-[#0276E8]/70 tabular-nums shrink-0"
+                      style={{ fontSize: "16px", letterSpacing: "0.08em" }}
+                    >
+                      {item.step}
+                    </span>
+                    <h4
+                      className="font-display text-white group-hover:text-[#CDE6FF] transition-colors"
+                      style={{ fontSize: "clamp(22px, 2.2vw, 32px)", letterSpacing: "-0.015em", lineHeight: 1.1 }}
+                    >
+                      {item.stage}
+                    </h4>
+                  </div>
+                  <p className="md:col-span-8 text-body-md text-white/55" style={{ lineHeight: 1.7 }}>
+                    {item.body}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
           {/* Procurement & Partnerships */}
           <div className="mt-16 md:mt-20 pt-8 border-t border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             <span className="lg:col-span-4 text-overline text-white/40">

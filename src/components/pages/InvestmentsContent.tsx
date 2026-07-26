@@ -2,10 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Telescope, ClipboardCheck, Landmark, TrendingUp, type LucideIcon } from "lucide-react";
+import { ArrowRight, ArrowLeft, Telescope, ClipboardCheck, Landmark, TrendingUp, Check, type LucideIcon } from "lucide-react";
 import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
+import { InvestmentsCTA } from "@/components/sections/InvestmentsCTA";
 import { PITCH_FORM_URL } from "@/lib/utils";
 
 // Illustrative allocation — sectors ordered so no two low-separation hues sit
@@ -392,14 +393,63 @@ export function InvestmentsContent() {
             ))}
           </div>
 
-          <p
-            className="text-body-md text-white/40 mt-8"
-            style={{ lineHeight: 1.75, maxWidth: "640px" }}
-          >
-            While our primary focus is growth-stage businesses, we occasionally
-            invest earlier when we encounter exceptional founders and
-            opportunities aligned with our long-term philosophy.
-          </p>
+          {/* Investment Criteria */}
+          <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/10">
+            <div className="max-w-3xl mb-10">
+              <span className="text-overline text-[#0276E8] block mb-3">Target Profile</span>
+              <h3
+                className="font-display text-white mb-4"
+                style={{ fontSize: "clamp(28px, 3.2vw, 48px)", letterSpacing: "-0.025em", lineHeight: 1.08 }}
+              >
+                Investment Criteria
+              </h3>
+              <p className="text-body-md text-white/60" style={{ lineHeight: 1.7 }}>
+                While every opportunity is unique, we generally look for businesses that demonstrate:
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                "Proven business model",
+                "Positive unit economics",
+                "Strong leadership",
+                "Clear path for sustainable growth",
+                "Sound financial fundamentals",
+                "Alignment with our long-term philosophy",
+              ].map((criteria) => (
+                <div
+                  key={criteria}
+                  className="p-6 border border-white/10 flex items-start gap-4 transition-colors hover:border-[#0276E8]/40"
+                  style={{ background: "rgba(10, 10, 10, 0.9)" }}
+                >
+                  <div className="p-2 rounded-full shrink-0" style={{ background: "rgba(2, 118, 232, 0.12)" }}>
+                    <Check size={16} className="text-[#0276E8]" />
+                  </div>
+                  <span className="font-heading text-white/90 text-base font-medium leading-snug pt-0.5">
+                    {criteria}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Flexible Capital */}
+          <div className="mt-16 md:mt-20 p-8 md:p-12 lg:p-16 border border-white/10 relative overflow-hidden" style={{ background: "rgba(10,12,16,0.9)" }}>
+            <div
+              className="absolute -top-20 -left-20 w-80 h-80 rounded-full pointer-events-none opacity-15"
+              style={{ background: "radial-gradient(circle, #0276E8 0%, transparent 70%)" }}
+            />
+            <span className="text-overline text-[#0276E8] block mb-4">Structuring Strategy</span>
+            <h3
+              className="font-display text-white mb-6"
+              style={{ fontSize: "clamp(30px, 3.6vw, 54px)", letterSpacing: "-0.025em", lineHeight: 1.05 }}
+            >
+              Flexible Capital — No two businesses are the same.
+            </h3>
+            <p className="text-body-lg text-white/70 max-w-3xl" style={{ lineHeight: 1.75 }}>
+              We structure investments based on the needs of the opportunity, whether through minority equity investments, majority acquisitions, or strategic partnerships.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -431,6 +481,8 @@ export function InvestmentsContent() {
         </MarqueeBand>
       </section>
 
+      {/* Dedicated Investments CTA Section with Inline Lead Collection Form */}
+      <InvestmentsCTA />
     </>
   );
 }
