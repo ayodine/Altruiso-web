@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Target, TrendingUp, GraduationCap, Users, Compass, Handshake, BarChart3, type LucideIcon } from "lucide-react";
+import { ArrowRight, ArrowLeft, Target, TrendingUp, GraduationCap, Users, Compass, Handshake, BarChart3, Check, type LucideIcon } from "lucide-react";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
 import { CTASection } from "@/components/sections/CTASection";
@@ -325,6 +325,68 @@ export function StrategiesContent() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Typical Engagements Container Cards */}
+          <div className="mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/10">
+            <div className="max-w-3xl mb-10">
+              <span className="inline-flex items-center px-3.5 py-1 bg-white/5 border border-white/10 rounded-full text-overline text-[#0276E8] mb-4">
+                Typical Engagements
+              </span>
+              <h3
+                className="font-display text-white font-normal"
+                style={{ fontSize: "clamp(26px, 2.8vw, 42px)", letterSpacing: "-0.02em", lineHeight: 1.1, fontWeight: 400 }}
+              >
+                Organizations typically engage us to:
+              </h3>
+            </div>
+
+            <div
+              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px border border-white/10"
+              style={{ background: "rgba(255,255,255,0.10)" }}
+            >
+              {[
+                "Develop strategic plans and organizational roadmaps.",
+                "Policy & Research Projects",
+                "Strengthen organizational performance and lead change initiatives.",
+                "Build leadership capability and workforce capacity.",
+                "Design, improve, or evaluate programs and services.",
+                "Engage stakeholders, partners, and communities effectively.",
+                "Deliver financial education and workforce development initiatives.",
+                "Measure impact and support continuous improvement.",
+              ].map((engagement, i) => (
+                <motion.div
+                  key={engagement}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-30px" }}
+                  transition={{ duration: 0.5, delay: i * 0.05 }}
+                  className="group relative p-7 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
+                  style={{ background: "#0A0A0A" }}
+                  data-cursor-hover
+                >
+                  {/* Hover ambient radial glow */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse 80% 70% at 100% 0%, rgba(2,118,232,0.12) 0%, transparent 65%)",
+                    }}
+                  />
+
+                  <div className="relative z-10 flex items-center justify-between mb-6">
+                    <Check size={20} strokeWidth={1.5} className="text-[#0276E8]" />
+                  </div>
+
+                  <span
+                    className="relative z-10 font-heading text-white text-base leading-snug group-hover:text-[#CDE6FF] transition-colors"
+                    style={{ fontWeight: 400 }}
+                  >
+                    {engagement}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
