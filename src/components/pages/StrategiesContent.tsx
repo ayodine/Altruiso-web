@@ -171,44 +171,48 @@ export function StrategiesContent() {
               </Link>
             </div>
           </motion.div>
-
-          {/* Our Focus — four disciplines, top-aligned hairline row */}
-          <div className="mt-20 md:mt-28">
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="text-overline text-white/40 block mb-8"
-            >
-              Our Focus
-            </motion.span>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
-              {focus.map((word, i) => (
-                <motion.div
-                  key={word}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 + i * 0.1, ease: easeSmooth }}
-                  className="border-t border-white/15 pt-5"
-                >
-                  <span className="font-heading text-[#0276E8]/50 block mb-3" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span
-                    className="font-display text-white block leading-none"
-                    style={{ fontSize: "clamp(26px, 2.8vw, 44px)", letterSpacing: "-0.02em" }}
-                  >
-                    {word}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Trusted By logo marquee */}
       <TrustedBy />
+
+      {/* Our Focus — four disciplines, top-aligned hairline row */}
+      <section className="py-16 md:py-24" style={{ background: "#000" }}>
+        <div className="container-site">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6 }}
+            className="text-overline text-white/40 block mb-8"
+          >
+            Our Focus
+          </motion.span>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
+            {focus.map((word, i) => (
+              <motion.div
+                key={word}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: easeSmooth }}
+                className="border-t border-white/15 pt-5"
+              >
+                <span className="font-heading text-[#0276E8]/50 block mb-3" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span
+                  className="font-display text-white block leading-none"
+                  style={{ fontSize: "clamp(26px, 2.8vw, 44px)", letterSpacing: "-0.02em" }}
+                >
+                  {word}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Discipline ticker — Consilio-style band */}
       <section
