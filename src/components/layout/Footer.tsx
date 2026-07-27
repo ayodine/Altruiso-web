@@ -27,7 +27,7 @@ const footerLinks = {
     { label: "Who We Are", href: "#who-we-are" },
     { label: "What We Do", href: "#what-we-do" },
     { label: "Our Ecosystem", href: "#ecosystem" },
-    { label: "Partner With Us", href: "#builders-welcome" },
+    { label: "Pitch to Us", href: "/pitch" },
   ],
   Platforms: [
     { label: "Altruiso Investments", href: "/investments" },
@@ -42,7 +42,12 @@ const footerLinks = {
 export function Footer() {
   const scrollTo = (href: string) => {
     if (href.startsWith("#")) {
-      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.assign(`/${href}`);
+      }
     } else {
       window.location.assign(href);
     }

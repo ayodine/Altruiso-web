@@ -11,7 +11,7 @@ const menuItems: StaggeredMenuItem[] = [
   { label: "Ecosystem", ariaLabel: "Explore our ecosystem", link: "#ecosystem" },
   { label: "Investments", ariaLabel: "Altruiso Investments", link: "/investments" },
   { label: "Strategies", ariaLabel: "Altruiso Strategies", link: "/strategies" },
-  { label: "Partner With Us", ariaLabel: "Partner with us", link: "#builders-welcome" },
+  { label: "Pitch to Us", ariaLabel: "Pitch to us", link: "/pitch" },
 ];
 
 const socialItems = [

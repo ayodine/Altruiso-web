@@ -334,15 +334,12 @@ export function Hero() {
             </a>
 
             <a
-              href="#builders-welcome"
+              href="/pitch"
               className="inline-flex items-center gap-3 px-8 py-4 font-heading font-medium text-sm text-white border border-white/20 hover:border-white/50 transition-all duration-300 opacity-0"
               style={{ fontSize: "14px" }}
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#builders-welcome")?.scrollIntoView({ behavior: "smooth" });
-              }}
+              data-cursor-hover
             >
-              Partner With Us
+              Pitch to Us
             </a>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { ArrowRight, ArrowLeft, Target, TrendingUp, GraduationCap, Users, Compas
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
 import { CTASection } from "@/components/sections/CTASection";
+import { TrustedBy } from "@/components/sections/TrustedBy";
 
 const CALENDLY_URL = "https://calendly.com/thealtruiso/30min";
 
@@ -131,9 +132,9 @@ export function StrategiesContent() {
             <Label>Altruiso Strategies</Label>
             <h1
               className="font-display text-white"
-              style={{ fontSize: "clamp(42px, 6.4vw, 100px)", lineHeight: 1.0, letterSpacing: "-0.035em", maxWidth: "17ch" }}
+              style={{ fontSize: "clamp(38px, 5.5vw, 84px)", lineHeight: 1.05, letterSpacing: "-0.03em", maxWidth: "22ch" }}
             >
-              Helping Organizations Move From Ideas to Measurable Impact.
+              Helping Organizations Solve Complex Challenges and Deliver Lasting Results.
             </h1>
           </motion.div>
 
@@ -145,11 +146,7 @@ export function StrategiesContent() {
             className="mt-12 md:mt-16 lg:ml-[41.666%] max-w-[620px]"
           >
             <p className="text-body-xl text-white/60" style={{ lineHeight: 1.7 }}>
-              Altruiso Strategies partners with governments, public
-              institutions, nonprofits, businesses, and community organizations
-              to solve complex challenges through strategy, implementation,
-              leadership, and capability building. Together, we turn ideas into
-              practical action and measurable results.
+              Altruiso Strategies partners with governments, public institutions, nonprofits, businesses, and community organizations to solve complex challenges through strategy, implementation, leadership, and capability building. Together, we turn ideas into practical action and measurable results.
             </p>
             <div className="flex flex-wrap items-center gap-4 mt-9">
               <a
@@ -160,7 +157,7 @@ export function StrategiesContent() {
                 style={{ fontSize: "15px", background: "#0276E8", boxShadow: "0 0 40px rgba(2,118,232,0.25)" }}
                 data-cursor-hover
               >
-                Partner With Us
+                Work with Us
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
               <Link
@@ -209,6 +206,9 @@ export function StrategiesContent() {
           </div>
         </div>
       </section>
+
+      {/* Trusted By logo marquee */}
+      <TrustedBy />
 
       {/* Discipline ticker — Consilio-style band */}
       <section

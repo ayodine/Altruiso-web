@@ -7,7 +7,6 @@ import { DonutChart, type DonutDatum } from "@/components/ui/DonutChart";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
 import { InvestmentsCTA } from "@/components/sections/InvestmentsCTA";
-import { TrustedBy } from "@/components/sections/TrustedBy";
 import { PITCH_FORM_URL } from "@/lib/utils";
 
 // Illustrative allocation — sectors ordered so no two low-separation hues sit
@@ -133,13 +132,11 @@ export function InvestmentsContent() {
             <div className="flex flex-wrap items-center gap-4 mt-9">
               <a
                 href={PITCH_FORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 font-heading font-medium text-white"
                 style={{ fontSize: "15px", background: "#0276E8", boxShadow: "0 0 40px rgba(2,118,232,0.25)" }}
                 data-cursor-hover
               >
-                Pitch for Investment
+                Pitch to Us
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
               <Link
@@ -157,8 +154,6 @@ export function InvestmentsContent() {
         </div>
       </section>
 
-      {/* Trusted By logo marquee */}
-      <TrustedBy />
 
       {/* Our Philosophy — large statement, revealed word-by-word on scroll */}
       <section className="section-pad" style={{ background: "#0A0A0A" }}>
@@ -255,9 +250,6 @@ export function InvestmentsContent() {
                   );
                 })}
               </div>
-              <p className="text-caption text-white/25 mt-4">
-                Illustrative allocation across current focus sectors.
-              </p>
             </div>
 
             <div className="lg:col-span-6 flex justify-center lg:justify-end lg:sticky lg:top-28 pt-4">
