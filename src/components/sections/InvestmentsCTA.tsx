@@ -93,27 +93,6 @@ export function InvestmentsCTA() {
               >
                 Whether you&apos;re seeking growth capital, succession planning, or a long-term investment partner, we&apos;d welcome the opportunity to learn more about your business.
               </p>
-
-              <div className="pt-8 border-t border-white/15 flex flex-wrap items-center gap-4">
-                <a
-                  href={PITCH_FORM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 px-7 py-4 font-heading font-medium text-white transition-all duration-300"
-                  style={{
-                    fontSize: "15px",
-                    background: "linear-gradient(135deg, #0276E8 0%, #005CB7 100%)",
-                    boxShadow: "0 0 30px rgba(2,118,232,0.25)",
-                  }}
-                  data-cursor-hover
-                >
-                  Full Investment Inquiry Form
-                  <ArrowRight
-                    size={16}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </a>
-              </div>
             </div>
           </div>
 
