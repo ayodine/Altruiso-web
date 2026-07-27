@@ -105,13 +105,13 @@ export function OurEcosystem() {
 
                 <div className="relative z-10 flex flex-1 flex-col p-8 md:p-10">
                 <h3
-                  className="font-display text-white group-hover:text-[#CDE6FF] transition-colors duration-300 mb-4"
-                  style={{ fontSize: "clamp(30px, 3.2vw, 46px)", letterSpacing: "-0.025em", lineHeight: 1.05, fontWeight: 600 }}
+                  className="font-display text-white transition-colors duration-300 mb-4"
+                  style={{ fontSize: "clamp(30px, 3.2vw, 46px)", letterSpacing: "-0.025em", lineHeight: 1.05, fontWeight: 400 }}
                 >
                   {platform.name}
                 </h3>
                 <p
-                  className="font-heading text-[#CDE6FF]/80 mb-5"
+                  className="font-heading text-[#0276E8] mb-5 font-medium"
                   style={{ fontSize: "clamp(17px, 1.7vw, 22px)", lineHeight: 1.35 }}
                 >
                   {platform.tagline}
