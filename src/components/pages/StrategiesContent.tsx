@@ -19,7 +19,7 @@ const audiences = [
 
 const capabilities: { title: string; icon: LucideIcon; items: string[] }[] = [
   {
-    title: "Strategy",
+    title: "Strategic Planning",
     icon: Target,
     items: ["Research & Strategic Planning", "Government Advisory", "Economic Development", "Tourism Strategy"],
   },
@@ -34,7 +34,7 @@ const capabilities: { title: string; icon: LucideIcon; items: string[] }[] = [
     items: ["Financial Wellness", "Corporate Training", "Professional Development", "Workshops"],
   },
   {
-    title: "Community & Stakeholders",
+    title: "Community & Partnerships",
     icon: Users,
     items: ["Community Engagement", "Stakeholder Consultation", "Facilitation", "Public Speaking"],
   },
@@ -289,13 +289,17 @@ export function StrategiesContent() {
       {/* How We Help — four capabilities, editorial ledger */}
       <section className="section-pad" style={{ background: "#000" }}>
         <div className="container-site">
-          <div className="max-w-2xl mb-12 md:mb-16">
-            <Label>How We Help</Label>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="blue-line" />
+            <span className="text-overline text-[#0276E8]">Capabilities</span>
+          </div>
+
+          <div className="mb-12 md:mb-16">
             <h2
-              className="font-display text-white"
-              style={{ fontSize: "clamp(32px, 4vw, 60px)", letterSpacing: "-0.02em", lineHeight: 1.05 }}
+              className="font-display text-white font-normal"
+              style={{ fontSize: "clamp(34px, 4.4vw, 64px)", letterSpacing: "-0.025em", lineHeight: 1.04, fontWeight: 400 }}
             >
-              Strategy. Education. Transformation.
+              How We Help
             </h2>
           </div>
 
