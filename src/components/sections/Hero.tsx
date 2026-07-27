@@ -294,13 +294,13 @@ export function Hero() {
             style={{
               maxWidth: "1080px",
               fontSize: "clamp(46px, 6.6vw, 104px)",
-              lineHeight: 1.02,
+              lineHeight: 1.12,
               letterSpacing: "-0.035em",
               fontWeight: 500,
             }}
           >
             {headline.map((word, i) => (
-              <span key={i} className="block overflow-hidden">
+              <span key={i} className="block overflow-hidden py-1">
                 <span className="word-wrap block opacity-0" style={{ transform: "translateY(110%)" }}>
                   {word}
                 </span>
