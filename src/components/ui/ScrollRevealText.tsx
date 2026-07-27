@@ -47,7 +47,7 @@ export function ScrollRevealText({
   className = "",
   style,
   tag: Tag = "p",
-  accentClassName = "text-[#8FC6FF]",
+  accentClassName = "text-[#0276E8]",
   dimOpacity = 0.14,
   start = "top 78%",
   end = "bottom 45%",
