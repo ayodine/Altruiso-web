@@ -80,6 +80,7 @@ export function ScrollRevealText({
           key={i}
           data-reveal-word
           className={t.accent ? accentClassName : undefined}
+          style={t.accent ? { color: "#0276E8" } : undefined}
         >
           {t.word}
           {i < tokens.length - 1 ? " " : ""}

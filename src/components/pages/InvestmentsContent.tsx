@@ -166,7 +166,7 @@ export function InvestmentsContent() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-4">
               <div className="lg:sticky lg:top-32">
-                <Label>Our Philosophy</Label>
+                <Label>Vision &amp; Philosophy</Label>
                 <p className="text-body-sm text-white/35 max-w-[26ch]" style={{ lineHeight: 1.7 }}>
                   The conviction behind every position we take.
                 </p>

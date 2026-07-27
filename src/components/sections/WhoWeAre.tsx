@@ -15,7 +15,7 @@ export function WhoWeAre() {
         {/* Label */}
         <div className="flex items-center gap-3 mb-10 md:mb-14">
           <span className="blue-line" />
-          <span className="text-overline text-white/40">Who We Are</span>
+          <span className="text-overline text-white/40">Vision &amp; Philosophy</span>
         </div>
 
         {/* Split: headline + lead copy left, image panel right */}
