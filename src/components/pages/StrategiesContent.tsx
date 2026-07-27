@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Target, TrendingUp, GraduationCap, Users, Compass, Handshake, BarChart3, Check, type LucideIcon } from "lucide-react";
+import { ArrowRight, ArrowLeft, Target, TrendingUp, GraduationCap, Users, Compass, Handshake, BarChart3, Check, Layers, Rocket, type LucideIcon } from "lucide-react";
 import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { MarqueeBand } from "@/components/ui/MarqueeBand";
 import { CTASection } from "@/components/sections/CTASection";
@@ -342,6 +342,102 @@ export function StrategiesContent() {
                       {item}
                     </span>
                   ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How We Work — 3-step process section adopted from Investflow / Optimus */}
+      <section className="section-pad" style={{ background: "#050505" }}>
+        <div className="container-site">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="blue-line" />
+            <span className="text-overline text-[#0276E8]">Our Process</span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16 md:mb-20 items-end">
+            <div className="lg:col-span-7">
+              <h2
+                className="font-display text-white font-normal"
+                style={{ fontSize: "clamp(34px, 4.4vw, 64px)", letterSpacing: "-0.025em", lineHeight: 1.04, fontWeight: 400 }}
+              >
+                How We Work
+              </h2>
+            </div>
+            <div className="lg:col-span-5">
+              <p className="text-body-md text-white/50" style={{ lineHeight: 1.75 }}>
+                A structured, collaborative approach to delivering practical strategies and lasting results.
+              </p>
+            </div>
+          </div>
+
+          {/* 3-Cell Hairline Bento Grid */}
+          <div
+            className="grid md:grid-cols-3 gap-px border border-white/10"
+            style={{ background: "rgba(255,255,255,0.10)" }}
+          >
+            {[
+              {
+                icon: Compass,
+                title: "Understand",
+                description:
+                  "We take time to understand your organization, challenges, stakeholders, and objectives before recommending solutions.",
+              },
+              {
+                icon: Layers,
+                title: "Design",
+                description:
+                  "Together, we develop practical strategies, programs, and implementation plans tailored to your goals.",
+              },
+              {
+                icon: Rocket,
+                title: "Deliver",
+                description:
+                  "We support implementation, build organizational capability, and measure progress to help ensure lasting results.",
+              },
+            ].map((step, i) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.7, delay: i * 0.1, ease: easeSmooth }}
+                className="group relative p-8 md:p-10 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#0276E8]/40"
+                style={{ background: "#0A0A0A" }}
+                data-cursor-hover
+              >
+                {/* Top active blue accent line */}
+                <span
+                  className="absolute top-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500 ease-out"
+                  style={{ background: "#0276E8" }}
+                  aria-hidden="true"
+                />
+
+                {/* Subtle hover radial glow */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse 80% 70% at 100% 0%, rgba(2,118,232,0.12) 0%, transparent 65%)",
+                    border: "1px solid rgba(2,118,232,0.22)",
+                  }}
+                />
+
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-8">
+                    <step.icon size={28} strokeWidth={1.5} className="text-[#0276E8]" />
+                  </div>
+                  <h3
+                    className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-4 font-normal"
+                    style={{ fontSize: "clamp(24px, 2.4vw, 32px)", lineHeight: 1.12, letterSpacing: "-0.015em", fontWeight: 400 }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="text-body-md text-white/55" style={{ lineHeight: 1.7 }}>
+                    {step.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
