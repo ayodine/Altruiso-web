@@ -171,69 +171,44 @@ export function StrategiesContent() {
               </Link>
             </div>
           </motion.div>
+
+          {/* Our Focus — four disciplines, top-aligned hairline row */}
+          <div className="mt-20 md:mt-28">
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="text-overline text-white/40 block mb-8"
+            >
+              Our Focus
+            </motion.span>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
+              {focus.map((word, i) => (
+                <motion.div
+                  key={word}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 + i * 0.1, ease: easeSmooth }}
+                  className="border-t border-white/15 pt-5"
+                >
+                  <span className="font-heading text-[#0276E8]/50 block mb-3" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className="font-display text-white block leading-none"
+                    style={{ fontSize: "clamp(26px, 2.8vw, 44px)", letterSpacing: "-0.02em" }}
+                  >
+                    {word}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Trusted By logo marquee */}
       <TrustedBy />
-
-      {/* Our Focus — four disciplines, top-aligned hairline row */}
-      <section className="py-16 md:py-24" style={{ background: "#000" }}>
-        <div className="container-site">
-          <motion.span
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.6 }}
-            className="text-overline text-white/40 block mb-8"
-          >
-            Our Focus
-          </motion.span>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
-            {focus.map((word, i) => (
-              <motion.div
-                key={word}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.8, delay: i * 0.1, ease: easeSmooth }}
-                className="border-t border-white/15 pt-5"
-              >
-                <span className="font-heading text-[#0276E8]/50 block mb-3" style={{ fontSize: "13px", letterSpacing: "0.08em" }}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className="font-display text-white block leading-none"
-                  style={{ fontSize: "clamp(26px, 2.8vw, 44px)", letterSpacing: "-0.02em" }}
-                >
-                  {word}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Discipline ticker — Consilio-style band */}
-      <section
-        className="py-7 md:py-9 border-y border-white/[0.07] select-none"
-        style={{ background: "#050505" }}
-        aria-hidden="true"
-      >
-        <MarqueeBand duration={22} trackClassName="gap-x-10 pr-10 md:gap-x-14 md:pr-14">
-          {tickerItems.map((item) => (
-            <span key={item} className="flex items-center gap-x-10 md:gap-x-14">
-              <span
-                className="font-heading font-medium uppercase whitespace-nowrap text-white/55"
-                style={{ fontSize: "clamp(14px, 1.4vw, 18px)", letterSpacing: "0.22em" }}
-              >
-                {item}
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#0276E8" }} />
-            </span>
-          ))}
-        </MarqueeBand>
-      </section>
 
       {/* Who We Serve — hairline grid, no card boxes */}
       <section className="section-pad" style={{ background: "#0A0A0A" }}>
