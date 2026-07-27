@@ -285,39 +285,45 @@ export function StrategiesContent() {
             </h2>
           </div>
 
-          {/* Capability bento — 2×2 cells with glass icons */}
-          <div
-            className="grid md:grid-cols-2 gap-px border border-white/10"
-            style={{ background: "rgba(255,255,255,0.10)" }}
-          >
+          {/* Column headers */}
+          <div className="hidden md:grid grid-cols-12 gap-8 pb-4 border-b border-white/10">
+            <span className="col-span-5 text-overline text-white/30">Capabilities &amp; Disciplines</span>
+            <span className="col-span-7 text-overline text-white/30">Focus &amp; Offerings</span>
+          </div>
+
+          {/* Table Rows — Tresmares "Fund Overview" editorial table style */}
+          <div className="border-t md:border-t-0 border-white/10">
             {capabilities.map((c, i) => (
               <motion.div
                 key={c.title}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.6, delay: (i % 2) * 0.08, ease: easeSmooth }}
-                className="group p-8 md:p-10"
-                style={{ background: "#0B0D10" }}
+                transition={{ duration: 0.6, delay: i * 0.05 }}
+                className="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline py-7 md:py-8 border-b border-white/10 transition-colors hover:bg-white/[0.015]"
               >
-                <div className="flex items-start justify-between mb-8">
-                  <c.icon size={32} strokeWidth={1.5} className="text-[#0276E8]" />
+                <div className="md:col-span-5 flex items-baseline gap-5">
                   <span className="font-heading text-[#0276E8]/50" style={{ fontSize: "14px" }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
+                  <h3
+                    className="font-display text-white group-hover:text-[#CDE6FF] transition-colors"
+                    style={{
+                      fontSize: "clamp(26px, 3vw, 44px)",
+                      letterSpacing: "-0.02em",
+                      lineHeight: 1.05,
+                      fontWeight: 400,
+                    }}
+                  >
+                    {c.title}
+                  </h3>
                 </div>
-                <h3
-                  className="font-display text-white group-hover:text-[#CDE6FF] transition-colors mb-6"
-                  style={{ fontSize: "clamp(26px, 2.8vw, 40px)", letterSpacing: "-0.02em", lineHeight: 1.08 }}
-                >
-                  {c.title}
-                </h3>
-                <div className="flex flex-wrap gap-2.5">
+                <div className="md:col-span-7 flex flex-wrap gap-2.5 pt-2 md:pt-0">
                   {c.items.map((item) => (
                     <span
                       key={item}
-                      className="font-heading text-white/55 px-4 py-2 whitespace-nowrap"
-                      style={{ fontSize: "13.5px", border: "1px solid rgba(255,255,255,0.12)" }}
+                      className="font-heading text-white/60 px-4 py-2"
+                      style={{ fontSize: "14px", border: "1px solid rgba(255,255,255,0.12)" }}
                     >
                       {item}
                     </span>
