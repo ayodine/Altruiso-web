@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Building2, Landmark, Users2, ArrowUpRight } from "lucide-react";
-import { PITCH_FORM_URL } from "@/lib/utils";
+import { Building2, Landmark, Users2 } from "lucide-react";
 
 const partners = [
   {
@@ -90,11 +89,6 @@ export function WhoWePartnerWith() {
                 <p className="text-body-md text-white/55" style={{ lineHeight: 1.7 }}>
                   {p.description}
                 </p>
-              </div>
-
-              <div className="relative z-10 pt-8 mt-8 border-t border-white/10 flex items-center justify-between">
-                <span className="text-overline text-white/30 group-hover:text-white/70 transition-colors">Explore Collaboration</span>
-                <ArrowUpRight size={16} className="text-white/40 group-hover:text-[#0276E8] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </motion.div>
           ))}
