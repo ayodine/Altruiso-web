@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     title: "Altruiso Strategies | Organizational Growth & Strategic Advisory",
     description:
       "Partnering with governments, public institutions, nonprofits, and businesses to solve complex challenges through practical strategy, leadership development, and capability building.",
-    url: "https://altruiso-web-prod.web.app/strategies",
+    url: "https://altruiso.com/strategies",
     images: [{ url: "/altruiso-opengraph.png", width: 1200, height: 630, alt: "Altruiso Strategies" }],
   },
   alternates: {
-    canonical: "https://altruiso-web-prod.web.app/strategies",
+    canonical: "https://altruiso.com/strategies",
   },
 };
 

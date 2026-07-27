@@ -37,7 +37,7 @@ const ppFragment = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://altruiso-web-prod.web.app"),
+  metadataBase: new URL("https://altruiso.com"),
   title: {
     template: "%s | ALTRUISO",
     default: "ALTRUISO | Building Institutions That Create Opportunity",
@@ -65,12 +65,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: "https://altruiso-web-prod.web.app",
+    canonical: "https://altruiso.com",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://altruiso-web-prod.web.app",
+    url: "https://altruiso.com",
     siteName: "ALTRUISO",
     title: "ALTRUISO | Building Institutions That Create Opportunity",
     description:

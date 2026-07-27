@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     title: "Altruiso Investments | Long-Term Value & Growth Capital",
     description:
       "Investing in businesses and opportunities that create enduring economic and social value through equity ownership and strategic partnerships.",
-    url: "https://altruiso-web-prod.web.app/investments",
+    url: "https://altruiso.com/investments",
     images: [{ url: "/altruiso-opengraph.png", width: 1200, height: 630, alt: "Altruiso Investments" }],
   },
   alternates: {
-    canonical: "https://altruiso-web-prod.web.app/investments",
+    canonical: "https://altruiso.com/investments",
   },
 };
 
