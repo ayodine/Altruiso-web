@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description:
       "Investing in businesses and opportunities that create enduring economic and social value through equity ownership and strategic partnerships.",
     url: "https://altruiso-web-prod.web.app/investments",
-    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "Altruiso Investments" }],
+    images: [{ url: "/altruiso-opengraph.png", width: 1200, height: 630, alt: "Altruiso Investments" }],
   },
   alternates: {
     canonical: "https://altruiso-web-prod.web.app/investments",

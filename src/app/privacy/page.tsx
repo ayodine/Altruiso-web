@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy | Altruiso",
     description: "How Altruiso collects, uses, and protects information when you use our website.",
     url: "https://altruiso-web-prod.web.app/privacy",
-    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "Altruiso Privacy Policy" }],
+    images: [{ url: "/altruiso-opengraph.png", width: 1200, height: 630, alt: "Altruiso Privacy Policy" }],
   },
   alternates: {
     canonical: "https://altruiso-web-prod.web.app/privacy",

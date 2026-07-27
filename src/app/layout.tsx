@@ -77,7 +77,7 @@ export const metadata: Metadata = {
       "Altruiso creates, invests in, and supports businesses that generate enduring value through ownership, strategic partnerships, and venture creation.",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/altruiso-opengraph.png",
         width: 1200,
         height: 630,
         alt: "ALTRUISO | Building Institutions That Create Opportunity",
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     title: "ALTRUISO | Building Institutions That Create Opportunity",
     description:
       "Altruiso creates, invests in, and supports businesses that generate enduring value through ownership, strategic partnerships, and venture creation.",
-    images: ["/images/og-image.png"],
+    images: ["/altruiso-opengraph.png"],
   },
   robots: {
     index: true,

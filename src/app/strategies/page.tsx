@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description:
       "Partnering with governments, public institutions, nonprofits, and businesses to solve complex challenges through practical strategy, leadership development, and capability building.",
     url: "https://altruiso-web-prod.web.app/strategies",
-    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "Altruiso Strategies" }],
+    images: [{ url: "/altruiso-opengraph.png", width: 1200, height: 630, alt: "Altruiso Strategies" }],
   },
   alternates: {
     canonical: "https://altruiso-web-prod.web.app/strategies",
